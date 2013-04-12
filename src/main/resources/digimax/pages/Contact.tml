@@ -1,0 +1,21 @@
+<html t:type="layout" title="Contact digimax"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <p>Contact digimax ...</p>
+${employee.firstName} ${employee.lastName} three3
+
+    <div t:type="loop" source="persons" value="person">
+        one------
+            <a t:type="pagelink" page="literal:PersonUi" context="person">${person.fullName}</a>
+    </div>
+     two2
+
+    <div t:type="loop" source="testers" value="tested">
+        one------
+        <a t:type="pagelink" page="literal:PersonUi" context="tested">${tested}</a>
+    </div>
+
+    <table t:type="grid" source="persons"/>
+
+</html>
