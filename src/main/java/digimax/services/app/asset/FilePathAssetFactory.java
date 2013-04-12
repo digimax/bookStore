@@ -13,10 +13,10 @@ import org.apache.tapestry5.services.AssetFactory;
 public class FilePathAssetFactory implements AssetFactory {
 
     public Resource getRootResource() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO:
     }
 
     public Asset createAsset(Resource resource) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO:
     }
 }
