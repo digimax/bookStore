@@ -1,6 +1,7 @@
 package digimax.services.app.asset;
 
 import org.apache.tapestry5.Asset;
+import org.apache.tapestry5.internal.services.AbstractAsset;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.services.AssetFactory;
 
@@ -12,11 +13,40 @@ import org.apache.tapestry5.services.AssetFactory;
  */
 public class FilePathAssetFactory implements AssetFactory {
 
-    public Resource getRootResource() {
-        return null;  //TODO:
+
+    private final FileAssetAliasManager aliasManager;
+    private final String pathPrefix;
+    private FileResource rootResource;
+
+    //alias manager necessary for support of different roots
+    public FilePathAssetFactory(FileAssetAliasManager aliasManager) {
+        //todo (manuel): maybe a resource cache should be used here... look if reusing existing ResourceCacheImpl
+        this.aliasManager = aliasManager;
+
+        pathPrefix ="fs/";
+
+        initRootResource();
     }
 
-    public Asset createAsset(Resource resource) {
-        return null;  //TODO:
+    private void initRootResource() {
+        rootResource = new FileResource(aliasManager, "/");
+    }
+
+    public Resource getRootResource() {
+        return rootResource;
+    }
+
+    public Asset createAsset(final Resource resource) {
+
+        return new AbstractAsset(true) {
+
+            public String toClientURL() {
+                return pathPrefix + aliasManager.toClientURL(resource.getPath());
+            }
+
+            public Resource getResource() {
+                return resource;
+            }
+        };
     }
 }
