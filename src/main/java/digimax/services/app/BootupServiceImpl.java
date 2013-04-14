@@ -23,7 +23,7 @@ import java.util.List;
 public class BootupServiceImpl implements BootupService {
 
     private static String BOOK_RIP_ROOT_FOLDER = "/Users/jonwilliams/wrk/maw_raw/pro/";
-    private static String APP_IMAGE_FOLDER = "/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/";
+    public static String APP_IMAGE_FOLDER = "/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/";
 
 
     @Inject
