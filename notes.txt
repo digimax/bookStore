@@ -12,7 +12,7 @@ FileBindingFactory.class).withId("FileBindingFactory");
 contributeFileAssetAliasManager(MappedConfiguration<String, String>
 configuration) {
         configuration.add("images",
-"file:/C:/Users/borish/Documents/NetBeansProjects/flow/src/main/webapp/images/");
+"file:/C:/Users/donor/Documents/NetBeansProjects/flow/src/main/webapp/images/");
     }
 
     public void contributeAssetSource(MappedConfiguration<String,
