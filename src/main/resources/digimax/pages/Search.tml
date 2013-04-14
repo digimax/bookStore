@@ -1,6 +1,6 @@
-<html t:type="layout" title="ncapsuld Index"
+<html t:type="layout" title="Search"
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-test ok
+Search
 </html>

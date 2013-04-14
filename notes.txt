@@ -1,0 +1,41 @@
+AppModule.java
+
+    public static void bind(ServiceBinder binder) {
+        binder.bind(FileAssetAliasManager.class,
+FileAssetAliasManagerImpl.class);
+        binder.bind(FileAssetFactory.class);
+        binder.bind(BindingFactory.class,
+FileBindingFactory.class).withId("FileBindingFactory");
+    }
+
+ public static void
+contributeFileAssetAliasManager(MappedConfiguration<String, String>
+configuration) {
+        configuration.add("images",
+"file:/C:/Users/borish/Documents/NetBeansProjects/flow/src/main/webapp/images/");
+    }
+
+    public void contributeAssetSource(MappedConfiguration<String,
+AssetFactory> configuration,
+            FileAssetFactory filesystemAssetFactory) {
+        configuration.add("file", filesystemAssetFactory);
+    }
+
+    public static void contributeBindingSource(MappedConfiguration<String,
+BindingFactory> configuration,
+            @InjectService("FileBindingFactory") BindingFactory
+fileBindingFactory) {
+        configuration.add("file", fileBindingFactory);
+    }
+
+Usage example
+
+  ${file:images/logo.png}
+
+So this works in a way that it compiles and I can run the application. The
+file path is written ok, and I can see in that paths is converted as it
+should be. However in the browser I get an error that says
+
+Resource interpreted as Image but transferred with MIME type text/html
+
+I am now quite sure why is this happening? Any ideas?
