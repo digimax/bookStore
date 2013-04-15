@@ -104,6 +104,6 @@ public class FileResource extends AbstractResource {
 
     @Override
     public int hashCode() {
-        return aliasManager != null ? aliasManager.hashCode() : 0;
+        return aliasManager != null ? aliasManager.hashCode()+getFile().hashCode() : 0;
     }
 }
