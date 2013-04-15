@@ -23,7 +23,7 @@ public class FilePathAssetFactory implements AssetFactory {
         //todo (manuel): maybe a resource cache should be used here... look if reusing existing ResourceCacheImpl
         this.aliasManager = aliasManager;
 
-        pathPrefix ="fs/";
+        pathPrefix ="/ncapsuld/assets/1.0-SNAPSHOT-DEV/images/";
 
         initRootResource();
     }

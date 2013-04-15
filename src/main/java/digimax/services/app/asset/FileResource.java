@@ -4,6 +4,8 @@ import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.internal.util.AbstractResource;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -65,6 +67,11 @@ public class FileResource extends AbstractResource {
                             + "path above filesystem root (%s) has bad pattern", getPath()), e);
         }
         return url;
+    }
+
+    @Override
+    public InputStream openStream() throws IOException {
+        return super.openStream();
     }
 
     @Override

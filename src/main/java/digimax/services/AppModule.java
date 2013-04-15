@@ -1,30 +1,40 @@
 package digimax.services;
 
 import java.io.IOException;
+import java.util.Map;
 
 import digimax.services.app.BootupServiceImpl;
 import digimax.services.app.asset.FileAssetAliasManager;
 import digimax.services.app.asset.FileBindingFactory;
 import digimax.services.app.asset.FilePathAssetFactory;
+import digimax.services.app.asset.FilePathAssetRequestHandler;
 import digimax.services.domain.ImageService;
 import digimax.services.domain.*;
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
+import org.apache.tapestry5.internal.services.AssetResourceLocator;
+import org.apache.tapestry5.internal.services.RequestConstants;
+import org.apache.tapestry5.internal.services.ResourceStreamer;
+import org.apache.tapestry5.internal.services.assets.ClasspathAssetRequestHandler;
+import org.apache.tapestry5.internal.services.assets.ContextAssetRequestHandler;
+import org.apache.tapestry5.internal.services.assets.StackAssetRequestHandler;
 import org.apache.tapestry5.ioc.*;
+import org.apache.tapestry5.ioc.annotations.Autobuild;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.services.*;
+import org.apache.tapestry5.services.assets.AssetRequestHandler;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
  * configure and extend Tapestry, or to place your own service definitions.
  */
 public class AppModule
-
 {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(AppModule.class);
     public static void bind(ServiceBinder binder)
     {
         {
@@ -135,6 +145,34 @@ public class AppModule
         // within the pipeline.
 
         configuration.add("Timing", filter);
+    }
+
+    public static void contributeAssetDispatcher(MappedConfiguration<String, AssetRequestHandler> configuration,
+
+//                                                 @ContextProvider
+                                                 FilePathAssetFactory fileAssetFactory,
+
+                                                 @Autobuild
+                                                 StackAssetRequestHandler stackAssetRequestHandler,
+
+                                                 FileAssetAliasManager fileAssetAliasManager, ResourceStreamer streamer,
+                                                 AssetResourceLocator assetResourceLocator)
+    {
+
+        LOGGER.debug("contributeAssetDispatcher fileAssetFactory :: {}", fileAssetFactory);
+        LOGGER.debug("contributeAssetDispatcher fileAssetAliasManager :: {}", fileAssetAliasManager);
+
+//        Map<String, String> mappings = classpathAssetAliasManager.getMappings();
+//
+//        for (String folder : mappings.keySet())
+//        {
+//            String path = mappings.get(folder);
+//
+//            configuration.add(folder, new ClasspathAssetRequestHandler(streamer, assetResourceLocator, path));
+//        }
+//
+        configuration.add("images",
+                new FilePathAssetRequestHandler(streamer, fileAssetFactory.getRootResource()));
     }
 
     public static void contributeHibernateEntityPackageManager(Configuration<String> configuration)
