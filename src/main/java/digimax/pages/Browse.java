@@ -1,6 +1,8 @@
 package digimax.pages;
 
+import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.BeforeRenderBody;
+import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -30,9 +32,13 @@ public class Browse {
     @Property
     private org.apache.tapestry5.Asset digimaxImage;
 
+    @Inject
+    @Path("file:images/A_STAINLESS_STEEL_RAT_IS_BORN~HARRY_HARRISON.png")
+    @Property
+    private org.apache.tapestry5.Asset bookImage;
 
-    @BeforeRenderBody
-    private void diagnostics() {
+    @BeginRender
+    void beginRender(MarkupWriter writer) {
         logger.debug("Start Diagnostics");
         logger.debug("End Diagnostics");
     }

@@ -1,12 +1,15 @@
 package digimax.components;
 
 import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.annotations.BeforeRenderBody;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.slf4j.Logger;
 
 /**
  * A product of Digimax Technology Inc. (digimax.com)
@@ -16,6 +19,8 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
  */
 @Import(stylesheet = "context:layout/layout.css")
 public class Layout {
+    @Inject
+    private Logger logger;
 
     @Inject
     private org.apache.tapestry5.ComponentResources resources;
@@ -51,4 +56,9 @@ public class Layout {
     {
         return new String[]{"Index", "Browse", "Search", "BookCart"};
     }
+
+//    void beforeRenderBody(MarkupWriter writer) {
+//        logger.debug("Start Diagnostics");
+//        logger.debug("End Diagnostics");
+//    }
 }

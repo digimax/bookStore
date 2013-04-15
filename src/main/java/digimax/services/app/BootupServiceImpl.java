@@ -42,7 +42,7 @@ public class BootupServiceImpl implements BootupService {
     private ImageService imageService;
 
     public Library bootupLibrary() {
-        long startTime = new Date().getTime();
+        long startTime = System.currentTimeMillis();
         Library library = libraryService.testInstance();
         library.name = "Qa Fresh Library";
 
@@ -129,7 +129,7 @@ public class BootupServiceImpl implements BootupService {
             }
         }
         libraryService.receive(library, newBooks);
-        long finishTime = new Date().getTime();
+        long finishTime = System.currentTimeMillis();
         logger.debug(String.format("bootupLibrary method. Time elapsed while Populating new Library :: %03d (seconds)"
                 , (finishTime-startTime)/1000));
         return library;

@@ -6,6 +6,8 @@ Browse
 <!--/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png-->
 <img src="${technologyImage}" alt="Technology"/>
 <!--<img src="${context:technology.jpg}" alt="Technology"/>-->
+<img alt="a book" src="${bookImage}"/>
 <img alt="digimax.com" src="${digimaxImage}"/>
+
 <!--${file:/images/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png}-->
 </html>
