@@ -1,5 +1,8 @@
 package digimax.services.app.asset;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -10,6 +13,8 @@ import java.util.Map;
  * Time: 5:43 PM
  */
 public class FileAssetAliasManagerImpl implements FileAssetAliasManager {
+
+    private Logger logger = LoggerFactory.getLogger(FileAssetAliasManagerImpl.class);
 
     private final AssetPathPrefixAliasMap pathPrefixAliasMap;
 
@@ -58,7 +63,7 @@ public class FileAssetAliasManagerImpl implements FileAssetAliasManager {
      */
     public String toResourcePath(String clientURL)
     {
-        String filesystemAlias = getFilesystemAlias(clientURL);
+        String filesystemAlias = getFilesystemAlias(clientURL); //TODO : WORKIN
 
         check(filesystemAlias != null,
                 String.format("Filesystem resource cannot be retrieved, because client-url %s does not contain " +
@@ -66,6 +71,7 @@ public class FileAssetAliasManagerImpl implements FileAssetAliasManager {
 
         String filesystemRoot = pathPrefixAliasMap.getAliasToPathPrefix().get(filesystemAlias);
 
+        logger.debug(clientURL.replaceFirst(filesystemAlias, filesystemRoot));
         return clientURL.replaceFirst(filesystemAlias, filesystemRoot);
     }
 

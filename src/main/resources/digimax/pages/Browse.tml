@@ -3,4 +3,9 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 Browse
+<!--/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png-->
+<img src="${technologyImage}" alt="Technology"/>
+<!--<img src="${context:technology.jpg}" alt="Technology"/>-->
+<img alt="digimax.com" src='${file:images/digimaxCom.jpg}'/>
+<!--${file:/images/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png}-->
 </html>

@@ -2,17 +2,19 @@ package digimax.services;
 
 import java.io.IOException;
 
+import digimax.services.app.BootupServiceImpl;
+import digimax.services.app.asset.FileAssetAliasManager;
+import digimax.services.app.asset.FileBindingFactory;
+import digimax.services.app.asset.FilePathAssetFactory;
 import digimax.services.domain.ImageService;
 import digimax.services.domain.*;
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.*;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
-import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.RequestFilter;
-import org.apache.tapestry5.services.RequestHandler;
-import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.services.*;
 import org.slf4j.Logger;
 
 /**
@@ -20,10 +22,19 @@ import org.slf4j.Logger;
  * configure and extend Tapestry, or to place your own service definitions.
  */
 public class AppModule
+
 {
+
     public static void bind(ServiceBinder binder)
     {
         {
+            binder.bind(FileAssetAliasManager.class);
+            binder.bind(FilePathAssetFactory.class);
+            binder.bind(BindingFactory.class,
+                FileBindingFactory.class).withId("FileBindingFactory");
+
+
+
             binder.bind(BookService.class);
             binder.bind(LibraryService.class);
             binder.bind(LocationService.class);
@@ -134,6 +145,26 @@ public class AppModule
 //        configuration.add("digimax.entities.library");
 //        configuration.add("digimax.entities.people");
 //        configuration.add("digimax.entities.store");
+    }
+
+    public static void
+    contributeFileAssetAliasManager(MappedConfiguration<String, String>
+                                            configuration) {
+        configuration.add("images",
+                "file:"+BootupServiceImpl.APP_IMAGE_FOLDER);
+    }
+
+    public void contributeAssetSource(MappedConfiguration<String,
+            AssetFactory> configuration,
+                                      FilePathAssetFactory filesystemAssetFactory) {
+        configuration.add("file", filesystemAssetFactory);
+    }
+
+    public static void contributeBindingSource(MappedConfiguration<String,
+            BindingFactory> configuration,
+                                               @InjectService("FileBindingFactory") org.apache.tapestry5.services.BindingFactory
+                                                       fileBindingFactory) {
+        configuration.add("file", fileBindingFactory);
     }
 
     @Match("*Service")
