@@ -49,7 +49,8 @@ public class Png {
 
     public StreamResponse onImages(final String imageFileName) {
         logger.debug("onImages called with imageFileName :: {}",imageFileName);
-        if (!fileName.toLowerCase().contains(FILE_EXTENSION))  {
+        //TODO: rework this condition to use Regex
+        if (imageFileName==null || !imageFileName.toLowerCase().contains(FILE_EXTENSION))  {
             return null;
         }
         String fullyQualifiedFileName = BootupServiceImpl.APP_IMAGE_FOLDER+imageFileName;
