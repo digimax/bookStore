@@ -1,7 +1,11 @@
 package digimax.pages;
 
+import digimax.services.app.BootupServiceImpl;
+import digimax.structural.ApplicationRuntimeException;
+import digimax.structural.image.PNGInline;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.StreamResponse;
 import org.apache.tapestry5.annotations.BeforeRenderBody;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Path;
@@ -10,6 +14,11 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +111,28 @@ public class Browse {
         logger.debug("assets array : {}", toString(getAssets()));
         logger.debug("End Diagnostics");
     }
+
+    public StreamResponse onSubmit() {
+        //Note that you could provide an absolute path here, like H:\\LOLCATZ.MP3
+        String fileName = "A_COSMIC_CORNUCOPIA~JOSH_KIRBY.png";
+        String fullyQualifiedFileName = /*"file:"+*/BootupServiceImpl.APP_IMAGE_FOLDER+fileName;
+
+        File file = new File(fullyQualifiedFileName);
+        logger.debug("onSubmit. file exists? :: {}",file.exists());
+        ClassLoader loader = Browse.class.getClassLoader();
+        URL filePathUrl = loader.getResource(fullyQualifiedFileName);
+
+        InputStream inputStream;
+//        URL filePathUrl =  Browse.class.getResource(fullyQualifiedFileName);
+        try {
+            inputStream = //file.//Browse.class.getResourceAsStream(fullyQualifiedFileName);
+                    new BufferedInputStream(file.toURL().openStream());
+        } catch (IOException e) {
+            throw new ApplicationRuntimeException("Failed to open input stream, fileName :: "+fullyQualifiedFileName, e);
+        }
+        return new PNGInline(inputStream, fileName);
+    }
+
 
     private String toString(Iterable<Asset> assets) {
         StringBuilder stringBuilder = new StringBuilder();

@@ -15,7 +15,7 @@ Browse
         ${var:string}
     </span>
 
-    <span t:type="loop" source="assetWrappers" value="assetWrapper">
+    <span t:type="loop" source="assetWrappers" value= "assetWrapper">
         <img alt = "A Book" src="${assetWrapper.asset}"/>
     </span>
 
@@ -26,6 +26,14 @@ Browse
     <span t:type="loop" source="${integers}">
         looping integers
     </span>
+
+
+    <form t:type="form" clientValidation="none" action = "doNothing">
+        <t:errors/>
+        <div>
+            <input type="submit" value="Generate report"/>
+        </div>
+    </form>
 </div>
 
 <!--${file:/images/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png}-->
