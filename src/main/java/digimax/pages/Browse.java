@@ -3,13 +3,9 @@ package digimax.pages;
 import digimax.services.app.BootupServiceImpl;
 import digimax.structural.ApplicationRuntimeException;
 import digimax.structural.image.PNGInline;
-import org.apache.tapestry5.Asset;
-import org.apache.tapestry5.MarkupWriter;
-import org.apache.tapestry5.StreamResponse;
-import org.apache.tapestry5.annotations.BeforeRenderBody;
-import org.apache.tapestry5.annotations.BeginRender;
-import org.apache.tapestry5.annotations.Path;
-import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.*;
+import org.apache.tapestry5.annotations.*;
+import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +27,23 @@ import java.util.List;
 public class Browse {
 
     @Inject
+    ComponentResources componentResources;
+
+    @Inject
+    private LinkSource linkSource;
+
+    @Inject
     private Logger logger;
 
     @Property
     private String string;
 
+    public String getFilePageImageName() {
+return null;//        return uploadStore.getUploadedFile("SOMEUUID");
+    }
+
     @Property
+//    @SuppressWarnings("unused")
     private AssetWrapper assetWrapper;
 
    @Inject
@@ -67,6 +74,29 @@ public class Browse {
     @Path("file:images/BALD~KEVIN_BALDWIN.png")
     @Property
     private org.apache.tapestry5.Asset bookImage3;
+
+    public Link getImageStreamLink() {
+        Link streamLink = linkSource.createPageRenderLink(Browse.class.getSimpleName(),false, new Object[]{"THE_QUEEN_OF_THE_DAMNED~ANNE_RICE.png"});
+        return streamLink;
+    }
+
+    public StreamResponse onActivate(final String imageFileName) {
+        logger.debug("onActivate called with imageFileName :: {}",imageFileName);
+//        String fileName = "A_COSMIC_CORNUCOPIA~JOSH_KIRBY.png";
+        String fullyQualifiedFileName = /*"file:"+*/BootupServiceImpl.APP_IMAGE_FOLDER+imageFileName;
+
+        File file = new File(fullyQualifiedFileName);
+        logger.debug("onActivate. file exists? :: {}",file.exists());
+
+        InputStream inputStream;
+        try {
+            inputStream =
+                    new BufferedInputStream(file.toURI().toURL().openStream());
+        } catch (IOException e) {
+            throw new ApplicationRuntimeException("Failed to open input stream, fileName :: "+fullyQualifiedFileName, e);
+        }
+        return new PNGInline(inputStream, imageFileName);
+    }
 
     public Iterable<Asset> getAssets() {
         List<Asset>  assets = new ArrayList<Asset>();
@@ -112,6 +142,10 @@ public class Browse {
         logger.debug("End Diagnostics");
     }
 
+    public StreamResponse getImageStream() {
+        return onSubmit();
+    }
+
     public StreamResponse onSubmit() {
         //Note that you could provide an absolute path here, like H:\\LOLCATZ.MP3
         String fileName = "A_COSMIC_CORNUCOPIA~JOSH_KIRBY.png";
@@ -119,13 +153,10 @@ public class Browse {
 
         File file = new File(fullyQualifiedFileName);
         logger.debug("onSubmit. file exists? :: {}",file.exists());
-        ClassLoader loader = Browse.class.getClassLoader();
-        URL filePathUrl = loader.getResource(fullyQualifiedFileName);
 
         InputStream inputStream;
-//        URL filePathUrl =  Browse.class.getResource(fullyQualifiedFileName);
         try {
-            inputStream = //file.//Browse.class.getResourceAsStream(fullyQualifiedFileName);
+            inputStream =
                     new BufferedInputStream(file.toURL().openStream());
         } catch (IOException e) {
             throw new ApplicationRuntimeException("Failed to open input stream, fileName :: "+fullyQualifiedFileName, e);

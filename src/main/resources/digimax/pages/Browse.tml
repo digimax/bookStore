@@ -31,9 +31,13 @@ Browse
     <form t:type="form" clientValidation="none" action = "doNothing">
         <t:errors/>
         <div>
-            <input type="submit" value="Generate report"/>
+            <input type="submit" value="Generate image"/>
         </div>
     </form>
+
+    <img src="${imageStreamlink}" alt="An Image from a stream"/>
+    12${imageStream}...34
+    <img src="filePageImageName" alt="An Image"/>
 </div>
 
 <!--${file:/images/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png}-->

@@ -14,7 +14,7 @@ import java.io.InputStream;
 
 
 public class InlineStreamResponse implements StreamResponse {
-    private InputStream is = null;
+    private InputStream inputStream = null;
 
     protected String contentType = "text/plain";// this is the default
 
@@ -22,8 +22,8 @@ public class InlineStreamResponse implements StreamResponse {
 
     protected String filename = "default";
 
-    public InlineStreamResponse(InputStream is, String... args) {
-        this.is = is;
+    public InlineStreamResponse(InputStream inputStream, String... args) {
+        this.inputStream = inputStream;
         if (args != null) {
             this.filename = args[0];
         }
@@ -34,7 +34,7 @@ public class InlineStreamResponse implements StreamResponse {
     }
 
     public InputStream getStream() throws IOException {
-        return is;
+        return inputStream;
     }
 
     public void prepareResponse(Response response) {
