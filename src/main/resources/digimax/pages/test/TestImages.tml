@@ -1,0 +1,37 @@
+<html t:type="layout" title="TestImages"
+      t:sidebarTitle="FrameworkVersion"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+TestImages
+<br />
+<img src="${technologyImage}" alt="Technology"/>
+<img alt="a book" src="${bookImage}"/>
+<img alt="a second book" src="${bookImage2}"/>
+<img alt="a second book" src="${bookImage3}"/>
+<img alt="digimax.com" src="${digimaxImage}"/>
+<div>
+    <span t:type="loop" source="${strings}" value="var:string">
+        ${var:string}
+    </span>
+
+    <span t:type="loop" source="assetWrappers" value= "assetWrapper">
+        <img alt = "A Book" src="${assetWrapper.asset}"/>
+    </span>
+
+    <span t:type="loop" source="${integers}">
+        looping integers
+    </span>
+
+
+    <form t:type="form" clientValidation="none" action = "doNothing">
+        <t:errors/>
+        <div>
+            <input type="submit" value="Generate image"/>
+        </div>
+    </form>
+
+    <img src="${imageStreamlink}" alt="An Image from a stream"/>
+    12${imageStream}...34
+    <img src="filePageImageName" alt="An Image"/>
+</div>
+</html>

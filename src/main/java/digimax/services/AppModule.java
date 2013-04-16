@@ -35,6 +35,13 @@ import org.slf4j.LoggerFactory;
 public class AppModule
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(AppModule.class);
+
+    @Match("*Service")
+    public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
+    {
+        advisor.addTransactionCommitAdvice(receiver);
+    }
+
     public static void bind(ServiceBinder binder)
     {
         {
@@ -205,10 +212,8 @@ public class AppModule
         configuration.add("file", fileBindingFactory);
     }
 
-    @Match("*Service")
-    public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
-    {
-        advisor.addTransactionCommitAdvice(receiver);
+    public static void contributeComponentClassResolver(Configuration<LibraryMapping> configuration) {
+//        configuration.add(new LibraryMapping("", "com.example.app.tasks"));
+//        configuration.add(new LibraryMapping("", "com.example.app.chat"));
     }
-
 }

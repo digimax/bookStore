@@ -3,42 +3,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 Browse
-<!--/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png-->
-<img src="${technologyImage}" alt="Technology"/>
-<!--<img src="${context:technology.jpg}" alt="Technology"/>-->
-<img alt="a book" src="${bookImage}"/>
-<img alt="a second book" src="${bookImage2}"/>
-<img alt="a second book" src="${bookImage3}"/>
-<img alt="digimax.com" src="${digimaxImage}"/>
-<div>
-    <span t:type="loop" source="${strings}" value="var:string">
-        ${var:string}
+    <span t:type="loop" source="${library.shelves}">
+        looping shelves
     </span>
-
-    <span t:type="loop" source="assetWrappers" value= "assetWrapper">
-        <img alt = "A Book" src="${assetWrapper.asset}"/>
-    </span>
-
-    <!--<span t:type="loop" source="${assets}">-->
-        <!--looping assets-->
-    <!--</span>-->
-
-    <span t:type="loop" source="${integers}">
-        looping integers
-    </span>
-
-
-    <form t:type="form" clientValidation="none" action = "doNothing">
-        <t:errors/>
-        <div>
-            <input type="submit" value="Generate image"/>
-        </div>
-    </form>
-
-    <img src="${imageStreamlink}" alt="An Image from a stream"/>
-    12${imageStream}...34
-    <img src="filePageImageName" alt="An Image"/>
-</div>
-
-<!--${file:/images/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png}-->
 </html>

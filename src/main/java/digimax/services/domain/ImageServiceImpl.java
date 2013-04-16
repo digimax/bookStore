@@ -4,10 +4,12 @@ import com.mortennobel.imagescaling.AdvancedResizeOp;
 import com.mortennobel.imagescaling.ResampleOp;
 import digimax.entities.app.Image;
 import digimax.structural.ApplicationRuntimeException;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.TapestryException;
 import org.hibernate.Session;
+import sun.security.provider.MD5;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -17,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageServiceImpl implements ImageService {
+
+    private static final String FILE_EXTENSION = ".png";
+    private static final String SCALED_IMAGE_PREFIX = "small";
 
     private static int SMALL_IMAGE_HEIGHT = 300;
 
@@ -38,15 +43,19 @@ public class ImageServiceImpl implements ImageService {
     }
 
     public List<Image>createImages(String appImagesFolderRoot, String fileName, File sourceImageFile) {
-        Image fullScaleImage = new Image(fileName);
+        String tempOldFileName = fileName;
+        fileName = DigestUtils.md5Hex(fileName)+FILE_EXTENSION;
+                Image fullScaleImage = new Image(fileName);
         File destinationImageFile = new File(appImagesFolderRoot+fileName);
+        File tempOldNameImageFile = new File(appImagesFolderRoot+tempOldFileName); //TODO: rework TestImages page to use HashedFileName
         try {
             FileUtils.copyFile(sourceImageFile, destinationImageFile);
+            FileUtils.copyFile(sourceImageFile, tempOldNameImageFile);
         } catch (IOException e) {
             throw new ApplicationRuntimeException(String.format("ImageServiceImpl IO failure. Failed to create new image file named :: %s", fileName) , e);
         }
         //create scaled image
-        String scaledImageFileName = "small{"+File.pathSeparatorChar+fileName;
+        String scaledImageFileName = SCALED_IMAGE_PREFIX+fileName;
         Image scaledImage = new Image(scaledImageFileName);
         try {
             BufferedImage src = ImageIO.read(destinationImageFile);
