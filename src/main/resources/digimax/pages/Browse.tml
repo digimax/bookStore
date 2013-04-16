@@ -7,7 +7,26 @@ Browse
 <img src="${technologyImage}" alt="Technology"/>
 <!--<img src="${context:technology.jpg}" alt="Technology"/>-->
 <img alt="a book" src="${bookImage}"/>
+<img alt="a second book" src="${bookImage2}"/>
+<img alt="a second book" src="${bookImage3}"/>
 <img alt="digimax.com" src="${digimaxImage}"/>
+<div>
+    <span t:type="loop" source="${strings}" value="var:string">
+        ${var:string}
+    </span>
+
+    <span t:type="loop" source="assetWrappers" value="assetWrapper">
+        <img alt = "A Book" src="${assetWrapper.asset}"/>
+    </span>
+
+    <!--<span t:type="loop" source="${assets}">-->
+        <!--looping assets-->
+    <!--</span>-->
+
+    <span t:type="loop" source="${integers}">
+        looping integers
+    </span>
+</div>
 
 <!--${file:/images/A_HOME_IN_THE_WORLD{HOUSES_AND_CULTURES]~MARTINE_LAFFON&CAROLINE_lAFFON.png}-->
 </html>
