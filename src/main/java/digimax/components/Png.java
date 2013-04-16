@@ -49,7 +49,7 @@ public class Png {
 
     public StreamResponse onImages(final String imageFileName) {
         logger.debug("onImages called with imageFileName :: {}",imageFileName);
-        if (!fileName.contains(FILE_EXTENSION))  {
+        if (!fileName.toLowerCase().contains(FILE_EXTENSION))  {
             return null;
         }
         String fullyQualifiedFileName = BootupServiceImpl.APP_IMAGE_FOLDER+imageFileName;
