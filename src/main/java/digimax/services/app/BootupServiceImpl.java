@@ -52,7 +52,8 @@ public class BootupServiceImpl implements BootupService {
 
         List<Book> newBooks = new ArrayList<Book>();
 
-        Iterator<File> fileIterator = new RecursiveFileListIterator(new File(BOOK_RIP_ROOT_FOLDER));
+        File rootfolder = new File(BOOK_RIP_ROOT_FOLDER);
+        Iterator<File> fileIterator = new RecursiveFileListIterator(rootfolder);
         while (fileIterator.hasNext()) {
             File file = fileIterator.next();
             String fileAbsolutePath = file.getAbsolutePath();
