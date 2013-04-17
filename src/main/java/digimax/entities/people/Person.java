@@ -40,8 +40,9 @@ public class Person extends DomainObject {
     public Address address;
 
     public String getFullName() {
-        return String.format("%s %s", firstName, lastName);
-//
+        if (firstName!=null)
+            return String.format("%s %s", firstName, lastName);
+        return lastName;
     }
 
 

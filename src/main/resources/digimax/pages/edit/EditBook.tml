@@ -1,0 +1,14 @@
+<html t:type="layout" title="literal:EditBook"
+      t:sidebarTitle="FrameworkVersion"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+Book
+${book.title}
+<br/>
+<ul t:type="loop" source="book.authors" value="author">
+    <li>${author.fullName}</li>
+</ul>
+<br />
+<span t:type="png" fileName="${book.images.get(0).fileName}" altMessage="{book.title}"/>
+<!--<span t:type="png" fileName="THE_QUEEN_OF_SUBLETIES~SUZANNAH_DUNN.png" altMessage="The Queen of Subleties"/>-->
+</html>

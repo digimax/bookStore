@@ -70,7 +70,7 @@ public class BootupServiceImpl implements BootupService {
                 logger.debug("      authorsName :: {}", authorsName);
 
                 String bookTitle = (fileName.indexOf('~')>0)?
-                        fileName.substring(0, fileName.indexOf('~')):
+                        fileName.substring(0, fileName.indexOf('~')).replace('_', ' '):
                         fileName.substring(0,fileName.lastIndexOf('.')).replace('_', ' ');
                 String bookSubTitle = null;
                 logger.debug("      title :: {}", bookTitle);

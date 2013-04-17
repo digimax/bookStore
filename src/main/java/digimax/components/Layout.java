@@ -17,7 +17,7 @@ import org.slf4j.Logger;
  * Date: 4/14/13
  * Time: 1:48 PM
  */
-@Import(stylesheet = "context:layout/layout.css")
+@Import(stylesheet = {"context:layout/layout.css", "context:layout/ncapsuld.css"})
 public class Layout {
     @Inject
     private Logger logger;
