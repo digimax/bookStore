@@ -132,6 +132,13 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.16</version>
                 <configuration>
+                    <!--<jettyConfig></jettyConfig>-->
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8888</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                     <!-- Log to the console. -->
                     <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
                         <!-- This doesn't do anything for Jetty, but is a workaround for a Maven bug
@@ -143,6 +150,15 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                             <name>tapestry.execution-mode</name>
                             <value>development</value>
                         </systemProperty>
+                        <!--<systemProperty>-->
+                            <!--<name>digimax.ncapsuld.rip.root</name>-->
+                            <!--<value>/Users/jonwilliams/wrk/maw_raw/pro/</value>-->
+                        <!--</systemProperty>-->
+                        <!--<systemProperty>-->
+                            <!--<name>digimax.ncapsuld.app.image.folder</name>-->
+                            <!--<value>/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/</value>-->
+                        <!--</systemProperty>-->
+
                     </systemProperties>
                 </configuration>
             </plugin>

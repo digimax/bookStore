@@ -22,8 +22,10 @@ import java.util.List;
 
 public class BootupServiceImpl implements BootupService {
 
-    private static String BOOK_RIP_ROOT_FOLDER = "/Users/jonwilliams/wrk/maw_raw/pro/";
-    public static String APP_IMAGE_FOLDER = "/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/";
+    //System property digimax.ncapsuld.rip.root
+    private static String BOOK_RIP_ROOT_FOLDER = System.getProperty("digimax.ncapsuld.rip.root");//"/Users/jonwilliams/wrk/maw_raw/pro/";
+    //System property digimax.ncapsuld.app.image.folder
+    public static String APP_IMAGE_FOLDER = System.getProperty("digimax.ncapsuld.app.image.folder");//"/Users/jonwilliams/wrk/digimax/nc/ncapsuld/target/app_images_folder/";
 
 
     @Inject
