@@ -27,8 +27,10 @@ public class Item extends DomainObject {
     public Float price;
 
     @Property
-    @OneToMany(mappedBy="item", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
-    @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
+    @OneToMany(mappedBy="item",// fetch = FetchType.LAZY,
+            cascade = {CascadeType.ALL} )
+//            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
+//    @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
     public List<Image> images = new ArrayList<Image>();
 
 }

@@ -3,7 +3,12 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 Browse
-    <span t:type="loop" source="${library.shelves}">
+    <span t:type="loop" source="library.shelves" value="shelf">
+        <span t:type="loop" source="shelf.books" value="book">
+            <!--${book.id} :: ${book.title}-->
+            <!--<br />-->
+            <a t:type="pagelink" page="BookUi" > <span t:type="png" fileName="${smallImageFileName}" altMessage="book.title"/> </a>
+        </span>
         looping shelves
     </span>
 </html>

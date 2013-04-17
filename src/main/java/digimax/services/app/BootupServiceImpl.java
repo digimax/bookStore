@@ -124,6 +124,9 @@ public class BootupServiceImpl implements BootupService {
                 searchBook.authors.add(searchAuthor);
                 searchBook.authors.add(secondSearchAuthor);
                 Book book = bookService.findOrCreateBook(searchBook);
+                for (Image image : spineImages) {
+                    image.item = book;
+                }
                 book.images.addAll(spineImages);
                 newBooks.add(book);
             }

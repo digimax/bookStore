@@ -1,5 +1,8 @@
 package digimax.pages;
 
+import digimax.entities.app.Image;
+import digimax.entities.item.Book;
+import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
 import digimax.services.app.BootupServiceImpl;
 import digimax.services.domain.LibraryService;
@@ -44,8 +47,23 @@ public class Browse {
     @Inject
     LibraryService libraryService;
 
+    @Property
+    Book book;
+
+    @Property
+    Shelf shelf;
+
     public Library getLibrary() {
         return (Library) session.createCriteria(Library.class).uniqueResult();
     }
 
+    public String getLargeImageFileName() {
+        Image image = book.images.get(0);
+        return image.fileName;
+    }
+
+    public String getSmallImageFileName() {
+        Image image = book.images.get(1);
+        return image.fileName;
+    }
 }
