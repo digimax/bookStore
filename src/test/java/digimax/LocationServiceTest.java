@@ -1,6 +1,5 @@
 package digimax;
 
-import com.sun.tools.javac.code.BoundKind;
 import digimax.entities.item.Book;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
