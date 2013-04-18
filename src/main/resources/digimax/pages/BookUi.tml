@@ -5,9 +5,12 @@
 <h1>${book.title}</h1>
 <h3>${book.subTitle}</h3>
 <span t:type="png" fileName="${book.images.get(1).fileName}" altMessage="${book.title}"/>
+<h3>${message:authors}</h3>
 <ul t:type="loop" source="book.authors" value="author">
-    <li>${author.fullName}</li>
+    <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
 </ul>
+<br />
+${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">${book.shelf.name}</a>
 <br />
 <span t:type="png" fileName="${book.images.get(0).fileName}" altMessage="${book.title}"/>
 </html>

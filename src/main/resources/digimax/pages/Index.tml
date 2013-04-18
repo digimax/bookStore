@@ -1,6 +1,11 @@
-<html t:type="layout" title="ncapsuld Index"
+<html t:type="layout" title="Index"
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-test ok
+<h1>${library.name}</h1>
+<img src="${bannerImage}" alt="${library.name}"/>
+    <h3>${message:shelves}</h3>
+    <ul t:type="loop" source="library.shelves" value="shelf">
+        <li><a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a></li>
+    </ul>
 </html>
