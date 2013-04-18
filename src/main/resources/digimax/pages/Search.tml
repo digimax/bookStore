@@ -2,7 +2,21 @@
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-Search
-<span t:type="png" fileName="THE_POLITICIAN~WELCH.png" altMessage="The Politician"/>
-<span t:type="png" fileName="THE_QUEEN_OF_SUBLETIES~SUZANNAH_DUNN.png" altMessage="The Queen of Subleties"/>
+<h1>${message:search}</h1>
+<form t:type="form" clientValidation="none" action = "doNothing">
+    <t:errors/>
+    <fieldset>
+        <legend>${message:searchByTitle}</legend>
+        <t:label for="bookTitle"/>:
+        <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>
+    </fieldset>
+    <fieldset>
+        <legend>${message:searchByAuthor}</legend>
+        <t:label for="authorName"/>:
+        <input t:type="TextField" t:id="authorName" value="author" t:validate="" size="30"/>
+    </fieldset>
+    <div>
+        <input type="submit" value="Search"/>
+    </div>
+</form>
 </html>
