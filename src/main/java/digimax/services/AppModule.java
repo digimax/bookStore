@@ -53,6 +53,7 @@ public class AppModule
 
 
             binder.bind(BookService.class);
+            binder.bind(BookMetaService.class);
             binder.bind(LibraryService.class);
             binder.bind(LocationService.class);
             binder.bind(PersonService.class);
@@ -91,6 +92,15 @@ public class AppModule
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
     }
 
+    /**
+     * Keep Tapestry from processing requests to the web service path.
+     *
+     * @param configuration {@link Configuration}
+     */
+    public static void contributeIgnoredPathsFilter(
+            final Configuration<String> configuration) {
+        configuration.add("/ws/.*");
+    }
 
     /**
      * This is a service definition, the service will be named "TimingFilter". The interface,

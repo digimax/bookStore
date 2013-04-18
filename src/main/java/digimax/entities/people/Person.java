@@ -20,7 +20,7 @@ public class Person extends DomainObject {
 
     @Property
     @OneToOne(cascade = CascadeType.ALL)
-    public IdentityMeta identityMeta = new IdentityMeta();;
+    public IdentityMeta identityMeta = new IdentityMeta();
 
     @Property
     @Validate("required")

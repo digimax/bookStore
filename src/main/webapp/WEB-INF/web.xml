@@ -35,5 +35,21 @@ of where to look for pages, components and mixins. -->
         <filter-name>app</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!-- Restlet adapter -->
+    <servlet>
+        <servlet-name>WebService</servlet-name>
+        <servlet-class>org.restlet.ext.spring.SpringServerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WebService</servlet-name>
+        <!-- This path must also be set in AppModule#contributeIgnoredPathsFilter,
+            otherwise Tapestry, being a request filter, will try to handle
+            requests to this path. -->
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>
       

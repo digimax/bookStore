@@ -1,6 +1,7 @@
 package digimax.entities.item;
 
 import digimax.entities.people.Author;
+import digimax.entities.people.IdentityMeta;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.NonVisual;
 
@@ -30,6 +31,16 @@ public class Book extends Item {
     public String subTitle;
 
     @Property
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "book")
+    public BookMeta bookMeta;
+
+//    @Property
+//    public String isbn;
+//
+//    @Property
+//    public String isbn13;
+
+    @Property
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
 //    @JoinTable(name="Book_Author",
@@ -41,7 +52,6 @@ public class Book extends Item {
     @Property
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
-//    @JoinColumn(name="shelf_id")
     public Shelf shelf;
 
     public Book() {
