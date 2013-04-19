@@ -33,15 +33,28 @@ img {
     float:left;
 }
 
+.big {
+    float: none;
+}
+
+.list {
+    list-style: none;
+}
+
+.list li {
+    margin-left: 10px;
+}
+
 /* UL LI */
 /*.list {*/
-    /*width:100px;*/
-    /*height:90%;*/
+    /*float:left;*/
+    /*width:500px;*/
+    /*height:500px;*/
 /*}*/
 
 /*.list li {*/
 /*float:left;*/
-    /*width:20px;*/
+    /*width:500px;*/
     /*list-style:none;*/
 /*}*/
 /*.list , .list li {*/

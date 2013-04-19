@@ -7,7 +7,9 @@
         <span t:type="loop" source="author.books" value="book">
             <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImageFileName}" altMessage="book.title"/></a>
         </span>
-        <ul t:type="loop" source="author.books" value="book">
-            <li><a t:type="pagelink" page="BookUi" context="book.id">${book.title}</a></li>
-        </ul>
+        <div style="border: 1px red">
+            <ul t:type="loop" source="author.books" value="book" class="list">
+                <li><a t:type="pagelink" page="BookUi" context="book.id">${book.title}</a></li>
+            </ul>
+        </div>
 </html>

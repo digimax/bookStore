@@ -17,5 +17,22 @@ ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">
     <span t:type="domain/bookmetaui" bookMeta="book.bookMeta"/>
 </fieldset>
 <br />
-<span t:type="png" fileName="${book.images.get(0).fileName}" altMessage="${book.title}"/>
+<span t:type="png" fileName="${book.images.get(0).fileName}" altMessage="${book.title}" class="big"/>
+<div id="viewerCanvas" style="width: 600px; height: 500px"></div>
 </html>
+
+<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
+<!--<script type="text/javascript">-->
+<!--google.load("books", "0");-->
+
+<!--function initialize() {-->
+    <!--var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));-->
+    <!--viewer.load('ISBN:0738531367');-->
+<!--}-->
+
+<!--google.setOnLoadCallback(initialize);-->
+<!--</script>-->
+        <!--</head>-->
+<!--<body>-->
+<!--<div id="viewerCanvas" style="width: 600px; height: 500px"></div>-->
+<!--</body>-->
