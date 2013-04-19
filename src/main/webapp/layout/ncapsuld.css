@@ -45,6 +45,11 @@ img {
     margin-left: 10px;
 }
 
+.warningMessage {
+    color: firebrick;
+    font-size: larger;
+}
+
 /* UL LI */
 /*.list {*/
     /*float:left;*/

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>${message:title}</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        var isbn = self.location.search.substring(1);
+        google.load("books", "0");
+
+        function alertNotFound() {
+            var warningMessage = "${message:warning}";
+            var canvas = document.getElementById('viewerCanvas');
+            canvas.className = 'warningMessage';
+            canvas.innerHTML = "<br /><br /><br /><br /><div>&nbsp;&nbsp;"+warningMessage+"</div>";
+        }
+
+        function initialize() {
+            var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+            viewer.load('ISBN:'+isbn, alertNotFound);
+        }
+
+        google.setOnLoadCallback(initialize);
+    </script>
+</head>
+<body>
+<div id="viewerCanvas" style="width: 600px; height: 500px"></div>
+<br />
+<br />
+<a href="/ncapsuld/structural/googlebookviewer" onclick="javascript:void window.close(); return false" style="float: right; padding-right: 5px">${message:close}</a>
+</body>
+</html>
