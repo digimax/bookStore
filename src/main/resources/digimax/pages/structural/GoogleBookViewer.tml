@@ -24,7 +24,7 @@
     </script>
 </head>
 <body>
-<div id="viewerCanvas" style="width: 600px; height: 500px"></div>
+<div id="viewerCanvas" style="width: 600px; height: 500px; font-size: larger;"></div>
 <br />
 <br />
 <a href="/ncapsuld/structural/googlebookviewer" onclick="javascript:void window.close(); return false" style="float: right; padding-right: 5px">${message:close}</a>

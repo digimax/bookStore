@@ -43,12 +43,16 @@ import java.io.IOException;
  */
 public class BookMetaServiceImpl implements BookMetaService {
 
+    //GOOGLE_BOOK_API_KEY=AIzaSyD_gFyi2tQQs6522D1_V2aBDLChzEkw0xw
+    //https://www.googleapis.com/books/v1/volumes?q=isbn:0330358448
+    private static final String GOOGLE_BOOK_KEY = System.getProperty("digimax.ncapsuld.google.book.key")!=null?
+            System.getProperty("digimax.ncapsuld.google.book.key") : "IAIzaSyD_gFyi2tQQs6522D1_V2aBDLChzEkw0xw";
     private static final String ISBNDB_KEY = System.getProperty("digimax.ncapsuld.isbndb.key")!=null?
             System.getProperty("digimax.ncapsuld.isbndb.key") : "IP3U2HMG";
     private static final String ISBNDB_UNIQUE_BOOK_URL =
             "https://isbndb.com/api/books.xml?access_key="+ISBNDB_KEY+"&index1=book_id&value1=";
 
-    private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 10000;
+    private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 1000;
 
     private static final ContentType TEXT_UTF8_XML = ContentType.create(
             "text/xml", Consts.UTF_8);
