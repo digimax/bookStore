@@ -27,22 +27,27 @@ h3 {
     text-decoration: underline;
     margin-bottom: 5px;
 }
-/* UL LI */
-.list ul {
-    border: red, 1px;
-    width:60px;
-    height: 60px;
+
+/* IMG */
+img {
+    float:left;
 }
 
-.list ul li{
-float:left;
-    width:20px;
-    list-style:none;
-}
-.list ul, .list ul li {
--moz-transform: rotate(-90deg) scaleX(-1);
-    -o-transform: rotate(-90deg) scaleX(-1);
-    -webkit-transform: rotate(-90deg) scaleX(-1);
-    -ms-transform: rotate(-90deg) scaleX(-1);
-    transform: rotate(-90deg) scaleX(-1);
-}
+/* UL LI */
+/*.list {*/
+    /*width:100px;*/
+    /*height:90%;*/
+/*}*/
+
+/*.list li {*/
+/*float:left;*/
+    /*width:20px;*/
+    /*list-style:none;*/
+/*}*/
+/*.list , .list li {*/
+    /*-moz-transform: rotate(-90deg) scaleX(-1);*/
+    /*-o-transform: rotate(-90deg) scaleX(-1);*/
+    /*-webkit-transform: rotate(-90deg) scaleX(-1);*/
+    /*-ms-transform: rotate(-90deg) scaleX(-1);*/
+    /*transform: rotate(-90deg) scaleX(-1);*/
+/*}*/
