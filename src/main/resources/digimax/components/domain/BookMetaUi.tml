@@ -2,7 +2,16 @@
       xmlns:p="tapestry:parameter">
 <t:content>
     <span>
-    ${bookMeta.title}, ${bookMeta?.longTitle}, ${bookMeta.authorNames}, ${bookMeta.publisherName}, ${bookMeta.isbn}, ${bookMeta.isbn13}
+        <dl>
+            <dt>${message:title}</dt><dd>${bookMeta.title}</dd>
+            <t:if test="bookMeta.longTitle">
+                <dt>${message:longTitle}</dt><dd>${bookMeta?.longTitle}</dd>
+            </t:if>
+            <dt>${message:authors}</dt><dd>${bookMeta.authorNames}</dd>
+            <dt>${message:publisher}</dt><dd>${bookMeta.publisherName}</dd>
+            <dt>${message:isbn}</dt><dd>${bookMeta.isbn}</dd>
+            <dt>${message:isbn13}</dt><dd>${bookMeta.isbn13}</dd>
+        </dl>
     </span>
 </t:content>
 </html>

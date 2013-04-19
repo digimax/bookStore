@@ -6,7 +6,7 @@
 <h3>${book.subTitle}</h3>
 <span t:type="png" fileName="${book.images.get(1).fileName}" altMessage="${book.title}"/>
 <h3>${message:authors}</h3>
-<ul t:type="loop" source="book.authors" value="author">
+<ul t:type="loop" source="book.authors" value="author" class="list">
     <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
 </ul>
 <br />
