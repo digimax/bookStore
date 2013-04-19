@@ -14,8 +14,8 @@ ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">
 <br />
 <fieldset>
     <legend>${message:bookMeta}</legend>
+    <span t:type="domain/bookmetaui" bookMeta="book.bookMeta"/>
 </fieldset>
-<span t:type="bookmetaui"/>
 <br />
 <span t:type="png" fileName="${book.images.get(0).fileName}" altMessage="${book.title}"/>
 </html>

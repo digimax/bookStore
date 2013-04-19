@@ -223,7 +223,7 @@ public class AppModule
     }
 
     public static void contributeComponentClassResolver(Configuration<LibraryMapping> configuration) {
-//        configuration.add(new LibraryMapping("", "com.example.app.tasks"));
+//        configuration.add(new LibraryMapping("", "digimax.components.domain"));
 //        configuration.add(new LibraryMapping("", "com.example.app.chat"));
     }
 }

@@ -78,7 +78,7 @@ public class BookMetaServiceImpl implements BookMetaService {
             book.bookMeta = bookMeta;
             bookMeta.book = book;
         }
-        String searchTitle = book.title.replace(' ', '_');
+        String searchTitle = book.title.replace(' ', '_').replaceAll("`","");
         String isbndb_unique_book_url = ISBNDB_UNIQUE_BOOK_URL+searchTitle;
 
         logger.debug("isbndb_unique_book_url :: {}", isbndb_unique_book_url);
@@ -103,12 +103,16 @@ public class BookMetaServiceImpl implements BookMetaService {
                 Node serverTime = nodeMap.getNamedItem("server_time");
                 logger.debug("Element #{} :: {}", i+"."+ node, serverTime);
                 NodeList childNodes = node.getChildNodes();
+
                 for (int j=0; j<childNodes.getLength(); j++) {
                     Node childNode = childNodes.item(j);
                     logger.debug("childNode #{} :: {}", j+"."+childNode, childNode.getNodeValue());
                 }
 
                 Node bookListNode = node.getFirstChild().getNextSibling();
+                if (bookListNode.getChildNodes().getLength()<=1) {
+                    break;
+                }
                 Node bookDataNode = bookListNode.getFirstChild().getNextSibling();
                 NamedNodeMap bookDataNodeMap = bookDataNode.getAttributes();
                 Node bookIdNode = bookDataNodeMap.getNamedItem("book_id");
@@ -140,7 +144,7 @@ public class BookMetaServiceImpl implements BookMetaService {
                 logger.debug("  BookMeta Publisher :: {}", bookMeta.publisherName);
 
             }
-
+            save(bookMeta);
         } catch (IOException e) {
             throw new ApplicationRuntimeException(
                     String.format("ISBNDB Request Error for Book URL :: %s", isbndb_unique_book_url), e);
@@ -149,7 +153,6 @@ public class BookMetaServiceImpl implements BookMetaService {
                     String.format("xPath NodeList evaluation Error for :: %s", xmlPath), e);
         }
 
-        save(bookMeta);
     }
 
     private Document getDocument(String webServiceUrl) throws IOException {
