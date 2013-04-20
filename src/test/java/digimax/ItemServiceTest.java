@@ -45,8 +45,8 @@ public class ItemServiceTest extends QaRegistryTest {
         Long bookId = book.id;
         Assert.assertNotNull(bookId);
 
-        Image largeImage = new Image("MISSING_AT_SEA.png");
-        Image smallImage = new Image("smallMISSING_AT_SEA.png");
+        Image largeImage = new Image("MISSING_AT_SEA.png", 1000, 500);
+        Image smallImage = new Image("smallMISSING_AT_SEA.png", 100, 50);
 
         largeImage.item = book;
         smallImage.item = book;

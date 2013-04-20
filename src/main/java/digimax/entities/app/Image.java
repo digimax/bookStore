@@ -19,6 +19,12 @@ public class Image extends DomainObject {
     public String fileName;
 
     @Property
+    public int height;
+
+    @Property
+    public int width;
+
+    @Property
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
     public Item item;
@@ -28,9 +34,11 @@ public class Image extends DomainObject {
         super();
     }
 
-    public Image(String fileName) {
+    public Image(String fileName, int width, int height) {
         this();
         this.fileName = fileName;
+        this.width = width;
+        this.height = height;
     }
 
 }

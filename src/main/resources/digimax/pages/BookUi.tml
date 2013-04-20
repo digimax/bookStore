@@ -4,7 +4,7 @@
       xmlns:p="tapestry:parameter">
 <h1>${book.title}</h1>
 <h3>${book.subTitle}</h3>
-<span t:type="png" fileName="${book.images.get(1).fileName}" altMessage="${book.title}"/>
+<span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/>
 <h3>${message:authors}</h3>
 <ul t:type="loop" source="book.authors" value="author" class="list">
     <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
@@ -17,5 +17,8 @@ ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">
     <span t:type="domain/bookmetaui" bookMeta="book.bookMeta"/>
 </fieldset>
 <br />
-<span t:type="png" fileName="${book.images.get(0).fileName}" altMessage="${book.title}" class="big"/>
+<div class="horizontal">
+<span t:type="png" fileName="${rotatedImage.fileName}" altMessage="${book.title}" width="${rotatedImage.width}" height="${rotatedImage.height}" class="big"/>
+<!--<span t:type="png" fileName="${largeImage.fileName}" altMessage="${book.title}" width="${largeImage.width}" height="${largeImage.height}" class="big"/>-->
+</div>
 </html>

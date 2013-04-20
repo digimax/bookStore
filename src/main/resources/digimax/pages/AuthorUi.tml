@@ -5,7 +5,7 @@
 <h1>${author.fullName}</h1>
 <h3>${message:books}</h3>
         <span t:type="loop" source="author.books" value="book">
-            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImageFileName}" altMessage="${book.title}"/></a>
+            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/></a>
         </span>
         <div style="border: 1px red">
             <ul t:type="loop" source="author.books" value="book" class="list">

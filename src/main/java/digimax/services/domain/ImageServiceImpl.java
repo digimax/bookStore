@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import sun.security.provider.MD5;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,8 @@ public class ImageServiceImpl implements ImageService {
 
     private static final String FILE_EXTENSION = ".png";
     private static final String SCALED_IMAGE_PREFIX = "small";
+    private static final String ROTATED_IMAGE_PREFIX = "horizontal";
+    private static final double ROTATED_ANGLE_RADIANS = -1.57079633d;
 
     private static int SMALL_IMAGE_HEIGHT = 300;
 
@@ -45,7 +48,8 @@ public class ImageServiceImpl implements ImageService {
     public List<Image>createImages(String appImagesFolderRoot, String fileName, File sourceImageFile) {
         String tempOldFileName = fileName;
         fileName = DigestUtils.md5Hex(fileName)+FILE_EXTENSION;
-                Image fullScaleImage = new Image(fileName);
+
+        Image fullScaleImage = null;
         File destinationImageFile = new File(appImagesFolderRoot+fileName);
         File tempOldNameImageFile = new File(appImagesFolderRoot+tempOldFileName); //TODO: rework TestImages page to use HashedFileName
         try {
@@ -56,13 +60,16 @@ public class ImageServiceImpl implements ImageService {
         }
         //create scaled image
         String scaledImageFileName = SCALED_IMAGE_PREFIX+fileName;
-        Image scaledImage = new Image(scaledImageFileName);
+        Image scaledImage;
         try {
             BufferedImage src = ImageIO.read(destinationImageFile);
             int imageHeight = src.getHeight();
             int imageWidth = src.getWidth();
+            fullScaleImage = new Image(fileName, imageWidth, imageHeight);
             float widthToHeightRatio = Float.intBitsToFloat(imageWidth)/Float.intBitsToFloat(imageHeight);
             int scaledWidth = (int) (widthToHeightRatio*SMALL_IMAGE_HEIGHT);
+            scaledImage = new Image(scaledImageFileName, scaledWidth, SMALL_IMAGE_HEIGHT);
+
             ResampleOp  resampleOp = new ResampleOp(scaledWidth , SMALL_IMAGE_HEIGHT);
             resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.VerySharp);
             BufferedImage rescaledImage = resampleOp.filter(src, null);
@@ -74,11 +81,40 @@ public class ImageServiceImpl implements ImageService {
             throw new ApplicationRuntimeException(String.format("ImageServiceImpl IO failure. Failed to createScaledImage :: %s", scaledImageFileName) , e);
         }
 
+        //create rotated image
+        String rotatedImageFileName = ROTATED_IMAGE_PREFIX+fileName;
+        Image rotatedImage = new Image(rotatedImageFileName, fullScaleImage.height, fullScaleImage.width);
+        try {
+            BufferedImage sourceBufferedImage = ImageIO.read(sourceImageFile);
+            BufferedImage rotatedBufferedImage = rotate(sourceBufferedImage, ROTATED_ANGLE_RADIANS);
+            ImageIO.write(rotatedBufferedImage, "PNG",
+                    new File(appImagesFolderRoot+rotatedImageFileName));
+            rotatedImage.fileName=rotatedImageFileName;
+        } catch (IOException e) {
+            throw new ApplicationRuntimeException(String.format("ImageServiceImpl IO failure. Failed to createRotatedImage :: %s", rotatedImageFileName) , e);
+        }
+
         List<Image> createdImages = new ArrayList<Image>();
         createdImages.add(fullScaleImage);
         createdImages.add(scaledImage);
+        createdImages.add(rotatedImage);
 
         return createdImages;
 
+    }
+
+    public static BufferedImage rotate(BufferedImage image, double angle) {
+        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
+        int w = image.getWidth(), h = image.getHeight();
+        int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+//        GraphicsConfiguration gc = getDefaultConfiguration();
+        BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
+        Graphics2D g = result.createGraphics();
+        g.translate((neww-w)/2, (newh-h)/2);
+        g.rotate(angle, w/2, h/2);
+        g.drawRenderedImage(image, null);
+        g.dispose();
+        return result;
     }
 }

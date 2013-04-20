@@ -62,6 +62,22 @@ img {
     font-size: larger;
 }
 
+.horizontal {
+    border: 1px darkred;
+    background-color: darkolivegreen;
+    /*-moz-transition: all 10s ease;*/
+    /*-webkit-transition: all 10s ease;*/
+    /*-o-transition: all 10s ease;*/
+    /*transition: all 10s ease;*/
+}
+
+/*.horizontal img {*/
+    /*transform: translate(400px,-200px) rotate(-90deg);*/
+    /*-moz-transform: translate(400px,-200px) rotate(-90deg);*/
+    /*-webkit-transform: translate(400px,-200px) rotate(-90deg);*/
+    /*-o-transform: translate(400px,-200px) rotate(-90deg);*/
+/*}*/
+
 /*#wrapper {*/
     /*width:940px;*/
     /*padding:10px;*/

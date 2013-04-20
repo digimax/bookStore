@@ -158,7 +158,7 @@ public class TestImages {
         InputStream inputStream;
         try {
             inputStream =
-                    new BufferedInputStream(file.toURL().openStream());
+                    new BufferedInputStream(file.toURI().toURL().openStream());
         } catch (IOException e) {
             throw new ApplicationRuntimeException("Failed to open input stream, fileName :: "+fullyQualifiedFileName, e);
         }

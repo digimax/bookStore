@@ -21,13 +21,8 @@ public class ShelfUi {
     @Property
     private Book book;
 
-    public String getLargeImageFileName() {
-        Image image = book.images.get(0);
-        return image.fileName;
-    }
-
-    public String getSmallImageFileName() {
+    public Image getSmallImage() {
         Image image = book.images.get(1);
-        return image.fileName;
+        return image;
     }
 }

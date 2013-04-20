@@ -40,14 +40,19 @@ public class BookUi {
         bookMetaService.populateBookMeta(book);
     }
 
-    public String getLargeImageFileName() {
+    public Image getLargeImage() {
         Image image = book.images.get(0);
-        return image.fileName;
+        return image;
     }
 
-    public String getSmallImageFileName() {
+    public Image getSmallImage() {
         Image image = book.images.get(1);
-        return image.fileName;
+        return image;
+    }
+
+    public Image getRotatedImage() {
+        Image image = book.images.get(2);
+        return image;
     }
 
     private static final String GOOGLE_BOOKS_VIEWER_SCRIPT =

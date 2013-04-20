@@ -35,6 +35,14 @@ public class Png {
     private ComponentResources componentResources;
 
     @Property
+    @Parameter(required = true, defaultPrefix = BindingConstants.VAR)
+    private int width;
+
+    @Property
+    @Parameter(required = true, defaultPrefix = BindingConstants.VAR)
+    private int height;
+
+    @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
     private String altMessage;
 
