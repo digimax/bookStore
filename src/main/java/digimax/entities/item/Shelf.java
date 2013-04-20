@@ -24,10 +24,6 @@ import java.util.List;
 public class Shelf extends Location {
 
     @Property
-    @Validate("required")
-    public String name;
-
-    @Property
     @OneToMany(mappedBy="shelf")//, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
 //    @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
     public List<Book> books = new ArrayList<Book>();

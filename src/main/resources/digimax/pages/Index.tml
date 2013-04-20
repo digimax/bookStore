@@ -4,8 +4,10 @@
       xmlns:p="tapestry:parameter">
 <h1>${library.name}</h1>
 <img src="${bannerImage}" alt="${library.name}"/>
-    <h3>${message:shelves}</h3>
-    <ul t:type="loop" source="library.shelves" value="shelf">
-        <li><a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a></li>
-    </ul>
+    <div>
+        <h3>${message:shelves}</h3>
+        <ul t:type="loop" source="library.shelves" value="shelf" class="list double">
+            <li><a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a></li>
+        </ul>
+    </div>
 </html>

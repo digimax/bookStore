@@ -60,16 +60,12 @@ public class LibraryServiceImpl implements LibraryService {
 
     public void purchase(Library library, List<Book> books) {
         //@TODO: simple general ledger
-        receive(library, books);
+        receive(library, null, books);
     }
 
-    public void receive(Library library, List<Book> books) {
-        Shelf newShelf = new Shelf();
-        newShelf.name = "Big Shelf";
-        library.shelves.add(newShelf);
-        locationService.save(newShelf);
+    public void receive(Library library, Shelf shelf, List<Book> books) {
         for (Book book : books) {
-            book.shelf = newShelf;
+            book.shelf = shelf;
             logger.debug(String.format("LibraryServiceImpl :: receive %s : %s", book, book.title));
             bookService.save(book);
             logger.debug(String.format("LibraryServiceImpl :: receive %s : %s", book.shelf, book.shelf.name));

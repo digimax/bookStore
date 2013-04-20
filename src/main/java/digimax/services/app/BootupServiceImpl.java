@@ -5,11 +5,9 @@ import digimax.entities.item.Book;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
 import digimax.entities.people.Author;
-import digimax.services.domain.BookService;
-import digimax.services.domain.ImageService;
-import digimax.services.domain.LibraryService;
-import digimax.services.domain.PersonService;
+import digimax.services.domain.*;
 import digimax.structural.RecursiveFileListIterator;
+import org.apache.commons.lang.WordUtils;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -41,6 +39,9 @@ public class BootupServiceImpl implements BootupService {
     private LibraryService libraryService;
 
     @Inject
+    private LocationService locationService;
+
+    @Inject
     private ImageService imageService;
 
     public Library bootupLibrary() {
@@ -50,7 +51,7 @@ public class BootupServiceImpl implements BootupService {
 
         libraryService.save(library);
 
-        List<Book> newBooks = new ArrayList<Book>();
+//        List<Book> newBooks = new ArrayList<Book>();
 
         File rootfolder = new File(BOOK_RIP_ROOT_FOLDER);
         Iterator<File> fileIterator = new RecursiveFileListIterator(rootfolder);
@@ -61,6 +62,7 @@ public class BootupServiceImpl implements BootupService {
             if (fileAbsolutePath.toLowerCase().contains(".png") && !fileAbsolutePath.toUpperCase().contains("SPINE")) {
                 String fileNameWithLocation =
                         fileAbsolutePath.substring(BOOK_RIP_ROOT_FOLDER.length(), fileAbsolutePath.length());
+                fileNameWithLocation = fileNameWithLocation.replace('^', '~');
                 logger.debug("  processing File :: {}", fileNameWithLocation);
                 String locationName = fileNameWithLocation.substring(0, fileNameWithLocation.lastIndexOf(File.separator));
                 locationName = locationName.replaceAll(File.separator, ".");
@@ -76,6 +78,11 @@ public class BootupServiceImpl implements BootupService {
                         fileName.substring(0, fileName.indexOf('~')).replace('_', ' '):
                         fileName.substring(0,fileName.lastIndexOf('.')).replace('_', ' ');
                 String bookSubTitle = null;
+                if (bookTitle.contains("[")&&bookTitle.contains("]")) {
+                    bookSubTitle = bookTitle.substring(bookTitle.indexOf('[')+1, bookTitle.indexOf(']'));
+                    bookTitle = bookTitle.substring(0, bookTitle.indexOf('['));
+                }
+
                 logger.debug("      title :: {}", bookTitle);
                 String firstAuthorLastName = null;
                 String firstAuthorFirstName = null;
@@ -114,16 +121,16 @@ public class BootupServiceImpl implements BootupService {
 
                 List<Image> spineImages = imageService.createImages(APP_IMAGE_FOLDER, fileName, file);
                 Author searchAuthor = new Author();
-                searchAuthor.lastName = firstAuthorLastName;
-                searchAuthor.firstName = firstAuthorFirstName;
+                searchAuthor.lastName = WordUtils.capitalizeFully(firstAuthorLastName);
+                searchAuthor.firstName = WordUtils.capitalizeFully(firstAuthorFirstName);
 
                 Author secondSearchAuthor = new Author();
-                secondSearchAuthor.lastName = secondAuthorLastName;
-                secondSearchAuthor.firstName = secondAuthorFirstName;
+                secondSearchAuthor.lastName = WordUtils.capitalizeFully(secondAuthorLastName);
+                secondSearchAuthor.firstName = WordUtils.capitalizeFully(secondAuthorFirstName);
 
                 Book searchBook = new Book();
-                searchBook.title = bookTitle;
-                searchBook.subTitle = bookSubTitle;
+                searchBook.title = WordUtils.capitalizeFully(bookTitle);
+                searchBook.subTitle = WordUtils.capitalizeFully(bookSubTitle);
                 searchBook.authors.add(searchAuthor);
                 searchBook.authors.add(secondSearchAuthor);
                 Book book = bookService.findOrCreateBook(searchBook);
@@ -131,10 +138,13 @@ public class BootupServiceImpl implements BootupService {
                     image.item = book;
                 }
                 book.images.addAll(spineImages);
-                newBooks.add(book);
+//                newBooks.add(book);
+                List<Book> receivedBooks = new ArrayList<Book>();
+                Shelf shelf = (Shelf) locationService.findOrCreateLocation(library, locationName);
+                receivedBooks.add(book);
+                libraryService.receive(library, shelf, receivedBooks);
             }
         }
-        libraryService.receive(library, newBooks);
         long finishTime = System.currentTimeMillis();
         logger.debug(String.format("bootupLibrary method. Time elapsed while Populating new Library :: %03d (seconds)"
                 , (finishTime-startTime)/1000));

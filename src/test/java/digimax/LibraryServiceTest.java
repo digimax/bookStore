@@ -1,11 +1,15 @@
 package digimax;
 
+import digimax.entities.geo.Location;
 import digimax.entities.item.Book;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
 import digimax.entities.people.Author;
+import digimax.entities.people.Person;
 import digimax.services.domain.BookService;
 import digimax.services.domain.LibraryService;
+import digimax.services.domain.LocationService;
+import digimax.services.domain.PersonService;
 import org.apache.tapestry5.services.ApplicationStateManager;
 import org.apache.tapestry5.test.TapestryTestCase;
 import org.hibernate.Session;
@@ -40,21 +44,11 @@ public class LibraryServiceTest extends QaRegistryTest {
     }
 
     @Test
-    public void testSave() {
-        Assert.assertTrue(true);
-    }
-
-
-    @Test
-    public void testDelete() {
-        Assert.assertTrue(true);
-    }
-
-    @Test
     void testReceive() {
         Session session = registry.getService(Session.class);
         BookService bookService = registry.getService(BookService.class);
         LibraryService libraryService = registry.getService(LibraryService.class);
+        LocationService locationService = registry.getService(LocationService.class);
 
         Book searchBook = new Book();
         searchBook.title = "East Malaysia";
@@ -89,7 +83,8 @@ public class LibraryServiceTest extends QaRegistryTest {
         newBooks.add(book2);
 
         Library library =  libraryService.testInstance();
-        libraryService.receive(library, newBooks);
+        Shelf location = (Shelf) locationService.findOrCreateLocation(library, "Test Shelf");
+        libraryService.receive(library, location, newBooks);
         Long libraryId = library.id;
         Assert.assertNotNull(libraryId);
 
@@ -123,4 +118,54 @@ public class LibraryServiceTest extends QaRegistryTest {
         Assert.assertEquals(shelf.books.size(), 2);
 
     }
+
+    @BeforeMethod
+    public void purgeTables() {
+        // cleanup all persisted Books
+        Session session = registry.getService(Session.class);
+
+        BookService bookService = registry.getService(BookService.class);
+        LibraryService libraryService = registry.getService(LibraryService.class);
+        LocationService locationService = registry.getService(LocationService.class);
+        PersonService personService = registry.getService(PersonService.class);
+
+        List<Book> persistedBookList = session.createCriteria(Book.class).list();
+
+        for (Book book: persistedBookList) {
+            bookService.delete(book);
+        }
+        //refetch
+        persistedBookList = session.createCriteria(Book.class).list();
+        Assert.assertEquals(persistedBookList.size(),0);
+
+        // cleanup all persisted Libraries
+        List<Library> persistedLibraryList = session.createCriteria(Library.class).list();
+
+        for (Library library: persistedLibraryList) {
+            libraryService.delete(library);
+        }
+        //refetch
+        persistedLibraryList = session.createCriteria(Library.class).list();
+        Assert.assertEquals(persistedLibraryList.size(),0);
+
+        // cleanup all persisted Locations
+        List<Location> persistedLocationList = session.createCriteria(Location.class).list();
+
+        for (Location location: persistedLocationList) {
+            locationService.delete(location);
+        }
+        //refetch
+        persistedLocationList = session.createCriteria(Location.class).list();
+        Assert.assertEquals(persistedLocationList.size(),0);
+
+        // cleanup all persisted Persons
+        List<Person> persistedPersonList = session.createCriteria(Person.class).list();
+
+        for (Person person: persistedPersonList) {
+            personService.delete(person);
+        }
+        //refetch
+        persistedPersonList = session.createCriteria(Person.class).list();
+        Assert.assertEquals(persistedPersonList.size(),0);
+    }    
 }

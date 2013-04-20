@@ -1,6 +1,8 @@
 package digimax.services.domain;
 
 import digimax.entities.geo.Location;
+import digimax.entities.item.Shelf;
+import digimax.entities.library.Library;
 import digimax.entities.people.Person;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
@@ -20,4 +22,8 @@ public interface LocationService {
 
     @CommitAfter
     void delete(Location location);
+
+    @CommitAfter
+    Location findOrCreateLocation(Library library, String locationName);
+
 }

@@ -26,7 +26,7 @@ public interface LibraryService {
     void purchase(Library library, List<Book> books);
 
     @CommitAfter
-    void receive(Library library, List<Book> books);
+    void receive(Library library, Shelf shelf, List<Book> books);
 
     @CommitAfter
     void save(Library library);
