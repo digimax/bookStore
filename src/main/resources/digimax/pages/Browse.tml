@@ -5,7 +5,7 @@
     <h1>${message:browseEntireLibrary}</h1>
     <span t:type="loop" source="library.shelves" value="shelf">
         <span t:type="loop" source="shelf.books" value="book">
-            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImageFileName}" altMessage="book.title"/></a>
+            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImageFileName}" altMessage="${book.title}"/></a>
         </span>
     </span>
 </html>
