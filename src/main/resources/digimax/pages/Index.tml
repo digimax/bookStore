@@ -4,6 +4,7 @@
       xmlns:p="tapestry:parameter">
 <h1>${library.name}</h1>
 <img src="${bannerImage}" alt="${library.name}"/>
+    <!--<div id="wrapper">-->
     <div>
         <h3>${message:shelves}</h3>
         <ul t:type="loop" source="library.shelves" value="shelf" class="list double">

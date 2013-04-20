@@ -42,6 +42,8 @@ img {
     margin-bottom: 0px;
     overflow:hidden;
     border-top:1px solid #ccc;
+    margin-bottom: 5px;
+    padding-left: 5px;
 }
 .list li {
     line-height:1.5em;
@@ -54,17 +56,24 @@ img {
 .quad li	{ width:25%; }
 .six li		{ width:16.666%; }
 
-.list {
-    list-style: none;
-}
+/*.list {*/
+    /*list-style: none;*/
+/*}*/
 
-.list li {
-    margin-left: 10px;
-}
+/*.list li {*/
+    /*margin-left: 10px;*/
+/*}*/
 
 .warningMessage {
     color: firebrick;
     font-size: larger;
+}
+
+#wrapper {
+    width:940px;
+    padding:10px;
+    margin:0 auto;
+    overflow:hidden;
 }
 
 /* UL LI */

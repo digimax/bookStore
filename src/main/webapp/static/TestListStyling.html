@@ -87,30 +87,30 @@
             /*------------------------------------*\
                 LISTS
             \*------------------------------------*/
-        ul{
+        .list {
             width:760px;
             margin-bottom:20px;
             overflow:hidden;
             border-top:1px solid #ccc;
         }
-        li{
+        .list li {
             line-height:1.5em;
             border-bottom:1px solid #ccc;
             float:left;
             display:inline;
         }
         .double li	{ width:50%;}
-        #triple li	{ width:33.333%; }
-        #quad li		{ width:25%; }
-        #six li		{ width:16.666%; }
+        .triple li	{ width:33.333%; }
+        .quad li		{ width:25%; }
+        .six li		{ width:16.666%; }
     </style>
 </head>
 
-<div id="wrapper">
+<!--<div id="wrapper">-->
     <h1>Mutiple column lists using one &lt;ul&gt;</h1>
 
     <h2>Two columns</h2>
-    <ul class="double">
+    <ul class="list double">
         <li>CSS</li>
         <li>XHTML</li>
         <li>Semantics</li>
@@ -126,7 +126,7 @@
     </ul>
 
     <h2>Three columns</h2>
-    <ul id="triple">
+    <ul class="list triple">
         <li>CSS</li>
         <li>XHTML</li>
         <li>Semantics</li>
@@ -142,7 +142,7 @@
     </ul>
 
     <h2>Four columns</h2>
-    <ul id="quad">
+    <ul class="list quad">
         <li>CSS</li>
         <li>XHTML</li>
         <li>Semantics</li>
@@ -158,7 +158,7 @@
     </ul>
 
     <h2>Six columns</h2>
-    <ul id="six">
+    <ul class="list six">
         <li>CSS</li>
         <li>XHTML</li>
         <li>Semantics</li>
@@ -172,5 +172,5 @@
         <li>HTML5</li>
         <li>UI</li>
     </ul>
-</div>
+<!--</div>-->
 </html>
