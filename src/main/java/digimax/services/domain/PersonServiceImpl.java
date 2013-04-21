@@ -63,6 +63,31 @@ public class PersonServiceImpl implements PersonService {
         return person.identityMeta.isCorrectPassword(password);
     }
 
+    public List<Author> findAuthors(String name) {
+        if (name==null || name.length()==0) {
+            return null;
+        }
+        List<Author> authors = null;
+        //parse out the first and last name
+        int spaceTokenIndex = name.indexOf(' ');
+        if (spaceTokenIndex>0) {
+            //Search by firstName and lastName
+            String firstName = name.substring(0, spaceTokenIndex);
+            String lastName = name.substring(spaceTokenIndex+1, name.length());
+            Criterion condition =
+                    Restrictions.conjunction().add(Restrictions.ilike("lastName", "%"+lastName+"%"))
+                            .add(Restrictions.ilike("firstName", "%"+firstName+"%"));
+            authors =
+                    session.createCriteria(Author.class).add(condition).list();
+
+        } else {
+            //Search by lastName only
+            authors =
+                    session.createCriteria(Author.class).add(Restrictions.ilike("lastName", "%"+name+"%")).list();
+        }
+        return authors;
+    }
+
     public Author findAuthor(String lastName, String firstName) {
         Criterion condition =
                 Restrictions.conjunction().add(Restrictions.eq("lastName", lastName))

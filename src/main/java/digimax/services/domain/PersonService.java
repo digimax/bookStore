@@ -26,6 +26,8 @@ public interface PersonService {
 
     boolean isPassword(Person person, String password);
 
+    List<Author> findAuthors(String name);
+
     Author findAuthor(String lastName, String firstName);
     @CommitAfter
     Author newAuthor(String userName, String password, String firstName, String lastName);

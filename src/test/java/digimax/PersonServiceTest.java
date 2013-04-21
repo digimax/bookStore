@@ -53,9 +53,10 @@ public class PersonServiceTest extends QaRegistryTest {
     @AfterMethod
     public void tearDown() {
         collection.clear();
-//        Session session = registry.getService(Session.class);
-//        session.clear();
-//        session.flush();
+    }
+
+    @BeforeMethod
+    public void purgeTables() {
             // cleanup all persisted People
             Session session = registry.getService(Session.class);
 
@@ -244,6 +245,49 @@ public class PersonServiceTest extends QaRegistryTest {
         //try non existing author
         persistedAuthor = personService.findAuthor("Pumpkinhead", "Peter");
         Assert.assertNull(persistedAuthor);
+    }
+
+    @Test
+    public void testFindAuthors() {
+        Session session = registry.getService(Session.class);
+        PersonService personService = registry.getService(PersonService.class);
+
+        Author author1 = new Author("Rotten", "Johnny");
+        personService.save(author1);
+        Long author1Id = author1.id;
+        Assert.assertNotNull(author1Id);
+
+        Author author2 = new Author("Vicious", "Sid");
+        personService.save(author2);
+        Long author2Id = author2.id;
+        Assert.assertNotNull(author2Id);
+
+        session.evict(author1);
+        session.evict(author2);
+
+        Author persistedAuthor1 = (Author) session.get(Author.class, author1Id);
+        Author persistedAuthor2 = (Author) session.get(Author.class, author2Id);
+
+        Assert.assertNotNull(persistedAuthor1);
+        Assert.assertNotNull(persistedAuthor1.id);
+
+        Assert.assertNotNull(persistedAuthor2);
+        Assert.assertNotNull(persistedAuthor2.id);
+
+        //test find by Full Author Name
+        List<Author> foundAuthors = personService.findAuthors("Johnny Rotten");
+        Assert.assertNotNull(foundAuthors);
+        Assert.assertEquals(foundAuthors.size(), 1);
+
+        //test find by Author lastName
+        foundAuthors = personService.findAuthors("Rotten");
+        Assert.assertNotNull(foundAuthors);
+        Assert.assertEquals(foundAuthors.size(), 1);
+
+        //test find by truncated Full Author Name
+        foundAuthors = personService.findAuthors("John Rotten");
+        Assert.assertNotNull(foundAuthors);
+        Assert.assertEquals(foundAuthors.size(), 1);
 
 
     }
