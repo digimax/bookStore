@@ -22,6 +22,7 @@ import java.util.List;
  * Time: 3:55 PM
  * To change this template use File | Settings | File Templates.
  */
+@SuppressWarnings("unchecked")
 public class PersonServiceImpl implements PersonService {
 
     @Inject
@@ -53,7 +54,6 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
     public boolean isUserNameUnique(String userName) {
         List<Person> users = session.createCriteria(Person.class).add(Restrictions.eq("userName", userName)).list();
         return (users!=null && users.size()==1)? false : true;

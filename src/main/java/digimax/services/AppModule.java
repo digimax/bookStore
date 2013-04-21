@@ -25,6 +25,7 @@ import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.services.*;
 import org.apache.tapestry5.services.assets.AssetRequestHandler;
+import org.got5.tapestry5.jquery.JQuerySymbolConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,6 +91,8 @@ public class AppModule
         // you can extend this list of locales (it's a comma separated series of locale names;
         // the first locale name is the default when there's no reasonable match).
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
+        configuration.add(JQuerySymbolConstants.SUPPRESS_PROTOTYPE, "true");
+        configuration.add(JQuerySymbolConstants.JQUERY_ALIAS, "$");
     }
 
     /**
