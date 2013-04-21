@@ -8,15 +8,18 @@
     <fieldset>
         <legend>${message:searchByTitle}</legend>
         <t:label for="bookTitle"/>:
-        <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>
+        <input t:type="TextField" t:id="bookTitle" value="title" t:validate="" size="30"/>
+       <!-- <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>-->
+        <input t:type="submit" t:id="searchByTitle" value="Search"/>
     </fieldset>
     <fieldset>
         <legend>${message:searchByAuthor}</legend>
         <t:label for="authorName"/>:
         <input t:type="TextField" t:id="authorName" value="author" t:validate="" size="30"/>
+        <input t:type="submit" t:id="searchByAuthor" value="Search"/>
     </fieldset>
     <div>
-        <input type="submit" value="Search"/>
+
     </div>
 </form>
 </html>

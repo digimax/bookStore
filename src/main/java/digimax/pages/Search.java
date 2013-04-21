@@ -1,7 +1,9 @@
 package digimax.pages;
 
 import org.apache.tapestry5.annotations.Property;
-
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.hibernate.sql.Insert;
+import org.slf4j.Logger;
 /**
  * A product of Digimax Technology Inc. (digimax.com)
  * User: jonwilliams
@@ -10,10 +12,24 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class Search {
 
+    @Inject
+    Logger logger;
+
+
     @Property
     private String author;
 
     @Property
     private String title;
+
+    void onSelectedFromSearchByAuthor() {
+        logger.debug("Start Diagnostics");
+        logger.debug("End Diagnostics");
+    }
+
+    void onSelectedFromSearchByTitle() {
+        logger.debug("Start Diagnostics");
+        logger.debug("End Diagnostics");
+    }
 
 }
