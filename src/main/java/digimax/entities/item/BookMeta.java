@@ -26,6 +26,9 @@ public class BookMeta extends DomainObject {
     public String authorNames;
 
     @Property
+    public String description;
+
+    @Property
     public String title;
 
     @Property
@@ -33,6 +36,9 @@ public class BookMeta extends DomainObject {
 
     @Property
     public String publisherName;
+
+    @Property
+    public String thumbnailUrl;
 
     @Property
     @OneToOne(fetch = FetchType.LAZY)//, optional=true)

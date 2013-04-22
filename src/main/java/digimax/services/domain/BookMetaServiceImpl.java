@@ -5,6 +5,9 @@ import digimax.entities.item.BookMeta;
 import digimax.structural.ApplicationRuntimeException;
 import java.nio.charset.Charset;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,6 +20,7 @@ import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
 import org.apache.http.entity.ContentType;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -45,10 +49,13 @@ public class BookMetaServiceImpl implements BookMetaService {
 
     //GOOGLE_BOOK_API_KEY=AIzaSyD_gFyi2tQQs6522D1_V2aBDLChzEkw0xw
     //https://www.googleapis.com/books/v1/volumes?q=isbn:0330358448
+    //https://www.googleapis.com/books/v1/volumes?q=isbn:053105988X
     private static final String GOOGLE_BOOK_KEY = System.getProperty("digimax.ncapsuld.google.book.key")!=null?
             System.getProperty("digimax.ncapsuld.google.book.key") : "IAIzaSyD_gFyi2tQQs6522D1_V2aBDLChzEkw0xw";
     private static final String ISBNDB_KEY = System.getProperty("digimax.ncapsuld.isbndb.key")!=null?
             System.getProperty("digimax.ncapsuld.isbndb.key") : "IP3U2HMG";
+    private static final String GOOGLE_BOOK_URL =
+            "https://www.googleapis.com/books/v1/volumes?q=isbn:";
     private static final String ISBNDB_UNIQUE_BOOK_URL =
             "https://isbndb.com/api/books.xml?access_key="+ISBNDB_KEY+"&index1=book_id&value1=";
 
@@ -147,6 +154,40 @@ public class BookMetaServiceImpl implements BookMetaService {
                 bookMeta.publisherName = publisherNode.getTextContent();
                 logger.debug("  BookMeta Publisher :: {}", bookMeta.publisherName);
 
+                //Get metainfo from Google Books
+                String google_book_url = GOOGLE_BOOK_URL+bookMeta.isbn;
+                HttpResponse httpResponse = Request.Get(google_book_url)
+                    .execute().returnResponse();//.returnContent();
+                StatusLine statusLine = httpResponse.getStatusLine();
+                HttpEntity entity = httpResponse.getEntity();
+                if (statusLine.getStatusCode() >= 300) {
+                    throw new HttpResponseException(
+                            statusLine.getStatusCode(),
+                            statusLine.getReasonPhrase());
+                }
+
+                if (entity == null) {
+                    throw new ClientProtocolException("Response contains no content");
+                }
+                String jsonText = EntityUtils.toString(entity);
+                logger.debug("Google returned JSON :: {}", jsonText);
+                JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonText);
+                JSONArray items = json.getJSONArray("items");
+                logger.debug("Google Books items :: {}", items);
+                for (int j=0; j<items.size(); j++) {
+                    JSONObject item = items.getJSONObject(j);
+                    if (item.containsKey("volumeInfo")) {
+                        JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                        JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                        if (imageLinks!=null && imageLinks.containsKey("thumbnail")) {
+                            String thumbnailUrl = (String) imageLinks.get("thumbnail");
+                            logger.debug("Google Books thumbnail :: {}", thumbnailUrl);
+                            bookMeta.thumbnailUrl = thumbnailUrl;
+                        }
+                    }
+
+
+                }
             }
             save(bookMeta);
         } catch (IOException e) {
