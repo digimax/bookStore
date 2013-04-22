@@ -4,26 +4,33 @@
       xmlns:p="tapestry:parameter">
 <h1>${message:search}</h1>
 
-    <form t:type="form" t:id="byTitleForm" clientValidation="none" action="">
+    <t:zone t:id="byTitleFormZone" id="byTitleFormZone">
+    <form t:type="form" t:id="byTitleForm" t:zone="^" clientValidation="submit" action="">
         <t:errors/>
     <fieldset>
         <legend>${message:searchByTitle}</legend>
         <t:label for="bookTitle"/>:
-        <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required" size="30"/>
-       <!-- <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>-->
+        <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>
         <input t:type="submit" t:id="searchByTitle" value="Search"/>
     </fieldset>
     </form>
-    <form t:type="form" t:id="byAuthorForm" clientValidation="none" action="">
-        <t:errors/>
-    <fieldset>
-        <legend>${message:searchByAuthor}</legend>
-        <t:label for="authorName"/>:
-        <input t:type="TextField" t:id="authorName" value="author" t:validate="required" size="30"/>
-        <input t:type="submit" t:id="searchByAuthor" value="Search"/>
-    </fieldset>
-    </form>
+    </t:zone>
+    <t:zone t:id="byAuthorFormZone" id="byAuthorFormZone">
+        <form t:type="form" t:id="byAuthorForm" t:zone="^" clientValidation="submit" action="">
+            <t:errors/>
+        <fieldset>
+            <legend>${message:searchByAuthor}</legend>
+            <t:label for="authorName"/>:
+            <input t:type="TextField" t:id="authorName" value="authorName" t:validate="required, minlength=3" size="30"/>
+            <input t:type="submit" t:id="searchByAuthor" value="Search"/>
+        </fieldset>
+        </form>
+    </t:zone>
     <div>
-
+        <t:zone t:id="authorsZone" id="authorsZone">
+            <t:if test="hasAuthors">
+                <t:grid source="authors" row="author" inPlace="true"/>
+            </t:if>
+        </t:zone>
     </div>
 </html>

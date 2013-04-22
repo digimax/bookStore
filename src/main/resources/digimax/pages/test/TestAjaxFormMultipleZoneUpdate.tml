@@ -1,0 +1,34 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
+<head>
+    <!--<link rel="stylesheet" type="text/css" href="${context:css/examples/js.css}"/>-->
+</head>
+<body>
+<h1>AJAX Form Multiple Zone Update</h1>
+
+<noscript class="js-required">
+    ${message:javascript_required}
+</noscript>
+
+This page demonstrates an AJAX-enabled Form that also updates another zone on success.
+
+    <t:zone t:id="formZone" id="formZone">
+        <form t:id="ajaxForm" t:type="form" t:zone="^">
+
+            First Name: <input t:type="TextField" t:id="firstName"/><br/>
+            Last Name: <input t:type="TextField" t:id="lastName"/><br/>
+            Birthday: <input t:type="datefield" t:id="birthday"/><br/><br/>
+
+            <input type="submit" value="Accept"/><br/><br/>
+
+            <t:errors/>
+
+        </form>
+    </t:zone>
+
+
+    <t:zone t:id="outZone" id="outZone">
+        Welcome ${name}. Your birthday is ${birthday}
+    </t:zone>
+
+</body>
+</html>
