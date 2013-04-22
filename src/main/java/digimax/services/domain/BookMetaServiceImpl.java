@@ -51,6 +51,9 @@ public class BookMetaServiceImpl implements BookMetaService {
     //GOOGLE_BOOK_API_KEY=AIzaSyD_gFyi2tQQs6522D1_V2aBDLChzEkw0xw
     //https://www.googleapis.com/books/v1/volumes?q=isbn:0330358448
     //https://www.googleapis.com/books/v1/volumes?q=isbn:053105988X
+    //    https://isbndb.com/api/books.xml?access_key=IP3U2HMG&index1=book_id&value1=jesus_incident
+    //    https://isbndb.com/api/books.xml?access_key=IP3U2HMG&index1=combined&value1=jesus_incident
+
     private static final String GOOGLE_BOOK_KEY = System.getProperty("digimax.ncapsuld.google.book.key")!=null?
             System.getProperty("digimax.ncapsuld.google.book.key") : "IAIzaSyD_gFyi2tQQs6522D1_V2aBDLChzEkw0xw";
     private static final String ISBNDB_KEY = System.getProperty("digimax.ncapsuld.isbndb.key")!=null?
@@ -70,10 +73,6 @@ public class BookMetaServiceImpl implements BookMetaService {
 
     @Inject
     private Session session;
-
-//    https://isbndb.com/api/books.xml?access_key=IP3U2HMG&index1=book_id&value1=jesus_incident
-//    https://isbndb.com/api/books.xml?access_key=IP3U2HMG&index1=combined&value1=jesus_incident
-
 
     public void save(BookMeta bookMeta) {
         session.save(bookMeta);
@@ -104,7 +103,7 @@ public class BookMetaServiceImpl implements BookMetaService {
             Document document = getDocument(isbndb_unique_book_url);
             logger.debug("ISBNDB returned Document :: {}", document);
 
-//Evaluate XPath against Document itself
+            //Evaluate XPath against Document itself
             XPath xPath = XPathFactory.newInstance().newXPath();
             xmlPath = "/ISBNdb";
             NodeList nodes = (NodeList)xPath.evaluate( xmlPath,
@@ -176,23 +175,23 @@ public class BookMetaServiceImpl implements BookMetaService {
                 if (json.containsKey("items")) {
                     try {
                         JSONArray items = json.getJSONArray("items");
-                    logger.debug("Google Books items :: {}", items);
-                    for (int j=0; j<items.size(); j++) {
-                        JSONObject item = items.getJSONObject(j);
-                        if (item.containsKey("volumeInfo")) {
-                            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-                            if (volumeInfo.containsKey("description")) {
-                                String description = volumeInfo.getString("description");
-                                bookMeta.description = description;
-                            }
-                            JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                            if (imageLinks!=null && imageLinks.containsKey("thumbnail")) {
-                                String thumbnailUrl = imageLinks.getString("thumbnail");
-                                logger.debug("Google Books thumbnail :: {}", thumbnailUrl);
-                                bookMeta.thumbnailUrl = thumbnailUrl;
+                        logger.debug("Google Books items :: {}", items);
+                        for (int j=0; j<items.size(); j++) {
+                            JSONObject item = items.getJSONObject(j);
+                            if (item.containsKey("volumeInfo")) {
+                                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                                if (volumeInfo.containsKey("description")) {
+                                    String description = volumeInfo.getString("description");
+                                    bookMeta.description = description;
+                                }
+                                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                                if (imageLinks!=null && imageLinks.containsKey("thumbnail")) {
+                                    String thumbnailUrl = imageLinks.getString("thumbnail");
+                                    logger.debug("Google Books thumbnail :: {}", thumbnailUrl);
+                                    bookMeta.thumbnailUrl = thumbnailUrl;
+                                }
                             }
                         }
-                    }
                     } catch (JSONException e) {
                         logger.debug("Google Books has no info for :: {}", book.title);
                     }
