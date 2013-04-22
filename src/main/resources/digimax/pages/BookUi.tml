@@ -7,19 +7,21 @@
 <span style="margin-right: 5px; border: 5px red"> <!--TODO: figure out why this style has no effect-->
     <span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/>
 </span>
-<h3>${message:authors}</h3>
-<ul t:type="loop" source="book.authors" value="author" class="list">
-    <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
-</ul>
+<div style="margin-left: 5px">
+    <h3>${message:authors}</h3>
+    <ul t:type="loop" source="book.authors" value="author" class="list">
+        <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
+    </ul>
+    <br />
+    ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">${book.shelf.name}</a>
+    <br />
+    <fieldset style="width : 50%">
+        <legend>${message:bookMeta}</legend>
+        <span t:type="domain/bookmetaui" bookMeta="book.bookMeta"/>
+    </fieldset>
+</div>
 <br />
-${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">${book.shelf.name}</a>
-<br />
-<fieldset style="width : 50%">
-    <legend>${message:bookMeta}</legend>
-    <span t:type="domain/bookmetaui" bookMeta="book.bookMeta"/>
-</fieldset>
-<br />
-<div class="horizontal">
+<div>
 <span t:type="png" fileName="${rotatedImage.fileName}" altMessage="${book.title}" width="${rotatedImage.width}" height="${rotatedImage.height}" class="big"/>
 <!--<span t:type="png" fileName="${largeImage.fileName}" altMessage="${book.title}" width="${largeImage.width}" height="${largeImage.height}" class="big"/>-->
 </div>

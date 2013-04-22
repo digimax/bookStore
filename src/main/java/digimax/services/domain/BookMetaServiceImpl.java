@@ -6,6 +6,7 @@ import digimax.structural.ApplicationRuntimeException;
 import java.nio.charset.Charset;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import org.apache.http.Consts;
@@ -172,24 +173,29 @@ public class BookMetaServiceImpl implements BookMetaService {
                 String jsonText = EntityUtils.toString(entity);
                 logger.debug("Google returned JSON :: {}", jsonText);
                 JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonText);
-                JSONArray items = json.getJSONArray("items");
-                logger.debug("Google Books items :: {}", items);
-                for (int j=0; j<items.size(); j++) {
-                    JSONObject item = items.getJSONObject(j);
-                    if (item.containsKey("volumeInfo")) {
-                        JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-                        if (volumeInfo.containsKey("description")) {
-                            String description = volumeInfo.getString("description");
-                            bookMeta.description = description;
-                        }
-                        JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                        if (imageLinks!=null && imageLinks.containsKey("thumbnail")) {
-                            String thumbnailUrl = imageLinks.getString("thumbnail");
-                            logger.debug("Google Books thumbnail :: {}", thumbnailUrl);
-                            bookMeta.thumbnailUrl = thumbnailUrl;
+                if (json.containsKey("items")) {
+                    try {
+                        JSONArray items = json.getJSONArray("items");
+                    logger.debug("Google Books items :: {}", items);
+                    for (int j=0; j<items.size(); j++) {
+                        JSONObject item = items.getJSONObject(j);
+                        if (item.containsKey("volumeInfo")) {
+                            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                            if (volumeInfo.containsKey("description")) {
+                                String description = volumeInfo.getString("description");
+                                bookMeta.description = description;
+                            }
+                            JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                            if (imageLinks!=null && imageLinks.containsKey("thumbnail")) {
+                                String thumbnailUrl = imageLinks.getString("thumbnail");
+                                logger.debug("Google Books thumbnail :: {}", thumbnailUrl);
+                                bookMeta.thumbnailUrl = thumbnailUrl;
+                            }
                         }
                     }
-
+                    } catch (JSONException e) {
+                        logger.debug("Google Books has no info for :: {}", book.title);
+                    }
 
                 }
             }
