@@ -4,7 +4,9 @@
       xmlns:p="tapestry:parameter">
 <h1>${book.title}</h1>
 <h3>${book.subTitle}</h3>
-<span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/>
+<span style="margin-right: 5px; border: 5px red"> <!--TODO: figure out why this style has no effect-->
+    <span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/>
+</span>
 <h3>${message:authors}</h3>
 <ul t:type="loop" source="book.authors" value="author" class="list">
     <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>

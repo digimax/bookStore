@@ -3,12 +3,10 @@ package digimax.components;
 import digimax.services.app.BootupServiceImpl;
 import digimax.structural.ApplicationRuntimeException;
 import digimax.structural.image.PNGInline;
-import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.ComponentResources;
-import org.apache.tapestry5.Link;
-import org.apache.tapestry5.StreamResponse;
+import org.apache.tapestry5.*;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.internal.structure.Page;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -25,6 +23,7 @@ import java.io.InputStream;
  * Date: 4/16/13
  * Time: 1:13 PM
  */
+@SupportsInformalParameters //TODO: find a way to get this working, currently seems to do nothing
 public class Png {
 
     private static final String FILE_EXTENSION = ".png";
@@ -54,6 +53,8 @@ public class Png {
         Link streamLink = componentResources.createEventLink("images", new Object[] {fileName});
         return streamLink;
     }
+
+//
 
     public StreamResponse onImages(final String imageFileName) {
         logger.debug("onImages called with imageFileName :: {}",imageFileName);
