@@ -178,9 +178,13 @@ public class BookMetaServiceImpl implements BookMetaService {
                     JSONObject item = items.getJSONObject(j);
                     if (item.containsKey("volumeInfo")) {
                         JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                        if (volumeInfo.containsKey("description")) {
+                            String description = volumeInfo.getString("description");
+                            bookMeta.description = description;
+                        }
                         JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
                         if (imageLinks!=null && imageLinks.containsKey("thumbnail")) {
-                            String thumbnailUrl = (String) imageLinks.get("thumbnail");
+                            String thumbnailUrl = imageLinks.getString("thumbnail");
                             logger.debug("Google Books thumbnail :: {}", thumbnailUrl);
                             bookMeta.thumbnailUrl = thumbnailUrl;
                         }

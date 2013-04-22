@@ -23,6 +23,9 @@
             </t:if>
         </dl>
     </span>
+    <t:if test="bookMeta.description">
+        <div>${bookMeta.description}</div>
+    </t:if>
     <t:if test="bookMeta.thumbnailUrl">
         <img src="${bookMeta.thumbnailUrl}" alt="${bookMeta.book.title}"/>
     </t:if>
