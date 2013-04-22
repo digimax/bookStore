@@ -23,6 +23,7 @@ import java.util.List;
 public class Item extends DomainObject {
 
     @Property
+    @NonVisual
     @Validate("required")
     public Float price;
 

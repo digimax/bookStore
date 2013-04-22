@@ -159,7 +159,51 @@ public class BookServiceTest extends QaRegistryTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
+    public void testFindBooks() {
+        Session session = registry.getService(Session.class);
+
+        BookService bookService = registry.getService(BookService.class);
+
+        Book book1 = new Book();
+        book1.title = "How the West was Won";
+        bookService.save(book1);
+        Long book1Id = book1.id;
+        Assert.assertNotNull(book1Id);
+
+        Book book2 = new Book();
+        book2.title = "All about the Roundabout";
+        bookService.save(book2);
+        Long book2Id = book2.id;
+        Assert.assertNotNull(book2Id);
+
+        session.evict(book1);
+        session.evict(book2);
+
+        Book persistedBook1 = (Book) session.get(Book.class, book1Id);
+        Book persistedBook2 = (Book) session.get(Book.class, book2Id);
+
+        Assert.assertNotNull(persistedBook1);
+        Assert.assertNotNull(persistedBook1.id);
+
+        Assert.assertNotNull(persistedBook2);
+        Assert.assertNotNull(persistedBook2.id);
+
+        List<Book> persistedBooks = session.createCriteria(Book.class).list();
+        Assert.assertEquals(persistedBooks.size(), 2);
+
+        //Test find by complete title
+        List<Book> foundBooks = bookService.findBooks("How the West was Won");
+        Assert.assertNotNull(foundBooks);
+        Assert.assertEquals(foundBooks.size(), 1);
+
+        //Test find by partial title
+        foundBooks = bookService.findBooks("Roundabout");
+        Assert.assertNotNull(foundBooks);
+        Assert.assertEquals(foundBooks.size(), 1);
+
+    }
+
+    @Test
     public void testNewBook() {
         Session session = registry.getService(Session.class);
 

@@ -1,6 +1,8 @@
 package digimax.pages;
 
+import digimax.entities.item.Book;
 import digimax.entities.people.Author;
+import digimax.services.domain.BookService;
 import digimax.services.domain.PersonService;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ComponentResources;
@@ -51,6 +53,9 @@ public class Search {
     private ComponentResources componentResources;
 
     @Inject
+    BookService bookService;
+
+    @Inject
     PersonService personService;
 
     @InjectComponent
@@ -63,7 +68,14 @@ public class Search {
     private Form byTitleForm;
 
     @InjectComponent
+    private Zone byTitleFormZone;
+
+    @InjectComponent
     private Zone authorsZone;
+
+    @InjectComponent
+    private Zone booksZone;
+
 
     @Property
 //    @Validate("required")
@@ -77,8 +89,16 @@ public class Search {
     private Author author;
 
     @Property
+    private Book book;
+
+    @Property
     @Persist(PersistenceConstants.SESSION)
     private List<Author> authors;
+
+
+    @Property
+    @Persist(PersistenceConstants.SESSION)
+    private List<Book> books;
 
     void onSelectedFromSearchByAuthor() {
         componentResources.discardPersistentFieldChanges();
@@ -106,6 +126,16 @@ public class Search {
         if (byTitleForm.getHasErrors()) {
             return;
         }
+        books = bookService.findBooks(title);
+        if (books==null || books.size()==0) {
+            manager.alert(Duration.SINGLE, Severity.WARN, messages.format("noBooksFound", title));
+            return;
+        }
+        if (request.isXHR()) {
+            logger.debug("byTitleFormZone :: {}", byTitleFormZone);
+            logger.debug("booksZone :: {}", booksZone);
+            ajaxResponseRenderer.addRender(byTitleFormZone).addRender(booksZone);
+        }
         logger.debug("End Diagnostics");
     }
 
@@ -113,4 +143,7 @@ public class Search {
         return (authors!=null && authors.size()>0);
     }
 
+    public boolean getHasBooks() {
+        return (books!=null && books.size()>0);
+    }
 }

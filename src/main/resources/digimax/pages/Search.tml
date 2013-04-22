@@ -39,5 +39,18 @@
                 </t:grid>
             </t:if>
         </t:zone>
+
+        <t:zone t:id="booksZone" id="booksZone">
+            <t:if test="hasBooks">
+                <t:grid source="books" row="book" inPlace="true">
+                    <p:titleCell>
+                        <a t:type="pagelink" page="BookUi"
+                           context="book.id">
+                            ${book.title}
+                        </a>
+                    </p:titleCell>
+                </t:grid>
+            </t:if>
+        </t:zone>
     </div>
 </html>

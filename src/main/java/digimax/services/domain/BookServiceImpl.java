@@ -18,6 +18,7 @@ import java.util.List;
  * Time: 3:54 PM
  * To change this template use File | Settings | File Templates.
  */
+@SuppressWarnings("unchecked")
 public class BookServiceImpl implements BookService {
 
     @Inject
@@ -63,6 +64,15 @@ public class BookServiceImpl implements BookService {
         Book foundBook = (Book) session.createCriteria(Book.class).createAlias("authors", "authorz").add(condition).uniqueResult();
         return foundBook;
         }
+
+    public List<Book> findBooks(String title) {
+        if (title==null || title.length()==0) {
+            return null;
+        }
+        List<Book> books = null;
+        books = session.createCriteria(Book.class).add(Restrictions.ilike("title", "%"+title+"%")).list();
+        return books;
+    }
 
     public Book newBook(String title, String subTitle, String firstAuthorLastName, String firstAuthorFirstName, String secondAuthorLastName, String secondAuthorFirstName) {
         Book book = new Book();
