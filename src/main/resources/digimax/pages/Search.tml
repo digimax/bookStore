@@ -29,7 +29,14 @@
     <div>
         <t:zone t:id="authorsZone" id="authorsZone">
             <t:if test="hasAuthors">
-                <t:grid source="authors" row="author" inPlace="true"/>
+                <t:grid source="authors" row="author" inPlace="true">
+                    <p:fullNameCell>
+                        <a t:type="pagelink" page="AuthorUi"
+                           context="author.id">
+                            ${author.fullName}
+                        </a>
+                    </p:fullNameCell>
+                </t:grid>
             </t:if>
         </t:zone>
     </div>

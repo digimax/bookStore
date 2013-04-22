@@ -3,6 +3,7 @@ package digimax.entities.people;
 import digimax.entities.geo.Address;
 import digimax.structural.DomainObject;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Person extends DomainObject {
     public String lastName;
 
     @Property
+    @NonVisual
     @Validate("required, regex")
     public String userName;
 

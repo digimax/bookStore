@@ -3,6 +3,7 @@ package digimax.pages;
 import digimax.entities.people.Author;
 import digimax.services.domain.PersonService;
 import org.apache.tapestry5.Block;
+import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
@@ -47,6 +48,9 @@ public class Search {
     private AjaxResponseRenderer ajaxResponseRenderer;
 
     @Inject
+    private ComponentResources componentResources;
+
+    @Inject
     PersonService personService;
 
     @InjectComponent
@@ -77,6 +81,7 @@ public class Search {
     private List<Author> authors;
 
     void onSelectedFromSearchByAuthor() {
+        componentResources.discardPersistentFieldChanges();
         authors = null;
         logger.debug("Start Diagnostics");
         if (byAuthorForm.getHasErrors()) {
@@ -96,6 +101,7 @@ public class Search {
     }
 
     void onSelectedFromSearchByTitle() {
+        componentResources.discardPersistentFieldChanges();
         logger.debug("Start Diagnostics");
         if (byTitleForm.getHasErrors()) {
             return;
