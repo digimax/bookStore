@@ -54,7 +54,7 @@ public class Layout {
 
     public String[] getPageNames()
     {
-        return new String[]{"Index", "Browse", "Search", "BookCart", "About", "test/TestImages"};
+        return new String[]{"Index", "About", "Browse", "Search", "BookCart", "Login", "Help"};
     }
 
 //    void beforeRenderBody(MarkupWriter writer) {

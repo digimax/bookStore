@@ -1,0 +1,17 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    <t:content>
+        <span>
+            <dl>
+                <dt><t:label for="street1"/></dt>
+                <dd><input t:type="textfield" t:id="street1" value="address.street1" t:validate="required, minlength=6" size="30"/></dd>
+                <dt><t:label for="street2"/></dt>
+                <dd><input t:type="textfield" t:id="street2" value="address.street2" t:validate="" size="30"/></dd>
+                <dt><t:label for="city"/></dt>
+                <dd><input t:type="textfield" t:id="city" value="address.city" t:validate="required, minlength=2" size="30"/></dd>
+                <dt><t:label for="state"/></dt>
+                <dd><input t:type="textfield" t:id="state" value="address.state" t:validate="required, minlength=3" size="30"/></dd>
+            </dl>
+        </span>
+    </t:content>
+</html>
