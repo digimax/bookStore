@@ -1,0 +1,26 @@
+<html t:type="layout" title="About ncapsuld"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+<head>
+
+</head>
+<body>
+<span class="container" style="float:right; width:750px">
+        <h1>New User</h1>
+        <fieldset>
+            <legend>
+                ${message:create-new-user}
+            </legend>
+            <form t:type="form" action="">
+                <t:errors/>
+                <span t:type="domain/customerui" customer="wrappedCustomer"/>
+                <dl>
+                    <dt><t:label for="verifyPassword"/></dt>
+                    <dd><input t:type="textfield" t:id="verifyPassword" value="verifyPassword" t:validate="required, minlength=6, regexp" size="30" type="password"></input></dd>
+                </dl>
+                <input t:type="submit" t:id="joinUp" value="Join up"/>
+            </form>
+        </fieldset>
+    </span>
+</body>
+</html>

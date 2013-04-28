@@ -38,7 +38,7 @@ public class Index
     private Shelf shelf;
 
     @Inject
-    @Path("context:imagez/humanity.jpg")
+    @Path("context:imagez/books.jpg")
     @Property
     private Asset bannerImage;
 

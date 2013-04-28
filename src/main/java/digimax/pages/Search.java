@@ -4,7 +4,6 @@ import digimax.entities.item.Book;
 import digimax.entities.people.Author;
 import digimax.services.domain.BookService;
 import digimax.services.domain.PersonService;
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.alerts.AlertManager;
@@ -14,16 +13,13 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
-import org.hibernate.sql.Insert;
 import org.slf4j.Logger;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,7 +34,7 @@ public class Search {
     private Logger logger;
 
     @Inject
-    private AlertManager manager;
+    private AlertManager alertManager;
 
     @Inject
     private Messages messages;
@@ -109,7 +105,7 @@ public class Search {
         }
         authors = personService.findAuthors(authorName);
         if (authors==null || authors.size()==0) {
-            manager.alert(Duration.SINGLE, Severity.WARN, messages.format("noAuthorsFound", authorName));
+            alertManager.alert(Duration.SINGLE, Severity.WARN, messages.format("noAuthorsFound", authorName));
             return;
         }
         if (request.isXHR()) {
@@ -128,7 +124,7 @@ public class Search {
         }
         books = bookService.findBooks(title);
         if (books==null || books.size()==0) {
-            manager.alert(Duration.SINGLE, Severity.WARN, messages.format("noBooksFound", title));
+            alertManager.alert(Duration.SINGLE, Severity.WARN, messages.format("noBooksFound", title));
             return;
         }
         if (request.isXHR()) {

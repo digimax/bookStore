@@ -2,13 +2,14 @@
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-<h1>${library.name}</h1>
-<img src="${bannerImage}" alt="${library.name}"/>
-    <!--<div id="wrapper">-->
-    <div>
+<div class="container">
+    <h1>${library.name}</h1>
+    <img src="${bannerImage}" alt="${library.name}"/>
+    <div style="float:right;">
         <h3>${message:shelves}</h3>
-        <ul t:type="loop" source="library.shelves" value="shelf" class="list double">
+        <ul t:type="loop" source="library.shelves" value="shelf" class="list six" style="width:600px;">
             <li><a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a></li>
         </ul>
     </div>
+</div>
 </html>

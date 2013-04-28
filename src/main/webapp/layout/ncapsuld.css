@@ -37,6 +37,11 @@ img {
     float: none;
 }
 
+.container {
+    width: 100%;
+    overflow: hidden;
+}
+
 .list {
     width:300px;
     margin-bottom: 0px;
@@ -72,15 +77,15 @@ img {
 }
 
 /*.horizontal img {*/
-    /*transform: translate(400px,-200px) rotate(-90deg);*/
-    /*-moz-transform: translate(400px,-200px) rotate(-90deg);*/
-    /*-webkit-transform: translate(400px,-200px) rotate(-90deg);*/
-    /*-o-transform: translate(400px,-200px) rotate(-90deg);*/
+/*transform: translate(400px,-200px) rotate(-90deg);*/
+/*-moz-transform: translate(400px,-200px) rotate(-90deg);*/
+/*-webkit-transform: translate(400px,-200px) rotate(-90deg);*/
+/*-o-transform: translate(400px,-200px) rotate(-90deg);*/
 /*}*/
 
 /*#wrapper {*/
-    /*width:940px;*/
-    /*padding:10px;*/
-    /*margin:0 auto;*/
-    /*overflow:hidden;*/
+/*width:940px;*/
+/*padding:10px;*/
+/*margin:0 auto;*/
+/*overflow:hidden;*/
 /*}*/

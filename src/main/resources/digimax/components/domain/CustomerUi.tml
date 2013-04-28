@@ -1,0 +1,14 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+<t:content>
+    <span>
+        <dl>
+            <dt><t:label for="userName"/></dt>
+            <dd><input t:type="textfield" t:id="userName" value="customer.userName" t:validate="required, minlength=6, regexp" size="30"></input></dd>
+            <dt><t:label for="password"/></dt>
+            <dd><input t:type="textfield" t:id="password" value="customer.identityMeta.password" t:validate="required, minlength=6" size="30" type="password"></input></dd>
+        </dl>
+        <span t:type="domain/addressui" address="customer.address"/>
+    </span>
+</t:content>
+</html>

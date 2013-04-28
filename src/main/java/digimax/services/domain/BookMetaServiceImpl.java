@@ -157,7 +157,7 @@ public class BookMetaServiceImpl implements BookMetaService {
                 //Get metainfo from Google Books
                 String google_book_url = GOOGLE_BOOK_URL+bookMeta.isbn;
                 HttpResponse httpResponse = Request.Get(google_book_url)
-                    .execute().returnResponse();//.returnContent();
+                        .execute().returnResponse();//.returnContent();
                 StatusLine statusLine = httpResponse.getStatusLine();
                 HttpEntity entity = httpResponse.getEntity();
                 if (statusLine.getStatusCode() >= 300) {
@@ -201,7 +201,7 @@ public class BookMetaServiceImpl implements BookMetaService {
             save(bookMeta);
         } catch (IOException e) {
             throw new ApplicationRuntimeException(
-                    String.format("ISBNDB Request Error for Book URL :: %s", isbndb_unique_book_url), e);
+                    String.format("REST Request Error for Book URL :: %s", isbndb_unique_book_url), e);
         } catch (XPathExpressionException e) {
             throw new ApplicationRuntimeException(
                     String.format("xPath NodeList evaluation Error for :: %s", xmlPath), e);

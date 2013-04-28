@@ -50,7 +50,7 @@ public class PersonServiceImpl implements PersonService {
         Person person = (Person)
                 session.createCriteria(Person.class).add(Restrictions.eq("userName", userName)).uniqueResult();
         if (person!=null && person.identityMeta.isCorrectPassword(password))
-                return person;
+            return person;
         return null;
     }
 
@@ -106,7 +106,7 @@ public class PersonServiceImpl implements PersonService {
         author.userName = userName;
         author.firstName = firstName;
         author.lastName = lastName;
-        author.identityMeta.setPassword(password);
+        author.identityMeta.setNewPassword(password);
         save(author);
         return author;
     }
@@ -124,7 +124,7 @@ public class PersonServiceImpl implements PersonService {
     public Customer findCustomer(String userName, String password) {
         Customer customer =
                 (Customer) session.createCriteria(Customer.class).add(Restrictions.eq("userName", userName)).uniqueResult();
-        return isPassword(customer, password)?customer:null;
+        return (customer!=null && isPassword(customer, password))? customer:null;
     }
 
     public Customer newCustomer(String userName, String password, String firstName, String lastName) {
@@ -136,7 +136,7 @@ public class PersonServiceImpl implements PersonService {
         customer.userName = userName;
         customer.firstName = firstName;
         customer.lastName = lastName;
-        customer.identityMeta.setPassword(password);
+        customer.identityMeta.setNewPassword(password);
         save(customer);
         return customer;
     }
@@ -159,7 +159,7 @@ public class PersonServiceImpl implements PersonService {
         employee.firstName = firstName;
         employee.lastName = lastName;
         logger.debug("employee.identityMeta::"+employee.identityMeta);
-        employee.identityMeta.setPassword(password);
+        employee.identityMeta.setNewPassword(password);
         save(employee);
         return employee;  //To change body of implemented methods use File | Settings | File Templates.
     }

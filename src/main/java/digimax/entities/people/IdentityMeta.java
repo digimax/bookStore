@@ -22,14 +22,14 @@ import javax.persistence.Id;
 public class IdentityMeta extends DomainObject {
 
     @Property
-    @Validate("required")
-    String password;
+    @Validate("required, regex")
+    public String password;
 
     public boolean isCorrectPassword(String password) {
         return this.password!=null && this.password.equals(DigestUtils.md5Hex(password));
     }
 
-    public void setPassword(String password) {
+    public void setNewPassword(String password) {
         this.password = (password==null) ? null : DigestUtils.md5Hex(password);
     }
 }

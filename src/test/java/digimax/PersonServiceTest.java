@@ -57,8 +57,8 @@ public class PersonServiceTest extends QaRegistryTest {
 
     @BeforeMethod
     public void purgeTables() {
-            // cleanup all persisted People
-            Session session = registry.getService(Session.class);
+        // cleanup all persisted People
+        Session session = registry.getService(Session.class);
 
         BookService bookService = registry.getService(BookService.class);
 
@@ -70,19 +70,19 @@ public class PersonServiceTest extends QaRegistryTest {
         //refetch
         persistedBookList = session.createCriteria(Book.class).list();
         Assert.assertEquals(persistedBookList.size(),0);
-        logger.info("@AfterMethod - tearDown");        
-        
-            PersonService personService = registry.getService(PersonService.class);
+        logger.info("@AfterMethod - tearDown");
 
-            List<Person> persistedPersonList = session.createCriteria(Person.class).list();
+        PersonService personService = registry.getService(PersonService.class);
 
-            for (Person person: persistedPersonList) {
-                personService.delete(person);
-            }
-            //refetch
-            persistedPersonList = session.createCriteria(Person.class).list();
-            Assert.assertEquals(persistedPersonList.size(),0);
-            logger.info("@AfterMethod - tearDown");
+        List<Person> persistedPersonList = session.createCriteria(Person.class).list();
+
+        for (Person person: persistedPersonList) {
+            personService.delete(person);
+        }
+        //refetch
+        persistedPersonList = session.createCriteria(Person.class).list();
+        Assert.assertEquals(persistedPersonList.size(),0);
+        logger.info("@AfterMethod - tearDown");
     }
 
     @Test
@@ -213,7 +213,7 @@ public class PersonServiceTest extends QaRegistryTest {
         author1.firstName="Martha";
         author1.lastName="Stewart";
         author1.userName="martha@martha.com";
-        author1.identityMeta.setPassword("zzz");
+        author1.identityMeta.setNewPassword("zzz");
 
         book.authors.add(author1);
         bookService.save(book);
@@ -229,7 +229,7 @@ public class PersonServiceTest extends QaRegistryTest {
         author2.firstName="Jimmy";
         author2.lastName="Pastrami";
         author2.userName="jim@pastrami.com";
-        author2.identityMeta.setPassword("zzz");
+        author2.identityMeta.setNewPassword("zzz");
 
         personService.save(author2);
         assertNotNull(author2.identityMeta);
@@ -291,7 +291,7 @@ public class PersonServiceTest extends QaRegistryTest {
 
 
     }
-    
+
     @Test
     public void testFindEmployee() {
         Session session = registry.getService(Session.class);
@@ -305,7 +305,7 @@ public class PersonServiceTest extends QaRegistryTest {
         employee1.firstName="Dave";
         employee1.lastName="Stewart";
         employee1.userName="FooBar1";
-        employee1.identityMeta.setPassword("xxx");
+        employee1.identityMeta.setNewPassword("xxx");
 
         personService.save(employee1);
         assertNotNull(employee1.identityMeta);
@@ -318,7 +318,7 @@ public class PersonServiceTest extends QaRegistryTest {
         customer1.firstName="Annie";
         customer1.firstName="Lennox";
         customer1.userName="Bones1";
-        customer1.identityMeta.setPassword("xxx");
+        customer1.identityMeta.setNewPassword("xxx");
 
         personService.save(customer1);
         assertNotNull(customer1.identityMeta);
