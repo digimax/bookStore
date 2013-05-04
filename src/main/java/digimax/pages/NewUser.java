@@ -4,13 +4,13 @@ import digimax.entities.geo.Address;
 import digimax.entities.people.Customer;
 import digimax.services.domain.PersonService;
 import digimax.services.domain.PersonServiceImpl;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.BeginRender;
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -40,6 +40,7 @@ public class NewUser {
     Form form;
 
     @Property
+    @Persist(PersistenceConstants.SESSION)
     private Customer customer;
 
     @Property
@@ -66,18 +67,15 @@ public class NewUser {
         if (form.getHasErrors()) {
             return this;
         }
-        if (!isUniqueUserName()) {
+        if (!personService.isUserNameUnique(customer.userName)) {
             alertManager.alert(Duration.SINGLE, Severity.WARN, messages.format("existing-customer", customer.userName));
             return Login.class;
         }
-        return this;
-    }
-
-    boolean isUniqueUserName() {
-        logger.debug("Start Diagnostics");
-        boolean isNewUser = personService.isUserNameUnique(customer.userName);
-        logger.debug("End Diagnostics");
-        return isNewUser;
+        if (!verifyPassword.equals(customer.identityMeta.password)) {
+            alertManager.alert(Duration.SINGLE, Severity.WARN, messages.format("bad-matching-password"));
+            return this;
+        }
+        return Index.class;
     }
 
 }

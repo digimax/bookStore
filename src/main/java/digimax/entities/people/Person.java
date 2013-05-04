@@ -46,6 +46,4 @@ public class Person extends DomainObject {
             return String.format("%s %s", firstName, lastName);
         return lastName;
     }
-
-
 }

@@ -48,7 +48,7 @@ public class BookServiceImpl implements BookService {
     public Book findBook(Book searchBook) {
         if (searchBook.authors==null)
             return null;
-        Author author = (searchBook.authors.size()>0)?searchBook.authors.get(0):null;
+        Author author = (searchBook.authors.size()>0)?(Author)searchBook.authors.toArray()[0]:null;
         Criterion condition = null;
         if (author==null) {
 //            condition = Restrictions.conjunction().add(Restrictions.eq("title", searchBook.title));
@@ -66,7 +66,7 @@ public class BookServiceImpl implements BookService {
         }
 
     public List<Book> findBooks(String title) {
-        if (title==null || title.length()==0) {
+        if (title==null || title.trim().length()==0) {
             return null;
         }
         List<Book> books = null;
@@ -87,7 +87,7 @@ public class BookServiceImpl implements BookService {
     public Book findOrCreateBook(Book searchBook) {
         Book book = findBook(searchBook);
         if (book==null) {
-            Author searchAuthor = searchBook.authors.get(0);
+            Author searchAuthor = (Author) searchBook.authors.toArray()[0];
             book = newBook(searchBook.title, searchBook.subTitle, searchAuthor.lastName, searchAuthor.firstName, null, null);
         }
         return book;

@@ -59,7 +59,7 @@ public class LibraryServiceTest extends QaRegistryTest {
         Assert.assertNotNull(book1);
         Assert.assertNotNull(book1.id);
         Assert.assertEquals(book1.title, "East Malaysia");
-        Author book1Author = book1.authors.get(0);
+        Author book1Author = (Author) book1.authors.toArray()[0];
         Assert.assertEquals(book1Author.firstName, "Jonny");
         Assert.assertEquals(book1Author.lastName, "Rotten");
 
@@ -68,7 +68,7 @@ public class LibraryServiceTest extends QaRegistryTest {
         Assert.assertNotNull(book2);
         Assert.assertNotNull(book2.id);
         Assert.assertEquals(book2.title, "Life in the Whole");
-        Author book2Author = book2.authors.get(0);
+        Author book2Author = (Author) book2.authors.toArray()[0];
         Assert.assertEquals(book2Author.firstName, "Jonny");
         Assert.assertEquals(book2Author.lastName, "Rotten");
 

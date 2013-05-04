@@ -2,5 +2,18 @@
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-BookCart
+<h1>Book Cart</h1>
+<div class="container">
+    <span t:type="if" test="exists">
+            <span t:type="loop" source="items" value="lineItem">
+                <a t:type="pagelink" page="BookUi" context="lineItem.item.id" title="${book.title}"><span t:type="png" fileName="${horizontalImage.fileName}" altMessage="${book.title}" width="${horizontalImage.width}" height="${horizontalImage.height}"/></a>
+            </span>
+            <br />
+            <a t:type="actionlink" t:id="clearCart">${message:clear}</a>
+    </span>
+    <br />
+    <span t:type="unless" test="exists">
+        Cart is empty.
+    </span>
+</div>
 </html>

@@ -25,7 +25,7 @@ public class Image extends DomainObject {
     public int width;
 
     @Property
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
     public Item item;
 

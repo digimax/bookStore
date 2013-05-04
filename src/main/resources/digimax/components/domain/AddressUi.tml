@@ -10,7 +10,7 @@
                 <dt><t:label for="city"/></dt>
                 <dd><input t:type="textfield" t:id="city" value="address.city" t:validate="required, minlength=2" size="30"/></dd>
                 <dt><t:label for="state"/></dt>
-                <dd><input t:type="textfield" t:id="state" value="address.state" t:validate="required, minlength=3" size="30"/></dd>
+                <dd><input t:type="textfield" t:id="state" value="address.state" t:validate="required, minlength=2" size="30"/></dd>
             </dl>
         </span>
     </t:content>

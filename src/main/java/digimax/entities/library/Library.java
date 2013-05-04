@@ -2,6 +2,7 @@ package digimax.entities.library;
 
 import digimax.entities.geo.Address;
 import digimax.entities.item.Shelf;
+import digimax.entities.people.Person;
 import digimax.structural.DomainObject;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.NonVisual;
@@ -37,6 +38,10 @@ public class Library extends DomainObject {
     @Property
     @OneToOne(cascade = CascadeType.ALL)
     public Bins bins;
+
+    @Property
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Person> users = new ArrayList<Person>();
 
     @Property
     @OneToMany(cascade = CascadeType.ALL)

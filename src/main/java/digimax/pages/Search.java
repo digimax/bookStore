@@ -9,10 +9,8 @@ import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.Persist;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -97,12 +95,13 @@ public class Search {
     private List<Book> books;
 
     void onSelectedFromSearchByAuthor() {
-        componentResources.discardPersistentFieldChanges();
-        authors = null;
         logger.debug("Start Diagnostics");
         if (byAuthorForm.getHasErrors()) {
             return;
         }
+        books = null;
+        byTitleForm.clearErrors();
+        componentResources.discardPersistentFieldChanges();
         authors = personService.findAuthors(authorName);
         if (authors==null || authors.size()==0) {
             alertManager.alert(Duration.SINGLE, Severity.WARN, messages.format("noAuthorsFound", authorName));
@@ -111,17 +110,19 @@ public class Search {
         if (request.isXHR()) {
             logger.debug("byAuthorFormZone :: {}", byAuthorFormZone);
             logger.debug("authorsZone :: {}", authorsZone);
-            ajaxResponseRenderer.addRender(byAuthorFormZone).addRender(authorsZone);
+            ajaxResponseRenderer.addRender(byAuthorFormZone).addRender(byTitleFormZone).addRender(authorsZone).addRender(booksZone);
         }
         logger.debug("End Diagnostics");
     }
 
     void onSelectedFromSearchByTitle() {
-        componentResources.discardPersistentFieldChanges();
         logger.debug("Start Diagnostics");
         if (byTitleForm.getHasErrors()) {
             return;
         }
+        authors = null;
+        byAuthorForm.clearErrors();
+        componentResources.discardPersistentFieldChanges();
         books = bookService.findBooks(title);
         if (books==null || books.size()==0) {
             alertManager.alert(Duration.SINGLE, Severity.WARN, messages.format("noBooksFound", title));
@@ -130,7 +131,7 @@ public class Search {
         if (request.isXHR()) {
             logger.debug("byTitleFormZone :: {}", byTitleFormZone);
             logger.debug("booksZone :: {}", booksZone);
-            ajaxResponseRenderer.addRender(byTitleFormZone).addRender(booksZone);
+            ajaxResponseRenderer.addRender(byTitleFormZone).addRender(byAuthorFormZone).addRender(booksZone).addRender(authorsZone);
         }
         logger.debug("End Diagnostics");
     }
@@ -141,5 +142,21 @@ public class Search {
 
     public boolean getHasBooks() {
         return (books!=null && books.size()>0);
+    }
+
+    @PageReset
+    void reset() {
+        logger.debug("Start Diagnostics");
+        books=null;
+        authors=null;
+        logger.debug("End Diagnostics");
+    }
+
+    @DiscardAfter
+    void onClear() {
+        logger.debug("Start Diagnostics");
+        books=null;
+        authors=null;
+        logger.debug("End Diagnostics");
     }
 }

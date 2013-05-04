@@ -3,20 +3,20 @@
       xmlns:p="tapestry:parameter">
 <span class="container" style="float:right; width:750px">
         <h1>Login</h1>
-         <fieldset>
-             <legend>Login here</legend>
-             <form t:type="form" action="">
-                 <t:errors/>
-                 <dl>
-                     <dt><t:label for="userName"/></dt>
-                     <dd><input t:type="textfield" t:id="userName" value="userName" t:validate="required, minlength=6, regexp" size="30"></input></dd>
-                     <dt><t:label for="password"/></dt>
-                     <dd><input t:type="textfield" t:id="password" value="password" t:validate="required, minlength=6" size="30" type="password"></input></dd>
-                     <dt><t:label for="rememberMe"/></dt>
-                     <dd><input t:type="checkbox" t:id="rememberMe" value="rememberMe"></input></dd>
-                 </dl>
-                 <br />
-                 <input t:type="submit" t:id="login" value="Login"/>
+        <fieldset>
+            <legend>Login here</legend>
+            <form t:type="form" action="">
+                <t:errors/>
+                <dl>
+                    <dt><t:label for="userName"/></dt>
+                    <dd><input t:type="textfield" t:id="userName" value="userName" t:validate="required, minlength=6, regexp" size="30"></input></dd>
+                    <dt><t:label for="password"/></dt>
+                    <dd><input t:type="textfield" t:id="password" value="password" t:validate="required, minlength=6" size="30" type="password"></input></dd>
+                    <dt><t:label for="rememberMe"/></dt>
+                    <dd><input t:type="checkbox" t:id="rememberMe" value="rememberMe"></input></dd>
+                </dl>
+                <br />
+                <input t:type="submit" t:id="login" value="Login"/>
              </form>
 
          </fieldset>

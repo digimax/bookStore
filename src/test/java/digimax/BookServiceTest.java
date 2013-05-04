@@ -1,5 +1,6 @@
 package digimax;
 
+import digimax.entities.app.Image;
 import digimax.entities.geo.Address;
 import digimax.entities.item.Book;
 import digimax.entities.people.Author;
@@ -60,7 +61,7 @@ public class BookServiceTest extends QaRegistryTest {
         Assert.assertEquals(persistedBook.id, bookId);
         Assert.assertEquals(persistedBook.title,"Crypto Astronomy");
         Assert.assertEquals(persistedBook.subTitle, "Alone in the Void");
-        Author persistedAuthor = persistedBook.authors.get(0);
+        Author persistedAuthor = (Author) persistedBook.authors.toArray()[0];
 //        Long persistedAuthorId = persistedAuthor.id;
         Assert.assertEquals(persistedAuthor, author);
         logger.debug("persistedAuthor.id::"+persistedAuthor.id);
@@ -111,7 +112,7 @@ public class BookServiceTest extends QaRegistryTest {
     Assert.assertEquals(persistedBook.id, bookId);
     Assert.assertEquals(persistedBook.title, "Crypto Astronomy");
     Assert.assertEquals(persistedBook.subTitle, "Alone in the Void");
-    Author persistedAuthor = persistedBook.authors.get(0);
+    Author persistedAuthor = (Author) persistedBook.authors.toArray()[0];
     Assert.assertEquals(persistedAuthor, author);
     logger.debug("persistedAuthor.id::" + persistedAuthor.id);
     Assert.assertEquals(persistedAuthor.id, author.id);
@@ -166,6 +167,19 @@ public class BookServiceTest extends QaRegistryTest {
 
         Book book1 = new Book();
         book1.title = "How the West was Won";
+        Image book1Image1 = new Image();
+        book1Image1.fileName="book1Image1.png";
+        book1Image1.item = book1;
+        Image book1Image2 = new Image();
+        book1Image2.fileName="book1Image2.png";
+        book1Image2.item = book1;
+        Image book1Image3 = new Image();
+        book1Image3.fileName="book1Image3.png";
+        book1Image3.item = book1;
+        book1.images.add(book1Image1);
+        book1.images.add(book1Image2);
+        book1.images.add(book1Image3);
+
         bookService.save(book1);
         Long book1Id = book1.id;
         Assert.assertNotNull(book1Id);
@@ -201,6 +215,11 @@ public class BookServiceTest extends QaRegistryTest {
         Assert.assertNotNull(foundBooks);
         Assert.assertEquals(foundBooks.size(), 1);
 
+        //Test lazy get of Images
+        assertEquals(persistedBook1.images.get(0), book1Image1);
+        assertEquals(persistedBook1.images.get(1), book1Image2);
+        assertEquals(persistedBook1.images.get(2), book1Image3);
+
     }
 
     @Test
@@ -216,15 +235,17 @@ public class BookServiceTest extends QaRegistryTest {
         Book book1 = bookService.newBook("High Tide", null, "Futura", "Peter", null, null );
         Assert.assertNotNull(book1.id);
         Assert.assertEquals(book1.title, "High Tide");
-        Assert.assertEquals(book1.authors.get(0).firstName, "Peter");
-        Assert.assertEquals(book1.authors.get(0).lastName, "Futura");
+        Author author1 = (Author) book1.authors.toArray()[0];
+        Assert.assertEquals(author1.firstName, "Peter");
+        Assert.assertEquals(author1.lastName, "Futura");
         Assert.assertEquals(book1.authors.size(), 1);
 
         Book book2 = bookService.newBook("Far Tide Horizons", null, "Smith", "Sebastian", null, null );
         Assert.assertNotNull(book2.id);
         Assert.assertEquals(book2.title, "Far Tide Horizons");
-        Assert.assertEquals(book2.authors.get(0).firstName, "Sebastian");
-        Assert.assertEquals(book2.authors.get(0).lastName, "Smith");
+        Author author2 = (Author) book2.authors.toArray()[0];
+        Assert.assertEquals(author2.firstName, "Sebastian");
+        Assert.assertEquals(author2.lastName, "Smith");
         Assert.assertEquals(book2.authors.size(), 1);
         
         session.evict(book1);
@@ -238,15 +259,16 @@ public class BookServiceTest extends QaRegistryTest {
         Assert.assertEquals(persistedBook1, book1);
         Assert.assertEquals(persistedBook1.id, book1.id);
         Assert.assertEquals(persistedBook1.title, book1.title);
-        Assert.assertEquals(persistedBook1.authors.get(0).firstName, "Peter");
-        Assert.assertEquals(persistedBook1.authors.get(0).lastName, "Futura");
+        Author persistedAuthor1 = (Author) persistedBook1.authors.toArray()[0];
+        Assert.assertEquals(persistedAuthor1.lastName, "Futura");
         Assert.assertEquals(persistedBook1.authors.size(), 1);
 
         Assert.assertEquals(persistedBook2, book2);
         Assert.assertEquals(persistedBook2.id, book2.id);
         Assert.assertEquals(persistedBook2.title, book2.title);
-        Assert.assertEquals(persistedBook2.authors.get(0).firstName, "Sebastian");
-        Assert.assertEquals(persistedBook2.authors.get(0).lastName, "Smith");
+        Author persistedAuthor2 = (Author) persistedBook2.authors.toArray()[0];
+        Assert.assertEquals(persistedAuthor2.firstName, "Sebastian");
+        Assert.assertEquals(persistedAuthor2.lastName, "Smith");
         Assert.assertEquals(persistedBook2.authors.size(), 1);
     }
 
@@ -278,7 +300,7 @@ public class BookServiceTest extends QaRegistryTest {
         Assert.assertEquals(aBook, book1);
         Assert.assertEquals(aBook.id, book1.id);
         Assert.assertEquals(aBook.title, "Fantasy League");
-        Author aBookAuthor = aBook.authors.get(0);
+        Author aBookAuthor = (Author) aBook.authors.toArray()[0];
         Assert.assertEquals(aBookAuthor.lastName, "Drew");
         Assert.assertEquals(aBookAuthor.firstName, "Nancy");
 
@@ -288,7 +310,7 @@ public class BookServiceTest extends QaRegistryTest {
         //ensure new book was created properly
         Assert.assertNotNull(aBook);
         Assert.assertNotNull(aBook.id);
-        aBookAuthor = aBook.authors.get(0);
+        aBookAuthor = (Author) aBook.authors.toArray()[0];
         Assert.assertEquals(aBookAuthor.lastName, "Drew");
         Assert.assertEquals(aBookAuthor.firstName, "Nancy");
 

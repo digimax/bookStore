@@ -1,15 +1,16 @@
 package digimax.components;
 
+import digimax.entities.people.Visit;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.annotations.BeforeRenderBody;
-import org.apache.tapestry5.annotations.Import;
-import org.apache.tapestry5.annotations.Parameter;
-import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A product of Digimax Technology Inc. (digimax.com)
@@ -24,6 +25,10 @@ public class Layout {
 
     @Inject
     private org.apache.tapestry5.ComponentResources resources;
+
+    private boolean visitExists;
+    @SessionState
+    private Visit visit;
 
     /**
      * The page title, for the <title> element and the <h1> element.
@@ -52,9 +57,23 @@ public class Layout {
     @Symbol(SymbolConstants.APPLICATION_VERSION)
     private String appVersion;
 
-    public String[] getPageNames()
+    public Object[] getPageNames()
     {
-        return new String[]{"Index", "About", "Browse", "Search", "BookCart", "Login", "Help"};
+        List<String> pageNames = new ArrayList<String>();
+        pageNames.add("Index");
+//        pageNames.add("About");
+        pageNames.add("Browse");
+        pageNames.add("Search");
+        pageNames.add("BookCart");
+        pageNames.add("Help");
+
+        if (!(visitExists && visit.isValid())) {
+            pageNames.add("Login");
+        } else {
+            pageNames.add("User");
+            pageNames.add("Logout");
+        }
+        return pageNames.toArray();
     }
 
 //    void beforeRenderBody(MarkupWriter writer) {

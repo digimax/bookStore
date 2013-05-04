@@ -1,9 +1,14 @@
 package digimax.pages;
 
+import digimax.entities.item.Cart;
 import digimax.entities.people.Customer;
 import digimax.entities.people.Person;
+import digimax.entities.people.Visit;
 import digimax.services.domain.PersonService;
 import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.ioc.Messages;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -36,6 +41,10 @@ public class Login {
     @InjectComponent
     private Form form;
 
+    private boolean visitExists;
+    @SessionState
+    private Visit visit;
+
     @Property
     boolean rememberMe;
 
@@ -45,18 +54,24 @@ public class Login {
     @Property
     private String userName;
 
-    private void onSelectedFromLogin() {
+    private Object onSelectedFromLogin() {
         logger.debug("Start Diagnostics");
         if (form.getHasErrors()) {
-            return;
+            return this;
         }
 
         //check to see if username exisits
-        Customer customer = personService.findCustomer(userName, password);
-        if (customer==null) {
+        Person user = personService.login(userName, password);
+        if (user==null) {
             form.recordError(messages.get("invalid-login"));
-            return;
+            return this;
         }
+
+        //Valid login
+        visit.user = user;
+        alertManager.alert(Duration.SINGLE, Severity.SUCCESS, messages.format("welcome", user.getFullName()));
+
         logger.debug("End Diagnostics");
+        return Index.class;
     }
 }

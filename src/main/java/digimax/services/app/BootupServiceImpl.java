@@ -5,6 +5,7 @@ import digimax.entities.item.Book;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
 import digimax.entities.people.Author;
+import digimax.entities.people.Employee;
 import digimax.services.domain.*;
 import digimax.structural.RecursiveFileListIterator;
 import org.apache.commons.lang.WordUtils;
@@ -50,6 +51,15 @@ public class BootupServiceImpl implements BootupService {
         long startTime = System.currentTimeMillis();
         Library library = libraryService.testInstance();
         library.name = "Qa Fresh Library";
+
+        Employee librarian = new Employee();
+        librarian.firstName="Jon";
+        librarian.lastName="Williams";
+        librarian.userName="jon@digimax.com";
+        librarian.identityMeta.setNewPassword("empty0");
+        library.users.add(librarian);
+
+
 
         libraryService.save(library);
 

@@ -13,6 +13,8 @@
         <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
     </ul>
     <br />
+    <a t:type="actionlink" t:id="putInCart">${message:put-in-cart}</a>
+    <br />
     ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">${book.shelf.name}</a>
     <br />
     <fieldset style="width : 50%">

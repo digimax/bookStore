@@ -1,7 +1,6 @@
-<html t:type="layout" title="literal:Help"
+<html t:type="layout" title="literal:EditBook"
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-<h1>Help</h1>
-<a t:type="pagelink" page="About">About ${library.name}</a>
+<h1>User</h1>
 </html>

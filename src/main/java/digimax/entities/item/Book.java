@@ -46,7 +46,7 @@ public class Book extends Item {
 //    @JoinTable(name="Book_Author",
 //            joinColumns={@JoinColumn(name="Book_id")},
 //            inverseJoinColumns={@JoinColumn(name="Author_id")})
-    public List<Author> authors = new ArrayList<Author>();
+    public Set<Author> authors = new HashSet<Author>();
 
 
     @Property
@@ -59,9 +59,7 @@ public class Book extends Item {
         subTitle="";
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
+    public Long getUid() {
+        return id;
     }
 }

@@ -2,6 +2,8 @@ package digimax.pages;
 
 import digimax.entities.app.Image;
 import digimax.entities.item.Book;
+import digimax.entities.item.Cart;
+import digimax.entities.item.LineItem;
 import digimax.entities.people.Author;
 import digimax.services.domain.BookMetaService;
 import org.apache.tapestry5.ClientElement;
@@ -24,6 +26,10 @@ public class BookUi {
 
     @Inject
     private BookMetaService bookMetaService;
+
+    private boolean cartExists;
+    @SessionState
+    private Cart cart;
 
     @Property
     private Author author;
@@ -73,6 +79,18 @@ public class BookUi {
 
     @InjectContainer
     private ClientElement element;
+
+    private Object onActionFromPutInCart() {
+        logger.debug("Start Diagnostics");
+        LineItem lineItem = new LineItem();
+        lineItem.item = book;
+        lineItem.quantity = 1;
+        cart.items.add(lineItem);
+
+        logger.debug("End Diagnostics");
+        return BookCart.class;
+    }
+
 
 //    @AfterRender
 //    public void afterRender() {
