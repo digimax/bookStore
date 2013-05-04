@@ -34,12 +34,6 @@ public class Book extends Item {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "book")
     public BookMeta bookMeta;
 
-//    @Property
-//    public String isbn;
-//
-//    @Property
-//    public String isbn13;
-
     @Property
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
@@ -59,7 +53,7 @@ public class Book extends Item {
         subTitle="";
     }
 
-    public Long getUid() {
-        return id;
-    }
+//    public Long getUid() {
+//        return id;
+//    }
 }
