@@ -116,7 +116,7 @@ public class BootupServiceImpl implements BootupService {
                         firstAuthorLastName = (authorsName.indexOf("_")>0)?authorsName.substring(authorsName.indexOf("_")+1, authorsName.length()):authorsName;
                     }
                 } else {
-                    firstAuthorFirstName = "UNKNOWN";
+                    firstAuthorFirstName = "";
                     firstAuthorLastName = "UNKNOWN";
                 }
                 firstAuthorLastName = (firstAuthorLastName!=null)?firstAuthorLastName.replace('_', ' ')
@@ -136,15 +136,16 @@ public class BootupServiceImpl implements BootupService {
                 searchAuthor.lastName = WordUtils.capitalizeFully(firstAuthorLastName);
                 searchAuthor.firstName = WordUtils.capitalizeFully(firstAuthorFirstName);
 
-                Author secondSearchAuthor = new Author();
-                secondSearchAuthor.lastName = WordUtils.capitalizeFully(secondAuthorLastName);
-                secondSearchAuthor.firstName = WordUtils.capitalizeFully(secondAuthorFirstName);
-
                 Book searchBook = new Book();
                 searchBook.title = WordUtils.capitalizeFully(bookTitle);
                 searchBook.subTitle = WordUtils.capitalizeFully(bookSubTitle);
                 searchBook.authors.add(searchAuthor);
-                searchBook.authors.add(secondSearchAuthor);
+                if (secondAuthorLastName!=null && secondAuthorLastName.length()>0) {
+                    Author secondSearchAuthor = new Author();
+                    secondSearchAuthor.lastName = WordUtils.capitalizeFully(secondAuthorLastName);
+                    secondSearchAuthor.firstName = WordUtils.capitalizeFully(secondAuthorFirstName);
+                    searchBook.authors.add(secondSearchAuthor);
+                }
                 Book book = bookService.findOrCreateBook(searchBook);
                 for (Image image : spineImages) {
                     image.item = book;

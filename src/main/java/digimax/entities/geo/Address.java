@@ -1,5 +1,6 @@
 package digimax.entities.geo;
 
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 import javax.persistence.Entity;
@@ -18,17 +19,22 @@ import javax.persistence.Id;
 @Entity
 public class Address extends Location {
 
+    @Property
     @Validate("required")
     public String street1;
 
+    @Property
     public String street2;
 
+    @Property
     @Validate("required")
     public String city;
 
+    @Property
     @Validate("required")
     public String state;
 
+    @Property
     @Validate("required,regexp")
     public String zip;
 }

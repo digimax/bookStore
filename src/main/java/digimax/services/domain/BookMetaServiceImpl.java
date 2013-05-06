@@ -63,7 +63,7 @@ public class BookMetaServiceImpl implements BookMetaService {
     private static final String ISBNDB_UNIQUE_BOOK_URL =
             "https://isbndb.com/api/books.xml?access_key="+ISBNDB_KEY+"&index1=book_id&value1=";
 
-    private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 1000;
+    private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 2000;
 
     private static final ContentType TEXT_UTF8_XML = ContentType.create(
             "text/xml", Consts.UTF_8);

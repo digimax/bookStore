@@ -78,6 +78,10 @@ public class BookServiceImpl implements BookService {
         Book book = new Book();
         Author author = personService.findOrCreateAuthor(firstAuthorLastName, firstAuthorFirstName);
         book.authors.add(author);
+        if (secondAuthorLastName!=null && secondAuthorLastName.length()>0) {
+            Author secondAuthor = personService.findOrCreateAuthor(secondAuthorLastName, secondAuthorFirstName);
+            book.authors.add(secondAuthor);
+        }
         book.title = title;
         book.subTitle = subTitle;
         save(book);
@@ -87,8 +91,14 @@ public class BookServiceImpl implements BookService {
     public Book findOrCreateBook(Book searchBook) {
         Book book = findBook(searchBook);
         if (book==null) {
-            Author searchAuthor = (Author) searchBook.authors.toArray()[0];
-            book = newBook(searchBook.title, searchBook.subTitle, searchAuthor.lastName, searchAuthor.firstName, null, null);
+            Author author = (Author) searchBook.authors.toArray()[0];
+            Author secondAuthor = null;
+            if (searchBook.authors.size()>1) {
+                secondAuthor = (Author) searchBook.authors.toArray()[1];
+            }
+            book = newBook(searchBook.title, searchBook.subTitle, author.lastName, author.firstName,
+                    (secondAuthor!=null)?secondAuthor.lastName: null,
+                    (secondAuthor!=null)?secondAuthor.firstName: null);
         }
         return book;
     }

@@ -33,4 +33,8 @@ public class Author extends Person {
         this.firstName = firstName;
     }
 
+//    public Long getUid() {
+//        return id;
+//    }
+
 }

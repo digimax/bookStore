@@ -10,6 +10,7 @@ import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
@@ -89,11 +90,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public Author findAuthor(String lastName, String firstName) {
-        Criterion condition =
-                Restrictions.conjunction().add(Restrictions.eq("lastName", lastName))
-                        .add(Restrictions.eq("firstName", firstName));
-        Author author =
-                (Author) session.createCriteria(Author.class).add(condition).uniqueResult();
+        Junction junction = Restrictions.conjunction().add(Restrictions.eq("lastName", lastName));
+        junction.add(Restrictions.or(Restrictions.and(Restrictions.isNotNull("firstName"),
+                Restrictions.eq("firstName", firstName)), Restrictions.isNull("firstName")));
+        Author author  = (Author) session.createCriteria(Author.class).add(junction).uniqueResult();
         return author;
     }
 
@@ -111,10 +111,10 @@ public class PersonServiceImpl implements PersonService {
         return author;
     }
 
-    public Author findOrCreateAuthor(String firstAuthorLastName, String firstAuthorFirstName) {
-        Author author  = findAuthor(firstAuthorLastName, firstAuthorFirstName);
+    public Author findOrCreateAuthor(String authorLastName, String authorFirstName) {
+        Author author  = findAuthor(authorLastName, authorFirstName);
         if (author==null) {
-            author = newAuthor(null, null, firstAuthorLastName, firstAuthorFirstName);
+            author = newAuthor(null, null, authorLastName, authorFirstName);
         }
         return author;
 
