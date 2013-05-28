@@ -65,6 +65,9 @@ public class BookMetaServiceImpl implements BookMetaService {
 
     private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 2000;
 
+    private static final ContentType TEXT_UTF8_HTML = ContentType.create(
+            "text/html", Consts.UTF_8);
+
     private static final ContentType TEXT_UTF8_XML = ContentType.create(
             "text/xml", Consts.UTF_8);
 
@@ -229,7 +232,8 @@ public class BookMetaServiceImpl implements BookMetaService {
                         try {
                             DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
                             ContentType contentType = ContentType.getOrDefault(entity);
-                            if (!contentType.toString().equals(TEXT_UTF8_XML.toString())) {
+//                            if (!contentType.toString().equals(TEXT_UTF8_XML.toString())) {
+                            if (!contentType.toString().equals(TEXT_UTF8_HTML.toString())) {
                                 throw new ClientProtocolException("Unexpected content type:" + contentType);
                             }
                             Charset charset = contentType.getCharset();

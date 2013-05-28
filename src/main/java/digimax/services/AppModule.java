@@ -221,8 +221,7 @@ public class AppModule
 
     public static void contributeBindingSource(MappedConfiguration<String,
             BindingFactory> configuration,
-                                               @InjectService("FileBindingFactory") org.apache.tapestry5.services.BindingFactory
-                                                       fileBindingFactory) {
+            @InjectService("FileBindingFactory") org.apache.tapestry5.services.BindingFactory fileBindingFactory) {
         configuration.add("file", fileBindingFactory);
     }
 

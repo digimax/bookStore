@@ -12,7 +12,7 @@
         <!--</property>-->
         <property name="connection.url">
             <!--jdbc:hsqldb:file:./target/work/ncapsuld;shutdown=true;create=true;hsqldb.sqllog=3-->
-            jdbc:hsqldb:file:./target/work/test/ncapsuld;shutdown=true;create=true;hsqldb.sqllog=3
+            jdbc:hsqldb:file:/dig/wrk/digimaxComOpenSource/apps/bookStore/db/bookstore;shutdown=true;create=true;hsqldb.sqllog=3
         </property>
         <property name="connection.username">sa</property>
         <property name="dialect">
