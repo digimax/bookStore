@@ -91,8 +91,12 @@ public class PersonServiceImpl implements PersonService {
 
     public Author findAuthor(String lastName, String firstName) {
         Junction junction = Restrictions.conjunction().add(Restrictions.eq("lastName", lastName));
-        junction.add(Restrictions.or(Restrictions.and(Restrictions.isNotNull("firstName"),
+        if (firstName!=null && firstName.trim().length()>0) {
+            junction.add(Restrictions.eq("firstName", firstName));
+        } else {
+            junction.add(Restrictions.or(Restrictions.and(Restrictions.isNotNull("firstName"),
                 Restrictions.eq("firstName", firstName)), Restrictions.isNull("firstName")));
+        }
         Author author  = (Author) session.createCriteria(Author.class).add(junction).uniqueResult();
         return author;
     }

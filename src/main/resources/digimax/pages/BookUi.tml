@@ -19,7 +19,7 @@
     <br />
     <fieldset style="width : 50%">
         <legend>${message:bookMeta}</legend>
-        <span t:type="domain/bookmetaui" bookMeta="book.bookMeta"/>
+        <span t:type="domain/bookmetaui" bookMeta="book.bookMeta" t:id="bookmetaui"/>
     </fieldset>
 </div>
 <br />

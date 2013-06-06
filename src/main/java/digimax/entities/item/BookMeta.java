@@ -41,8 +41,22 @@ public class BookMeta extends DomainObject {
     public String thumbnailUrl;
 
     @Property
-    @OneToOne(fetch = FetchType.LAZY)//, optional=true)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @OneToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)//, optional=true)
+//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 //    @PrimaryKeyJoinColumn
     public Book book;
+
+    public BookMeta(final Book book) {
+        this();
+        this.book = book;
+        book.bookMeta = this;
+    }
+
+    public BookMeta() {
+        super();
+    }
+
+    public boolean isInitialized() {
+        return (isbn!=null || title!=null);
+    }
 }

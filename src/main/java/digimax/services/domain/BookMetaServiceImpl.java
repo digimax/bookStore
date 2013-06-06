@@ -63,7 +63,7 @@ public class BookMetaServiceImpl implements BookMetaService {
     private static final String ISBNDB_UNIQUE_BOOK_URL =
             "https://isbndb.com/api/books.xml?access_key="+ISBNDB_KEY+"&index1=book_id&value1=";
 
-    private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 2000;
+    private static final int WEB_SERVICE_TIMEOUT_THRESHOLD = 10000;
 
     private static final ContentType TEXT_UTF8_HTML = ContentType.create(
             "text/html", Consts.UTF_8);
@@ -85,12 +85,10 @@ public class BookMetaServiceImpl implements BookMetaService {
         session.delete(bookMeta);
     }
 
-    public void populateBookMeta(Book book) {
+    public void populateBookMeta(final Book book) {
         BookMeta bookMeta = book.bookMeta;
         if (bookMeta==null) {
-            bookMeta = new BookMeta();
-            book.bookMeta = bookMeta;
-            bookMeta.book = book;
+            bookMeta = new BookMeta(book);
         }
         String searchTitle = book.title.replace(' ', '_').replaceAll("`","");
         String isbndb_unique_book_url = ISBNDB_UNIQUE_BOOK_URL+searchTitle;
@@ -233,7 +231,7 @@ public class BookMetaServiceImpl implements BookMetaService {
                             DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
                             ContentType contentType = ContentType.getOrDefault(entity);
 //                            if (!contentType.toString().equals(TEXT_UTF8_XML.toString())) {
-                            if (!contentType.toString().equals(TEXT_UTF8_HTML.toString())) {
+                            if (!( contentType.toString().equals(TEXT_UTF8_HTML.toString()) || contentType.toString().equals(TEXT_UTF8_XML.toString()))) {
                                 throw new ClientProtocolException("Unexpected content type:" + contentType);
                             }
                             Charset charset = contentType.getCharset();

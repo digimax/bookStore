@@ -4,6 +4,7 @@ import digimax.entities.geo.Location;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
 import digimax.entities.people.Person;
+import digimax.entities.store.Store;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
 /**
@@ -24,6 +25,9 @@ public interface LocationService {
     void delete(Location location);
 
     @CommitAfter
-    Location findOrCreateLocation(Library library, String locationName);
+    Location findOrCreateLibraryLocation(Library library, String locationName);
+
+    @CommitAfter
+    Location findOrCreateStoreLocation(Store store, String locationName);
 
 }

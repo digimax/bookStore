@@ -1,36 +1,49 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 <t:content>
-    <span>
-        <dl>
-            <t:if test="bookMeta.longTitle">
-                <dt>${message:title}</dt><dd>${bookMeta.title}</dd>
+    <div t:type="zone" t:id="asyncInfoZone" id="asyncinfozone" t:update="slideUp"  t:mixins="jquery/zonerefresh"
+         t:period="${asyncRefreshPeriod}">
+        <div t:type="if" test="initialized">
+            <span>
+                <dl>
+                    <t:if test="bookMeta.longTitle">
+                        <dt>${message:title}</dt><dd>${bookMeta.title}</dd>
+                    </t:if>
+                    <t:if test="bookMeta.longTitle">
+                        <dt>${message:longTitle}</dt><dd>${bookMeta?.longTitle}</dd>
+                    </t:if>
+                    <t:if test="bookMeta.authorNames">
+                        <dt>${message:authors}</dt><dd>${bookMeta.authorNames}</dd>
+                    </t:if>
+                    <t:if test="bookMeta.publisherName">
+                        <dt>${message:publisher}</dt><dd>${bookMeta.publisherName}</dd>
+                    </t:if>
+                    <t:if test="bookMeta.isbn">
+                        <dt>${message:isbn}</dt><dd>${bookMeta.isbn}</dd>
+                    </t:if>
+                    <t:if test="bookMeta.isbn13">
+                        <dt>${message:isbn13}</dt><dd>${bookMeta.isbn13}</dd>
+                    </t:if>
+                </dl>
+            </span>
+            <t:if test="bookMeta.description">
+                <div>${bookMeta.description}</div>
             </t:if>
-            <t:if test="bookMeta.longTitle">
-                <dt>${message:longTitle}</dt><dd>${bookMeta?.longTitle}</dd>
-            </t:if>
-            <t:if test="bookMeta.authorNames">
-                <dt>${message:authors}</dt><dd>${bookMeta.authorNames}</dd>
-            </t:if>
-            <t:if test="bookMeta.publisherName">
-                <dt>${message:publisher}</dt><dd>${bookMeta.publisherName}</dd>
+            <t:if test="bookMeta.thumbnailUrl">
+                <img src="${bookMeta.thumbnailUrl}" alt="${bookMeta.book.title}"/>
             </t:if>
             <t:if test="bookMeta.isbn">
-                <dt>${message:isbn}</dt><dd>${bookMeta.isbn}</dd>
+                <a href="/ncapsuld/structural/googlebookviewer?${bookMeta.isbn}" onclick="javascript:void window.open('/ncapsuld/structural/googlebookviewer?${bookMeta.isbn}','BookPreview','width=700,height=600,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">View Book Preview</a>
             </t:if>
-            <t:if test="bookMeta.isbn13">
-                <dt>${message:isbn13}</dt><dd>${bookMeta.isbn13}</dd>
-            </t:if>
-        </dl>
-    </span>
-    <t:if test="bookMeta.description">
-        <div>${bookMeta.description}</div>
-    </t:if>
-    <t:if test="bookMeta.thumbnailUrl">
-        <img src="${bookMeta.thumbnailUrl}" alt="${bookMeta.book.title}"/>
-    </t:if>
-    <t:if test="bookMeta.isbn">
-        <a href="/ncapsuld/structural/googlebookviewer?${bookMeta.isbn}" onclick="javascript:void window.open('/ncapsuld/structural/googlebookviewer?${bookMeta.isbn}','BookPreview','width=700,height=600,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">View Book Preview</a>
-    </t:if>
+            <!--<p><a id="start">Start Refreshing</a></p>-->
+            <!--<p><a id="stop">Stop Refreshing</a></p>-->
+          <p:else>
+              No meta data for this item.
+          </p:else>
+        </div>
+        <script>
+            $("#asyncinfozone").trigger("stopRefresh");
+        </script>
+    </div>
 </t:content>
 </html>
