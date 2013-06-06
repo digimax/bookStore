@@ -1,5 +1,6 @@
 package digimax.pages;
 
+import digimax.components.domain.BookMetaUi;
 import digimax.entities.app.Image;
 import digimax.entities.item.Book;
 import digimax.entities.item.Cart;
@@ -19,7 +20,7 @@ import org.slf4j.Logger;
  * Date: 4/16/13
  * Time: 7:15 PM
  */
-//@Import(library="  https://www.google.com/jsapi")
+//@Import(library="https://www.google.com/jsapi")
 public class BookUi {
     @Inject
     private Logger logger;
@@ -38,12 +39,26 @@ public class BookUi {
     @Property
     private Book book;
 
+    @InjectComponent
+    private BookMetaUi bookmetaui;
+
     @BeginRender
     void beginRender(MarkupWriter writer) {
+        final Book thisBook = book;
         logger.debug("Start Diagnostics");
         logger.debug("End Diagnostics");
-        //populated the Book MetaData from web service
-        bookMetaService.populateBookMeta(book);
+        assert(thisBook!=null);
+        //populate the Book MetaData from web service
+        Thread populateMetaDataThread = new Thread() {
+            @Override
+            public void run() {
+                if (thisBook.bookMeta==null || !thisBook.bookMeta.isInitialized()) {
+                    logger.debug("Book :: {}", thisBook);
+                    bookMetaService.populateBookMeta(thisBook);
+                }
+            }
+        };
+        populateMetaDataThread.start();
     }
 
     public Image getLargeImage() {

@@ -45,4 +45,18 @@ public class BookMeta extends DomainObject {
 //    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 //    @PrimaryKeyJoinColumn
     public Book book;
+
+    public BookMeta(final Book book) {
+        this();
+        this.book = book;
+        book.bookMeta = this;
+    }
+
+    public BookMeta() {
+        super();
+    }
+
+    public boolean isInitialized() {
+        return (isbn!=null || title!=null);
+    }
 }

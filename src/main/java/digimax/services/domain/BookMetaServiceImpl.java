@@ -85,12 +85,10 @@ public class BookMetaServiceImpl implements BookMetaService {
         session.delete(bookMeta);
     }
 
-    public void populateBookMeta(Book book) {
+    public void populateBookMeta(final Book book) {
         BookMeta bookMeta = book.bookMeta;
         if (bookMeta==null) {
-            bookMeta = new BookMeta();
-            book.bookMeta = bookMeta;
-            bookMeta.book = book;
+            bookMeta = new BookMeta(book);
         }
         String searchTitle = book.title.replace(' ', '_').replaceAll("`","");
         String isbndb_unique_book_url = ISBNDB_UNIQUE_BOOK_URL+searchTitle;

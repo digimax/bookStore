@@ -19,5 +19,5 @@ public interface BookMetaService {
     void delete(BookMeta bookMeta);
 
     @CommitAfter
-    void populateBookMeta(Book book);
+    void populateBookMeta(final Book book);
 }

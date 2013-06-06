@@ -5,7 +5,10 @@ import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.*;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.slf4j.Logger;
 
 /**
@@ -20,7 +23,16 @@ public class BookMetaUi {
     private Logger logger;
 
     @Inject
+    private AjaxResponseRenderer ajaxResponseRenderer;
+
+    @Inject
     private ComponentResources componentResources;
+
+    @Inject
+    private JavaScriptSupport javaScriptSupport;
+
+    @InjectComponent
+    private Zone asyncinfozone;
 
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.PROP)
@@ -42,7 +54,22 @@ public class BookMetaUi {
     @AfterRenderTemplate
     void checkAfterTemplate(MarkupWriter writer) {
         logger.debug("Start Diagnostics");
+
         logger.debug("End Diagnostics");
     }
+
+    public boolean isInitialized() {
+        return bookMeta!=null && bookMeta.isInitialized();
+    }
+
+    public Long getAsyncRefreshPeriod() {
+        return 2l;
+    }
+
+    public void afterRender(){
+//        javaScriptSupport.addScript("$(\"#stop\").bind(\"click\", function(){$(\"#asyncinfozone\").trigger(\"stopRefresh\");});");
+//        javaScriptSupport.addScript("$(\"#start\").bind(\"click\", function(){$(\"#clickZone\").trigger(\"startRefresh\");});");
+    }
+
 
 }
