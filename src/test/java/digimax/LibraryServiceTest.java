@@ -83,7 +83,7 @@ public class LibraryServiceTest extends QaRegistryTest {
         newBooks.add(book2);
 
         Library library =  libraryService.testInstance();
-        Shelf location = (Shelf) locationService.findOrCreateLocation(library, "Test Shelf");
+        Shelf location = (Shelf) locationService.findOrCreateLibraryLocation(library, "Test Shelf");
         libraryService.receive(library, location, newBooks);
         Long libraryId = library.id;
         Assert.assertNotNull(libraryId);

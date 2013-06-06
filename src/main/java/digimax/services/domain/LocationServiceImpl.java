@@ -44,7 +44,8 @@ public class LocationServiceImpl implements LocationService {
         session.delete(location);
     }
 
-    public Location findOrCreateLocation(Library library, String locationName) {
+    @Override
+    public Location findOrCreateLibraryLocation(Library library, String locationName) {
         for (Location location : library.shelves) {
             if (location.name.equals(locationName)) {
                 return location;
@@ -52,6 +53,18 @@ public class LocationServiceImpl implements LocationService {
         }
         Shelf newLocation = new Shelf(locationName);
         library.shelves.add(newLocation);
+        return newLocation;
+    }
+
+    @Override
+    public Location findOrCreateStoreLocation(Store store, String locationName) {
+        for (Location location : store.shelves) {
+            if (location.name.equals(locationName)) {
+                return location;
+            }
+        }
+        Shelf newLocation = new Shelf(locationName);
+        store.shelves.add(newLocation);
         return newLocation;
     }
 }
