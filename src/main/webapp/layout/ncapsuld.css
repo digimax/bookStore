@@ -2,6 +2,10 @@
 Digimax.com ncapsuld css
 */
 
+body {
+    margin: 0px 10px 0px 10px;
+}
+
 /*DL, DT, DD TAGS LIST DATA*/
 dl {
     margin-bottom:10px;
@@ -30,7 +34,7 @@ h3 {
 
 /* IMG */
 img {
-    float:left;
+    /*float:left;*/
 }
 
 .big {
@@ -57,6 +61,7 @@ img {
     float:left;
     display:inline;
 }
+.single li { width: 100%;}
 .double li	{ width:50%; }
 .triple li	{ width:33.333%; }
 .quad li	{ width:25%; }
@@ -65,15 +70,6 @@ img {
 .warningMessage {
     color: firebrick;
     font-size: larger;
-}
-
-.horizontal {
-    border: 1px darkred;
-    background-color: darkolivegreen;
-    /*-moz-transition: all 10s ease;*/
-    /*-webkit-transition: all 10s ease;*/
-    /*-o-transition: all 10s ease;*/
-    /*transition: all 10s ease;*/
 }
 
 /*.horizontal img {*/

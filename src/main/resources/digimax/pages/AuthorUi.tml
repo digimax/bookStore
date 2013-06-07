@@ -3,13 +3,20 @@
       xmlns:p="tapestry:parameter">
 
 <h1>${author.fullName}</h1>
-<h3>${message:books}</h3>
-        <span t:type="loop" source="author.books" value="book">
-            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/></a>
+<!--<h3 style="margin-left: 2em;">${message:books}</h3>-->
+        <span t:type="loop" source="author.books" value="book" style="float: left; margin-right: 1em">
+            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}">
+                <span t:type="png" t:id="smallImage" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/>
+            </a>
         </span>
-        <div style="border: 1px red">
-            <ul t:type="loop" source="author.books" value="book" class="list">
-                <li><a t:type="pagelink" page="BookUi" context="book.id">${book.title}</a></li>
-            </ul>
-        </div>
+        <fieldset style="margin-left: 1em; width: 50%;">
+            <legend>Books by author</legend>
+            <div style="border: 0px dashed red">
+                <ul class="list single" style="width: 300px; border: 0px red dashed;">
+                    <li t:type="loop" source="author.books" value="book">
+                        <a t:type="pagelink" page="BookUi" context="book.id">${book.title}</a>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
 </html>

@@ -5,6 +5,7 @@ import digimax.entities.item.Book;
 import digimax.entities.item.BookLineItem;
 import digimax.entities.item.Cart;
 import digimax.entities.item.LineItem;
+import digimax.entities.people.Author;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -46,6 +47,10 @@ public class BookCart {
 
     public boolean isExists() {
         return cartExists && cart.items.size()>0;
+    }
+
+    public String getAuthorName() {
+        return ((Author)getBook().authors.toArray()[0]).getFullName();
     }
 
     private void onActionFromClearCart() {

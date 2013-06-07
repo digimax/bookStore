@@ -4,13 +4,15 @@
       xmlns:p="tapestry:parameter">
 <h1>${book.title}</h1>
 <h3>${book.subTitle}</h3>
-<span style="margin-right: 5px; border: 5px red"> <!--TODO: figure out why this style has no effect-->
+<div style="margin-left: 5px; margin-right: 5px; border: 0px red dashed; float:left;">
     <span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/>
-</span>
+</div>
 <div style="margin-left: 5px">
     <h3>${message:authors}</h3>
-    <ul t:type="loop" source="book.authors" value="author" class="list">
-        <li><a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a></li>
+    <ul class="list single" style="width: 200px;">
+        <li t:type="loop" source="book.authors" value="author">
+            <a t:type="pagelink" page="AuthorUi" context="author.id">${author.fullName}</a>
+        </li>
     </ul>
     <br />
     <a t:type="actionlink" t:id="putInCart">${message:put-in-cart}</a>

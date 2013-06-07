@@ -5,10 +5,12 @@
 <div class="container">
     <h1>${library.name}</h1>
     <img src="${bannerImage}" alt="${library.name}"/>
-    <div style="float:right;">
+    <div style="float: right; border: 0px dashed black; margin-left:.5em;">
         <h3>${message:shelves}</h3>
-        <ul t:type="loop" source="library.shelves" value="shelf" class="list six" style="width:600px;">
-            <li><a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a></li>
+        <ul class="list triple" style="width: 400px">
+            <li t:id="shelfLoop" t:type="loop" source="library.shelves" value="shelf">
+                <a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a>
+            </li>
         </ul>
     </div>
 </div>

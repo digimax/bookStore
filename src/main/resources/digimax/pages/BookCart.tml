@@ -8,6 +8,16 @@
             <span t:type="loop" source="items" value="lineItem">
                 <a t:type="pagelink" page="BookUi" context="lineItem.item.id" title="${book.title}"><span t:type="png" fileName="${horizontalImage.fileName}" altMessage="${book.title}" width="${horizontalImage.width}" height="${horizontalImage.height}"/></a>
             </span>
+            <fieldset style="margin-left: 1em; width: 50%;">
+                <legend>Books in your book cart</legend>
+                <div style="border: 0px dashed red">
+                    <ul class="list single" style="width: 600px; border: 0px red dashed;">
+                        <li t:type="loop" source="items" value="lineItem">
+                            <a t:type="pagelink" page="BookUi" context="lineItem.item.id">${book.title} - ${authorName}</a>
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
             <br />
             <a t:type="actionlink" t:id="clearCart">${message:clear}</a>
     </span>

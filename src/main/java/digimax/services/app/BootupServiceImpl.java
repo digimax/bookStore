@@ -2,6 +2,7 @@ package digimax.services.app;
 
 import digimax.entities.app.Image;
 import digimax.entities.item.Book;
+import digimax.entities.item.BookMeta;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
 import digimax.entities.people.Author;
@@ -151,7 +152,7 @@ public class BootupServiceImpl implements BootupService {
                     image.item = book;
                 }
                 book.images.addAll(spineImages);
-//                newBooks.add(book);
+                new BookMeta(book);
                 List<Book> receivedBooks = new ArrayList<Book>();
                 Shelf shelf = (Shelf) locationService.findOrCreateLibraryLocation(library, locationName);
                 receivedBooks.add(book);
