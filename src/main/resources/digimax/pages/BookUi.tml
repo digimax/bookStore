@@ -27,6 +27,5 @@
 <br />
 <div>
 <span t:type="png" fileName="${rotatedImage.fileName}" altMessage="${book.title}" width="${rotatedImage.width}" height="${rotatedImage.height}" class="big"/>
-<!--<span t:type="png" fileName="${largeImage.fileName}" altMessage="${book.title}" width="${largeImage.width}" height="${largeImage.height}" class="big"/>-->
 </div>
 </html>

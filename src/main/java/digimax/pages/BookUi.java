@@ -42,11 +42,10 @@ public class BookUi {
     @InjectComponent
     private BookMetaUi bookmetaui;
 
-    @BeginRender
-    void beginRender(MarkupWriter writer) {
+    @SetupRender
+    private void initializeBookMeta() {
         final Book thisBook = book;
         logger.debug("Start Diagnostics");
-        logger.debug("End Diagnostics");
         assert(thisBook!=null);
         //populate the Book MetaData from web service
         Thread populateMetaDataThread = new Thread() {
@@ -59,6 +58,12 @@ public class BookUi {
             }
         };
         populateMetaDataThread.start();
+        logger.debug("End Diagnostics");
+    }
+
+    @BeginRender
+    void beginRender(MarkupWriter writer) {
+
     }
 
     public Image getLargeImage() {
@@ -76,16 +81,16 @@ public class BookUi {
         return image;
     }
 
-    private static final String GOOGLE_BOOKS_VIEWER_SCRIPT =
-//            "Tapestry.onDOMLoaded(function() {"+
-                    "alert('testing javascript');"+
-                    "google.load(\"books\", \"0\");"+
-                    "function initialize() {"+
-                    "    var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));"+
-                    "    viewer.load('ISBN:0738531367');"+
-                    "}"+
-                    "google.setOnLoadCallback(initialize);";//+
-//                    "}";
+//    private static final String GOOGLE_BOOKS_VIEWER_SCRIPT =
+////            "Tapestry.onDOMLoaded(function() {"+
+//                    "alert('testing javascript');"+
+//                    "google.load(\"books\", \"0\");"+
+//                    "function initialize() {"+
+//                    "    var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));"+
+//                    "    viewer.load('ISBN:0738531367');"+
+//                    "}"+
+//                    "google.setOnLoadCallback(initialize);";//+
+////                    "}";
 
 
 
@@ -112,5 +117,7 @@ public class BookUi {
 //        javaScriptSupport.addScript(GOOGLE_BOOKS_VIEWER_SCRIPT);
 ////        javaScriptSupport.addScript("new Confirm('%s', '%s');", element.getClientId(), message);
 //    }
+
+
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class DomainObject {
 
     @Id
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonVisual
     public Long id;
