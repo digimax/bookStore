@@ -15,9 +15,11 @@
         </li>
     </ul>
     <br />
-    <a t:type="actionlink" t:id="putInCart">${message:put-in-cart}</a>
+    <span t:type="domain/bookcarttool" book="book" style="border: 1px red dashed;"/>
     <br />
-    ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">${book.shelf.name}</a>
+    <span style="font-size: smaller;">
+        ${message:location} <a t:type="pagelink" page="ShelfUi" context="book.shelf.id">${book.shelf.name}</a>
+    </span>
     <br />
     <fieldset style="width : 50%">
         <legend>${message:bookMeta}</legend>

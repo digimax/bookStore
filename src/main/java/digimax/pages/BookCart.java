@@ -6,11 +6,16 @@ import digimax.entities.item.BookLineItem;
 import digimax.entities.item.Cart;
 import digimax.entities.item.LineItem;
 import digimax.entities.people.Author;
+import org.apache.tapestry5.Asset;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.slf4j.Logger;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,6 +28,12 @@ public class BookCart {
 
     @Property
     private LineItem lineItem;
+
+    @Inject
+    private Logger logger;
+
+    @InjectComponent
+    private Zone refreshZone;
 
     public Image getHorizontalImage() {
         Book book = (Book) lineItem.item;
@@ -38,8 +49,6 @@ public class BookCart {
     public List<LineItem> getItems() {
         return cart.items;
     }
-    @Inject
-    private Logger logger;
 
     private boolean cartExists;
     @SessionState//(create=false)
@@ -53,10 +62,27 @@ public class BookCart {
         return ((Author)getBook().authors.toArray()[0]).getFullName();
     }
 
+    @Inject
+    @Path("context:imagez/no.png")
+    @Property
+    private Asset deleteImage;
+
     private void onActionFromClearCart() {
         logger.debug("Start Diagnostics");
         cart.items.clear();
         logger.debug("End Diagnostics");
+    }
+
+    private Object onActionFromRemove(Long itemId) {
+        logger.debug("Start Diagnostics");
+        for (LineItem lineItem : cart.items) {
+            if (itemId.equals(lineItem.item.id)) {
+                cart.items.remove(lineItem);
+                break;
+            }
+        }
+        logger.debug("End Diagnostics");
+        return refreshZone.getBody();
     }
 
 

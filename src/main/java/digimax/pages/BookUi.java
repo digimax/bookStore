@@ -101,17 +101,6 @@ public class BookUi {
     @InjectContainer
     private ClientElement element;
 
-    private Object onActionFromPutInCart() {
-        logger.debug("Start Diagnostics");
-        LineItem lineItem = new LineItem();
-        lineItem.item = book;
-        lineItem.quantity = 1;
-        cart.items.add(lineItem);
-
-        logger.debug("End Diagnostics");
-        return BookCart.class;
-    }
-
 
 //    @AfterRender
 //    public void afterRender() {

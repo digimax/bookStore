@@ -1,0 +1,18 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+<t:content>
+    <span t:type="zone" t:id="refreshZone">
+        <span t:type="if" test="inBookcart" style="font-size: smaller;">
+            <a t:type="actionlink" t:id="removeItemLink" t:zone="^">
+                Remove from Bookcart
+            </a>
+            &nbsp;(1 of ${itemCount} items in cart)
+          <p:else>
+            <a t:type="actionlink" t:id="addItemLink" style="font-size: smaller;">
+                Add to Bookcart
+            </a>
+          </p:else>
+        </span>
+    </span>
+</t:content>
+</html>
