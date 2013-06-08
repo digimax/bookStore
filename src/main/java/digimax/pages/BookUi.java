@@ -51,13 +51,14 @@ public class BookUi {
         Thread populateMetaDataThread = new Thread() {
             @Override
             public void run() {
-                if (thisBook.bookMeta==null || !thisBook.bookMeta.isInitialized()) {
-                    logger.debug("Book :: {}", thisBook);
-                    bookMetaService.populateBookMeta(thisBook);
-                }
+                logger.debug("Book :: {}", thisBook);
+                bookMetaService.populateBookMeta(thisBook);
             }
         };
-        populateMetaDataThread.start();
+        if (thisBook.bookMeta==null || !thisBook.bookMeta.isInitialized()) {
+            populateMetaDataThread.start();
+        }
+
         logger.debug("End Diagnostics");
     }
 
