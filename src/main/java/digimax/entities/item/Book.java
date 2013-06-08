@@ -31,7 +31,7 @@ public class Book extends Item {
     public String subTitle;
 
     @Property
-    @OneToOne(cascade = {CascadeType.REFRESH} ,fetch = FetchType.LAZY, mappedBy = "book")
+    @OneToOne(cascade = {CascadeType.ALL} ,fetch = FetchType.EAGER, mappedBy = "book")
     public BookMeta bookMeta;
 
     @Property
