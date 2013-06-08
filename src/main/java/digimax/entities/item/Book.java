@@ -31,7 +31,8 @@ public class Book extends Item {
     public String subTitle;
 
     @Property
-    @OneToOne(cascade = {CascadeType.ALL} ,fetch = FetchType.EAGER, mappedBy = "book")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "book")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     public BookMeta bookMeta;
 
     @Property

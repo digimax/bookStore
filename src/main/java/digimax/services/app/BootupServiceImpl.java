@@ -152,7 +152,7 @@ public class BootupServiceImpl implements BootupService {
                     image.item = book;
                 }
                 book.images.addAll(spineImages);
-                new BookMeta(book);
+                //new BookMeta(book);
                 List<Book> receivedBooks = new ArrayList<Book>();
                 Shelf shelf = (Shelf) locationService.findOrCreateLibraryLocation(library, locationName);
                 receivedBooks.add(book);

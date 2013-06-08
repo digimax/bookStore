@@ -41,8 +41,8 @@ public class BookMeta extends DomainObject {
     public String thumbnailUrl;
 
     @Property
-    @OneToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)//, optional=true)
-//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)//, optional=true)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 //    @PrimaryKeyJoinColumn
     public Book book;
 
