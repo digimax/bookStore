@@ -7,23 +7,23 @@
     <t:zone t:id="byTitleFormZone" id="byTitleFormZone">
     <form t:type="form" t:id="byTitleForm" t:zone="^" clientValidation="submit" action="">
         <t:errors/>
-    <fieldset style="width: 50%;">
-        <legend>${message:searchByTitle}</legend>
-        <strong><t:label for="bookTitle"/>:</strong>
-        <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>
-        <input t:type="submit" t:id="searchByTitle" value="Search"/>
-    </fieldset>
+        <fieldset style="width: 50%;">
+            <legend>${message:searchByTitle}</legend>
+            <strong><t:label for="bookTitle"/>:</strong>
+            <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>
+            <input t:type="submit" t:id="searchByTitle" value="Search"/>
+        </fieldset>
     </form>
     </t:zone>
     <t:zone t:id="byAuthorFormZone" id="byAuthorFormZone">
         <form t:type="form" t:id="byAuthorForm" t:zone="^" clientValidation="submit" action="">
             <t:errors/>
-        <fieldset style="width: 50%;">
-            <legend>${message:searchByAuthor}</legend>
-            <strong><t:label for="authorName"/>:</strong>
-            <input t:type="TextField" t:id="authorName" value="authorName" t:validate="required, minlength=3" size="30"/>
-            <input t:type="submit" t:id="searchByAuthor" value="Search"/>
-        </fieldset>
+            <fieldset style="width: 50%;">
+                <legend>${message:searchByAuthor}</legend>
+                <strong><t:label for="authorName"/>:</strong>
+                <input t:type="TextField" t:id="authorName" value="authorName" t:validate="required, minlength=3" size="30"/>
+                <input t:type="submit" t:id="searchByAuthor" value="Search"/>
+            </fieldset>
         </form>
     </t:zone>
     <div>

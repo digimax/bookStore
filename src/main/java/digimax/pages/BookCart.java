@@ -67,10 +67,11 @@ public class BookCart {
     @Property
     private Asset deleteImage;
 
-    private void onActionFromClearCart() {
+    private Object onActionFromClearCart() {
         logger.debug("Start Diagnostics");
         cart.items.clear();
         logger.debug("End Diagnostics");
+        return refreshZone.getBody();
     }
 
     private Object onActionFromRemove(Long itemId) {

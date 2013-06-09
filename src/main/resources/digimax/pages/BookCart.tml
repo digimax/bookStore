@@ -9,10 +9,11 @@
             <span t:type="loop" source="items" value="lineItem">
                 <a t:type="pagelink" page="BookUi" context="lineItem.item.id" title="${book.title}"><span t:type="png" fileName="${horizontalImage.fileName}" altMessage="${book.title}" width="${horizontalImage.width}" height="${horizontalImage.height}"/></a>
             </span>
-            <fieldset style="margin-left: 1em; width: 50%;">
+            <a id="top"/>
+            <fieldset style="margin-left: 1em; width: 96%;">
                 <legend>Books in your book cart</legend>
                 <div style="border: 0px dashed red">
-                    <ul class="list double" style="width: 900px; border: 0px red dashed;">
+                    <ul class="list double" style="width: 100%; border: 0px red dashed;">
                         <span t:type="loop" source="items" value="lineItem">
                             <li>
                                 <strong>
@@ -36,7 +37,9 @@
                 </div>
             </fieldset>
             <br />
-            <a t:type="actionlink" t:id="clearCart">${message:clear}</a>
+            <a t:type="actionlink" t:id="clearCart" zone="^" style="float: right;">${message:clear}</a>
+            <br />
+            <a id="bottom"/>
         </span>
         <br />
         <span t:type="unless" test="exists">
