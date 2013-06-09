@@ -7,9 +7,9 @@
     <t:zone t:id="byTitleFormZone" id="byTitleFormZone">
     <form t:type="form" t:id="byTitleForm" t:zone="^" clientValidation="submit" action="">
         <t:errors/>
-    <fieldset>
+    <fieldset style="width: 50%;">
         <legend>${message:searchByTitle}</legend>
-        <t:label for="bookTitle"/>:
+        <strong><t:label for="bookTitle"/>:</strong>
         <input t:type="TextField" t:id="bookTitle" value="title" t:validate="required, minlength=3" size="30"/>
         <input t:type="submit" t:id="searchByTitle" value="Search"/>
     </fieldset>
@@ -18,9 +18,9 @@
     <t:zone t:id="byAuthorFormZone" id="byAuthorFormZone">
         <form t:type="form" t:id="byAuthorForm" t:zone="^" clientValidation="submit" action="">
             <t:errors/>
-        <fieldset>
+        <fieldset style="width: 50%;">
             <legend>${message:searchByAuthor}</legend>
-            <t:label for="authorName"/>:
+            <strong><t:label for="authorName"/>:</strong>
             <input t:type="TextField" t:id="authorName" value="authorName" t:validate="required, minlength=3" size="30"/>
             <input t:type="submit" t:id="searchByAuthor" value="Search"/>
         </fieldset>
