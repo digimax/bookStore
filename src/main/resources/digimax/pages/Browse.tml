@@ -3,9 +3,8 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
     <h1>${message:browseEntireLibrary}</h1>
-    <span t:type="loop" source="library.shelves" value="shelf">
-        <span t:type="loop" source="shelf.books" value="book">
-            <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/></a>
-        </span>
+    <span t:type="loop" source="sortedBooks" value="book">
+        <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/></a>
     </span>
+
 </html>

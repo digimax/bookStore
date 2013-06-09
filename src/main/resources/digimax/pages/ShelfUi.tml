@@ -3,14 +3,14 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
         <h1>${message:shelf} ${shelf.name}</h1>
-        <span t:type="loop" source="shelf.books" value="book">
+        <span t:type="loop" source="sortedBooks" value="book">
             <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/></a>
         </span>
         <fieldset style="margin-left: 1em; width: 50%;">
             <legend>Books on this shelf</legend>
             <div style="border: 0px dashed red">
                 <ul class="list single" style="width: 600px; border: 0px red dashed;">
-                    <li t:type="loop" source="shelf.books" value="book">
+                    <li t:type="loop" source="sortedBooks" value="book">
                         <a t:type="pagelink" page="BookUi" context="book.id">${book.title} - ${authorName}</a>
                     </li>
                 </ul>

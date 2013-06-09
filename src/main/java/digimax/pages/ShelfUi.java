@@ -7,6 +7,10 @@ import digimax.entities.people.Author;
 import org.apache.tapestry5.annotations.PageActivationContext;
 import org.apache.tapestry5.annotations.Property;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * A product of Digimax Technology Inc. (digimax.com)
  * User: jonwilliams
@@ -30,4 +34,11 @@ public class ShelfUi {
     public String getAuthorName() {
         return ((Author)book.authors.toArray()[0]).getFullName();
     }
+
+    public List<Book> getSortedBooks() {
+        List<Book> sortedBooks = shelf.books;
+        Collections.sort(sortedBooks, new Book.Compare());
+        return sortedBooks;
+    }
+
 }

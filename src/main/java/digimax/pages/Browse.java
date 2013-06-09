@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,6 +56,23 @@ public class Browse {
 
     public Library getLibrary() {
         return (Library) session.createCriteria(Library.class).uniqueResult();
+    }
+
+    public List<Shelf> getSortedShelves() {
+        List<Shelf> sortedShelves = getLibrary().shelves;
+        Collections.sort(sortedShelves, new Shelf.Compare());
+        return sortedShelves;
+    }
+
+    public List<Book> getSortedBooks() {
+        List<Book> sortedBooks = new ArrayList<Book>();
+        for (Shelf shelf: getSortedShelves()) {
+            for (Book book: shelf.books) {
+                sortedBooks.add(book);
+            }
+        }
+        Collections.sort(sortedBooks, new Book.Compare());
+        return sortedBooks;
     }
 
     public Image getSmallImage() {

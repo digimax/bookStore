@@ -57,4 +57,12 @@
     //    public Long getUid() {
     //        return id;
     //    }
+
+        public static final class Compare implements Comparator<Book> {
+
+            @Override
+            public int compare(Book book1, Book book2) {
+                return book1.title.compareTo(book2.title);
+            }
+        }
     }

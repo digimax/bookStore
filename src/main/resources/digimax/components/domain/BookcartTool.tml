@@ -6,9 +6,9 @@
             <a t:type="actionlink" t:id="removeItemLink" t:zone="^">
                 Remove from Bookcart
             </a>
-            &nbsp;(1 of ${itemCount} items in cart)
+            &nbsp;(1 of ${itemCount} items in <a t:type="pagelink" page="BookCart">cart</a>)
           <p:else>
-            <a t:type="actionlink" t:id="addItemLink" style="font-size: smaller;">
+            <a t:type="actionlink" t:id="addItemLink">
                 Add to Bookcart
             </a>
           </p:else>

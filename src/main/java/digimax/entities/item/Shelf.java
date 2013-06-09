@@ -11,6 +11,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -36,6 +37,14 @@ public class Shelf extends Location {
 
     public Shelf() {
         super();
+    }
+
+    public static final class Compare implements Comparator<Shelf> {
+        @Override
+        public int compare(Shelf shelf1, Shelf shelf2) {
+            return shelf1.name.compareTo(shelf2.name);
+//            return (shelf1.name.compareTo(shelf2.name))?-1:(shelf1.name.equals(shelf2.name)?0:1); //TODO: implement this method
+        }
     }
 
 }

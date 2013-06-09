@@ -12,7 +12,7 @@
             <fieldset style="margin-left: 1em; width: 50%;">
                 <legend>Books in your book cart</legend>
                 <div style="border: 0px dashed red">
-                    <ul class="list double" style="width: 800px; border: 0px red dashed;">
+                    <ul class="list double" style="width: 900px; border: 0px red dashed;">
                         <span t:type="loop" source="items" value="lineItem">
                             <li>
                                 <strong>
@@ -22,12 +22,14 @@
                                 </strong>
                             </li>
                             <li>
-                                <a t:type="actionlink" t:id="remove" context="lineItem.item.id" zone="^">
-                                    <!--<img src="${deleteImage}" style="width: 16px; height: 16px; margin: 0px; padding: 0px; horizontal-align: top;"/>-->
-                                    <span style="margin-bottom: 10px; vertical-align: top; font-size: smaller;">
-                                        remove from cart
-                                    </span>
-                                </a>
+                                <span style="float: right;">
+                                    <a t:type="actionlink" t:id="remove" context="lineItem.item.id" zone="^">
+                                        <!--<img src="${deleteImage}" style="width: 16px; height: 16px; margin: 0px; padding: 0px; horizontal-align: top;"/>-->
+                                        <span style="margin-bottom: 10px; vertical-align: top; font-size: smaller;">
+                                            remove from cart
+                                        </span>
+                                    </a>
+                                </span>
                             </li>
                         </span>
                     </ul>

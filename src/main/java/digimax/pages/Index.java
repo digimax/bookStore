@@ -1,6 +1,8 @@
 package digimax.pages;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
@@ -50,6 +52,12 @@ public class Index
 
     public Library getLibrary() {
         return (Library) session.createCriteria(Library.class).uniqueResult();
+    }
+
+    public List<Shelf> getSortedShelves() {
+        List<Shelf> sortedShelves = getLibrary().shelves;
+        Collections.sort(sortedShelves, new Shelf.Compare());
+        return sortedShelves;
     }
 
 //    @InjectComponent
