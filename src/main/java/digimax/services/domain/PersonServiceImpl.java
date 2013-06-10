@@ -16,13 +16,6 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/6/13
- * Time: 3:55 PM
- * To change this template use File | Settings | File Templates.
- */
 @SuppressWarnings("unchecked")
 public class PersonServiceImpl implements PersonService {
 
