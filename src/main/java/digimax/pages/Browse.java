@@ -4,6 +4,7 @@ import digimax.entities.app.Image;
 import digimax.entities.item.Book;
 import digimax.entities.item.Shelf;
 import digimax.entities.library.Library;
+import digimax.entities.people.Author;
 import digimax.services.app.BootupServiceImpl;
 import digimax.services.domain.LibraryService;
 import digimax.structural.ApplicationRuntimeException;
@@ -53,6 +54,10 @@ public class Browse {
 
     @Property
     Shelf shelf;
+
+    public String getAuthorName() {
+        return ((Author)book.authors.toArray()[0]).getFullName();
+    }
 
     public Library getLibrary() {
         return (Library) session.createCriteria(Library.class).uniqueResult();

@@ -6,5 +6,11 @@
     <span t:type="loop" source="sortedBooks" value="book">
         <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}"><span t:type="png" fileName="${smallImage.fileName}" altMessage="${book.title}" width="${smallImage.width}" height="${smallImage.height}"/></a>
     </span>
-
+    <fieldset style="width: 50%;">
+        <legend>All books in the library</legend>
+        <span t:type="loop" source="sortedBooks" value="book">
+        <a t:type="pagelink" page="BookUi" context="book.id" title="${book.title}">${book.title} - ${authorName}</a>
+        <br />
+    </span>
+    </fieldset>
 </html>

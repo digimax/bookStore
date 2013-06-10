@@ -16,13 +16,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/6/13
- * Time: 3:25 PM
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 //@Proxy(lazy=false)
 @Inheritance(strategy=InheritanceType.JOINED)

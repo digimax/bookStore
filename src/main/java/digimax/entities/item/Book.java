@@ -13,13 +13,6 @@
 
     import java.util.*;
 
-    /**
-     * Created with IntelliJ IDEA.
-     * User: jonwilliams
-     * Date: 4/6/13
-     * Time: 1:54 PM
-     * To change this template use File | Settings | File Templates.
-     */
     @Entity
     public class Book extends Item {
 
@@ -37,7 +30,7 @@
 
         @Property
         @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
-        @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
+        @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     //    @JoinTable(name="Book_Author",
     //            joinColumns={@JoinColumn(name="Book_id")},
     //            inverseJoinColumns={@JoinColumn(name="Author_id")})

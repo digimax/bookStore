@@ -22,11 +22,18 @@ import org.slf4j.Logger;
  */
 //@Import(library="https://www.google.com/jsapi")
 public class BookUi {
+
+    @Inject
+    private JavaScriptSupport javaScriptSupport;
+
     @Inject
     private Logger logger;
 
     @Inject
     private BookMetaService bookMetaService;
+
+    @InjectContainer
+    private ClientElement element;
 
     private boolean cartExists;
     @SessionState
@@ -92,14 +99,6 @@ public class BookUi {
 //                    "}"+
 //                    "google.setOnLoadCallback(initialize);";//+
 ////                    "}";
-
-
-
-    @Inject
-    private JavaScriptSupport javaScriptSupport;
-
-    @InjectContainer
-    private ClientElement element;
 
 
 //    @AfterRender
