@@ -7,7 +7,7 @@
     <img src="${bannerImage}" alt="${library.name}"/>
     <div style="float: right; border: 0px dashed black; margin-left:.5em;">
         <h3>${message:shelves}</h3>
-        <ul class="list triple" style="width: 400px">
+        <ul class="list triple" style="width: 390px">
             <li t:id="shelfLoop" t:type="loop" source="sortedShelves" value="shelf">
                 <a t:type="pagelink" page="ShelfUi" context="shelf.id">${shelf.name}</a>
             </li>

@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
 
     public Book testInstance() {
         Book book = new Book();
-        book.title = "Feng TSui Master Sweet";
+        book.title = "Fung Master Sweet";
         return book;
     }
 

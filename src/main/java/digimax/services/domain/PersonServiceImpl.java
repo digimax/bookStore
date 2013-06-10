@@ -165,7 +165,7 @@ public class PersonServiceImpl implements PersonService {
         logger.debug("employee.identityMeta::"+employee.identityMeta);
         employee.identityMeta.setNewPassword(password);
         save(employee);
-        return employee;  //To change body of implemented methods use File | Settings | File Templates.
+        return employee;
     }
 
     @SuppressWarnings("unchecked")

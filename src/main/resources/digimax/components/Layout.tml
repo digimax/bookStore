@@ -9,6 +9,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"/>
 </head>
 <body>
+<a id="top"/>
 
 <!-- start header -->
 <div class="header">
@@ -31,9 +32,8 @@
 
 
 <t:alerts/>
-<!-- <div t:type="body"/> Tap doesn't like this. WHY DOESN'T THIS WORK?-->
 <t:body/>
 
-
+<a id="bottom"/>
 </body>
 </html>

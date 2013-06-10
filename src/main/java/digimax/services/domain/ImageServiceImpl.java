@@ -51,12 +51,14 @@ public class ImageServiceImpl implements ImageService {
 
         Image fullScaleImage = null;
         File destinationImageFile = new File(appImagesFolderRoot+fileName);
-        File tempOldNameImageFile = new File(appImagesFolderRoot+tempOldFileName); //TODO: rework TestImages page to use HashedFileName
+        File tempOldNameImageFile = new File(appImagesFolderRoot+tempOldFileName);
+         //TODO: rework TestImages page to use HashedFileName
         try {
             FileUtils.copyFile(sourceImageFile, destinationImageFile);
             FileUtils.copyFile(sourceImageFile, tempOldNameImageFile);
         } catch (IOException e) {
-            throw new ApplicationRuntimeException(String.format("ImageServiceImpl IO failure. Failed to create new image file named :: %s", fileName) , e);
+            throw new ApplicationRuntimeException(String.format(
+                    "ImageServiceImpl IO failure. Failed to create new image file named :: %s", fileName) , e);
         }
         //create scaled image
         String scaledImageFileName = SCALED_IMAGE_PREFIX+fileName;
@@ -78,7 +80,8 @@ public class ImageServiceImpl implements ImageService {
             scaledImage.fileName=scaledImageFileName;
 
         } catch (IOException e) {
-            throw new ApplicationRuntimeException(String.format("ImageServiceImpl IO failure. Failed to createScaledImage :: %s", scaledImageFileName) , e);
+            throw new ApplicationRuntimeException(String.format(
+                    "ImageServiceImpl IO failure. Failed to createScaledImage :: %s", scaledImageFileName) , e);
         }
 
         //create rotated image
@@ -91,7 +94,8 @@ public class ImageServiceImpl implements ImageService {
                     new File(appImagesFolderRoot+rotatedImageFileName));
             rotatedImage.fileName=rotatedImageFileName;
         } catch (IOException e) {
-            throw new ApplicationRuntimeException(String.format("ImageServiceImpl IO failure. Failed to createRotatedImage :: %s", rotatedImageFileName) , e);
+            throw new ApplicationRuntimeException(String.format(
+                    "ImageServiceImpl IO failure. Failed to createRotatedImage :: %s", rotatedImageFileName) , e);
         }
 
         List<Image> createdImages = new ArrayList<Image>();
@@ -107,7 +111,8 @@ public class ImageServiceImpl implements ImageService {
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
         int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);
-        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        GraphicsConfiguration gc = graphicsDevice.getDefaultConfiguration();
 //        GraphicsConfiguration gc = getDefaultConfiguration();
         BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
         Graphics2D g = result.createGraphics();
