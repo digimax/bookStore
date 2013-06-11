@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("unchecked")
 public class LocationServiceTest extends QaRegistryTest {
@@ -32,7 +33,7 @@ public class LocationServiceTest extends QaRegistryTest {
         LocationService locationService = registry.getService(LocationService.class);
         for (Shelf shelf: persistedShelfList) {
             locationService.delete(shelf);
-            List<Book> shelvedBooks = shelf.books;
+            Set<Book> shelvedBooks = shelf.books;
             for (Book book : shelvedBooks) {
                 book.shelf = null;
                 bookService.delete(book);
@@ -82,13 +83,13 @@ public class LocationServiceTest extends QaRegistryTest {
         shelf.books.add(persistedBooks.get(1));
         shelf.books.add(persistedBooks.get(2));
 
-        Assert.assertEquals(shelf.books.get(0), book1);
-        Assert.assertEquals(shelf.books.get(1), book2);
-        Assert.assertEquals(shelf.books.get(2), book3);
+        Assert.assertEquals(shelf.getSortedBooks().get(0), book1);
+        Assert.assertEquals(shelf.getSortedBooks().get(1), book2);
+        Assert.assertEquals(shelf.getSortedBooks().get(2), book3);
 
-        Assert.assertNotNull(shelf.books.get(0).id);
-        Assert.assertNotNull(shelf.books.get(1).id);
-        Assert.assertNotNull(shelf.books.get(2).id);
+        Assert.assertNotNull(shelf.getSortedBooks().get(0).id);
+        Assert.assertNotNull(shelf.getSortedBooks().get(1).id);
+        Assert.assertNotNull(shelf.getSortedBooks().get(2).id);
 
         locationService.save(shelf);
 

@@ -29,8 +29,7 @@
         public BookMeta bookMeta;
 
         @Property
-        @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
-        @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+        @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     //    @JoinTable(name="Book_Author",
     //            joinColumns={@JoinColumn(name="Book_id")},
     //            inverseJoinColumns={@JoinColumn(name="Author_id")})

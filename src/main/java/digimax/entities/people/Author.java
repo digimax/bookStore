@@ -2,26 +2,20 @@ package digimax.entities.people;
 
 import digimax.entities.item.Book;
 import org.apache.tapestry5.annotations.Property;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/6/13
- * Time: 1:54 PM
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class Author extends Person {
 
     @Property
-    @ManyToMany(fetch = FetchType.LAZY,
-            mappedBy="authors")
-    public List<Book> books = new ArrayList<Book>();
+    @ManyToMany(mappedBy = "authors")
+    public Set<Book> books = new HashSet<Book>();
 
     public Author() {
         super();
@@ -31,6 +25,15 @@ public class Author extends Person {
         this();
         this.lastName = lastName;
         this.firstName = firstName;
+    }
+
+    public List<Book> getSortedBooks() {
+        List<Book> sortedBooks = new ArrayList<Book>();
+        for (Book book: books) {
+            sortedBooks.add(book);
+        }
+        Collections.sort(sortedBooks, new Book.Compare());
+        return sortedBooks;
     }
 
 //    public Long getUid() {

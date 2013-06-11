@@ -10,9 +10,7 @@ import org.apache.tapestry5.beaneditor.Validate;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,7 +25,7 @@ public class Shelf extends Location {
     @Property
     @OneToMany(mappedBy="shelf")//, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
 //    @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
-    public List<Book> books = new ArrayList<Book>();
+    public Set<Book> books = new HashSet<Book>();
 
 
     public Shelf(String name) {
@@ -45,6 +43,15 @@ public class Shelf extends Location {
             return shelf1.name.compareTo(shelf2.name);
 //            return (shelf1.name.compareTo(shelf2.name))?-1:(shelf1.name.equals(shelf2.name)?0:1); //TODO: implement this method
         }
+    }
+
+    public List<Book> getSortedBooks() {
+        List<Book> sortedBooks = new ArrayList<Book>();
+        for (Book book: books) {
+            sortedBooks.add(book);
+            Collections.sort(sortedBooks, new Book.Compare());
+        }
+        return sortedBooks;
     }
 
 }

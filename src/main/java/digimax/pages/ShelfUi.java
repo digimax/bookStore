@@ -36,8 +36,7 @@ public class ShelfUi {
     }
 
     public List<Book> getSortedBooks() {
-        List<Book> sortedBooks = shelf.books;
-        Collections.sort(sortedBooks, new Book.Compare());
+        List<Book> sortedBooks = shelf.getSortedBooks();
         return sortedBooks;
     }
 
