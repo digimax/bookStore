@@ -21,6 +21,8 @@ import java.util.Set;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Item extends DomainObject {
 
+    public static final Float DEFAULT_PRICE = new Float(119.99);
+
     @Property
     @NonVisual
     @Validate("required")
@@ -33,5 +35,12 @@ public class Item extends DomainObject {
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
 //    @Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
     public List<Image> images = new ArrayList<Image>();
+
+    public Float getCalculatedPrice() {
+        if (price==null) {
+            price = DEFAULT_PRICE;
+        }
+        return price;
+    }
 
 }

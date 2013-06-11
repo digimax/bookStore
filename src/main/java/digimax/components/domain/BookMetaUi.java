@@ -63,7 +63,7 @@ public class BookMetaUi {
     }
 
     public Long getAsyncRefreshPeriod() {
-        return 2l;
+        return 4l;
     }
 
     public void afterRender(){

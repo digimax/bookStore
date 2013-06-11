@@ -15,4 +15,12 @@ public class Cart {
 
     @Property
     public List<LineItem> items = new ArrayList<LineItem>();
+
+    public Float getTotal() {
+        Float total = 0f;
+        for (LineItem lineItem: items) {
+            total += lineItem.quantity*lineItem.item.getCalculatedPrice();
+        }
+        return total;
+    }
 }

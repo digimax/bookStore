@@ -51,6 +51,7 @@ public class BookCart {
     }
 
     private boolean cartExists;
+    @Property
     @SessionState//(create=false)
     private Cart cart;
 

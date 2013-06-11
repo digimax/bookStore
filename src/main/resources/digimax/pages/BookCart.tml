@@ -2,10 +2,11 @@
       t:sidebarTitle="FrameworkVersion"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-<h1>Book Cart</h1>
-<div class="container">
     <span t:type="zone" t:id="refreshZone">
+    <h1>Book Cart</h1>
+    <div class="container">
         <span t:type="if" test="exists">
+            <span style="float: right;"><strong>Total in cart</strong> $${cart.total}</span>
             <span t:type="loop" source="items" value="lineItem">
                 <a t:type="pagelink" page="BookUi" context="lineItem.item.id" title="${book.title}"><span t:type="png" fileName="${horizontalImage.fileName}" altMessage="${book.title}" width="${horizontalImage.width}" height="${horizontalImage.height}"/></a>
             </span>
@@ -22,10 +23,11 @@
                                 </strong>
                             </li>
                             <li>
-                                <span style="float: right;">
+                                <span style="float: right; margin-bottom: 0px; vertical-align: top; font-size: smaller;">
+                                    quantity ${lineItem.quantity} ($${lineItem.item.calculatedPrice} /ea.)
                                     <a t:type="actionlink" t:id="remove" context="lineItem.item.id" zone="^">
                                         <!--<img src="${deleteImage}" style="width: 16px; height: 16px; margin: 0px; padding: 0px; horizontal-align: top;"/>-->
-                                        <span style="margin-bottom: 10px; vertical-align: top; font-size: smaller;">
+                                        <span>
                                             remove from cart
                                         </span>
                                     </a>
@@ -35,6 +37,7 @@
                     </ul>
                 </div>
             </fieldset>
+            <span style="float: right;"><strong>Total in cart</strong> $${cart.total}</span>
             <br />
             <a t:type="actionlink" t:id="clearCart" zone="^" style="float: right;">${message:clear}</a>
             <br />
@@ -43,6 +46,6 @@
         <span t:type="unless" test="exists">
             Your cart is empty.
         </span>
+    </div>
     </span>
-</div>
 </html>
