@@ -11,6 +11,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,6 +42,10 @@ public class Item extends DomainObject {
             price = DEFAULT_PRICE;
         }
         return price;
+    }
+
+    public String getFormattedPrice() {
+        return NumberFormat.getCurrencyInstance().format(getCalculatedPrice());
     }
 
 }

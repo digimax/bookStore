@@ -7,6 +7,12 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>${title}</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"/>
+
+    <meta http-equiv="expires" content="600"/>
+    <meta http-equiv="cache-control" content="public, must-revalidate, max-age=600"/>
+    <!--<meta http-equiv="cache-control" content="no-cache, must-revalidate"/>-->
+    <!--<meta http-equiv="pragma" content="no-cache"/>-->
+
 </head>
 <body>
 <a id="top"/>

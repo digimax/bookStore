@@ -37,6 +37,26 @@ img {
     /*float:left;*/
 }
 
+.ads {
+    clear: both;
+    float: right;
+    font-size: .88em;
+    vertical-align: bottom;
+    border: 0px darkred dashed;
+    vertical-position: subscript;
+    margin-right: 2em;
+    color: lightgray;
+}
+
+.ads a:link {color: lightgray}
+.ads a:visited {color: lightgray}
+.ads a:hover {color: gray}
+.ads a:active {color: lightgray}
+
+.ads h3 {
+    color: gray;
+}
+
 .big {
     float: none;
 }

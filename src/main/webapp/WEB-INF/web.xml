@@ -30,7 +30,7 @@ of where to look for pages, components and mixins. -->
 
     <context-param>
         <param-name>tapestry.execution-mode</param-name>
-        <param-value>development</param-value>
+        <param-value>production</param-value>
     </context-param>
 
     <filter>

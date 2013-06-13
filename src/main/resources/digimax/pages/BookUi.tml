@@ -15,7 +15,7 @@
             </li>
         </ul>
         <br />
-        <strong>Price $${book.calculatedPrice}</strong>
+        <strong>Price ${book.formattedPrice}</strong>
         <br />
         <span t:type="domain/bookcarttool" book="book" style="border: 0px red dashed;"/>
         <br />

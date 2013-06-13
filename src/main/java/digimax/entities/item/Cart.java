@@ -1,7 +1,9 @@
 package digimax.entities.item;
 
 import org.apache.tapestry5.annotations.Property;
+import sun.misc.Regexp;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,5 +24,9 @@ public class Cart {
             total += lineItem.quantity*lineItem.item.getCalculatedPrice();
         }
         return total;
+    }
+
+    public String getFormattedTotal() {
+        return NumberFormat.getCurrencyInstance().format(getTotal());
     }
 }

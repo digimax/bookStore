@@ -10,6 +10,7 @@ import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.internal.structure.Page;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
 
 import java.io.BufferedInputStream;
@@ -33,6 +34,9 @@ public class Png {
     @Inject
     private ComponentResources componentResources;
 
+    @Inject
+    private Response response;
+
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.VAR)
     private int width;
@@ -48,6 +52,7 @@ public class Png {
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
     private String fileName;
+
 
     public Link getStreamLink() {
         Link streamLink = componentResources.createEventLink("images", new Object[] {fileName});
@@ -80,5 +85,4 @@ public class Png {
         }
         return new PNGInline(inputStream, imageFileName);
     }
-
 }

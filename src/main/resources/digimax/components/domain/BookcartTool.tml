@@ -4,12 +4,12 @@
     <span t:type="zone" t:id="refreshZone">
         <span t:type="if" test="inBookcart" style="font-size: smaller;">
             <a t:type="actionlink" t:id="removeItemLink" t:zone="^">
-                Remove from Bookcart
+                Remove from bookcart
             </a>
             &nbsp;(1 of ${itemCount} items in <a t:type="pagelink" page="BookCart">cart</a>)
           <p:else>
             <a t:type="actionlink" t:id="addItemLink" anchor="bottom">
-                Add to Bookcart
+                Add to bookcart
             </a>
           </p:else>
         </span>

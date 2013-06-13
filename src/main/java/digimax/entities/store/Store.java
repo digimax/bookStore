@@ -15,13 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/6/13
- * Time: 2:06 PM
- * To change this template use File | Settings | File Templates.
- */
+@SuppressWarnings("unchecked")
 @Entity
 public class Store extends DomainObject implements Inventory {
 

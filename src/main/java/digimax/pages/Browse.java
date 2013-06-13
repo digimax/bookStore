@@ -13,6 +13,7 @@ import org.apache.tapestry5.*;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,9 @@ public class Browse {
 
     @Inject
     ComponentResources componentResources;
+
+    @Inject
+    private JavaScriptSupport javaScriptSupport;
 
     @Inject
     private LinkSource linkSource;
@@ -84,4 +88,33 @@ public class Browse {
         Image image = book.images.get(1);
         return image;
     }
+
+    public String getImageUrls() {
+        String imageUrls = "";
+        for (Book book: getSortedBooks()) {
+            imageUrls += "\"/browse.png:images/"+book.images.get(0).fileName+"\",";
+        }
+        return imageUrls;
+    }
+
+
+//    public void afterRender() {
+//        javaScriptSupport.addScript(getImageCacheScript());
+//    }
+
+    public String getImageCacheScript() {
+    return "function preloadImages(array) {\n"+
+    "    if (!preloadImages.list) {\n"+
+    "        preloadImages.list = [];\n"+
+    "    }\n"+
+    "    for (var i = 0; i < array.length; i++) {\n"+
+    "        var img = new Image();\n"+
+    "        img.src = array[i];\n"+
+    "        preloadImages.list.push(img);\n"+
+    "    }\n"+
+    "}\n"+
+    "var imageURLs = ["+getImageUrls()+"];\n"+
+    "preloadImages(imageURLs);";
+    }
+
 }
