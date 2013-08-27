@@ -8,13 +8,6 @@ import org.apache.tapestry5.beaneditor.Validate;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/6/13
- * Time: 1:47 PM
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Person extends DomainObject {

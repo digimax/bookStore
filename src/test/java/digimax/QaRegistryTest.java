@@ -18,14 +18,8 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/7/13
- * Time: 7:18 PM
- * To change this template use File | Settings | File Templates.
- */
-public class QaRegistryTest extends TapestryTestCase {
+public class QaRegistryTest {
+//public class QaRegistryTest extends TapestryTestCase {
 
     protected final static Logger logger = LoggerFactory.getLogger(QaRegistryTest.class);
     protected Registry registry;

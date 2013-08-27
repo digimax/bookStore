@@ -45,7 +45,7 @@ public class AppModule
 
     public static void bind(ServiceBinder binder)
     {
-        {
+
             binder.bind(FileAssetAliasManager.class);
             binder.bind(FilePathAssetFactory.class);
             binder.bind(BindingFactory.class,
@@ -61,7 +61,7 @@ public class AppModule
             binder.bind(StoreService.class);
             binder.bind(ImageService.class);
             binder.bind(ItemService.class);
-        }
+
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.

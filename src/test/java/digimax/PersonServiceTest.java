@@ -219,7 +219,7 @@ public class PersonServiceTest extends QaRegistryTest {
         bookService.save(book);
 
 //        personService.save(author1);
-        assertNotNull(author1.identityMeta);
+        Assert.assertNotNull(author1.identityMeta);
 
         session.evict(author1);
         List<Person> populatedPersonList = session.createCriteria(Person.class).list();
@@ -232,7 +232,7 @@ public class PersonServiceTest extends QaRegistryTest {
         author2.identityMeta.setNewPassword("zzz");
 
         personService.save(author2);
-        assertNotNull(author2.identityMeta);
+        Assert.assertNotNull(author2.identityMeta);
 
         session.evict(author2);
         populatedPersonList = session.createCriteria(Person.class).list();
@@ -308,7 +308,7 @@ public class PersonServiceTest extends QaRegistryTest {
         employee1.identityMeta.setNewPassword("xxx");
 
         personService.save(employee1);
-        assertNotNull(employee1.identityMeta);
+        Assert.assertNotNull(employee1.identityMeta);
 
 
         List<Person> populatedPersonList = session.createCriteria(Person.class).list();
@@ -321,7 +321,7 @@ public class PersonServiceTest extends QaRegistryTest {
         customer1.identityMeta.setNewPassword("xxx");
 
         personService.save(customer1);
-        assertNotNull(customer1.identityMeta);
+        Assert.assertNotNull(customer1.identityMeta);
 
         populatedPersonList = session.createCriteria(Person.class).list();
         Assert.assertEquals(populatedPersonList.size(),2);
@@ -330,10 +330,10 @@ public class PersonServiceTest extends QaRegistryTest {
         session.evict(customer1);
 
         Employee  employee =  personService.findEmployee("Oscar1","xxx");
-        assertNull(employee);
+        Assert.assertNull(employee);
 
         Customer customer = personService.findEmployee("FooBar1","xxx");
-        assertNotNull(customer);
+        Assert.assertNotNull(customer);
 
     }
 
@@ -361,7 +361,7 @@ public class PersonServiceTest extends QaRegistryTest {
         //test username collisions
         Employee newEmployee = personService.newEmployee(employee.userName,"yyy", "chester", "tester");
         //null indicates that their was a name collision
-        assertNull(newEmployee);
+        Assert.assertNull(newEmployee);
     }
 
     @Test
@@ -442,10 +442,6 @@ public class PersonServiceTest extends QaRegistryTest {
         //try invalid login
         Person invalidUser = personService.login("Whatutalkingbout","");
         Assert.assertNull(invalidUser);
-
     }
-
-
-
 
 }

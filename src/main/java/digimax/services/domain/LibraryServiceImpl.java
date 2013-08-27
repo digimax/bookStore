@@ -44,7 +44,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     public Book locate(Library library, String title, String subTitle, String authorLastName, String authorFirstName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //@TODO
     }
 
     public Shelf findShelf(Library library, String locationName) {

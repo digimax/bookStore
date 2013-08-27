@@ -19,13 +19,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/7/13
- * Time: 6:26 PM
- * To change this template use File | Settings | File Templates.
- */
 @SuppressWarnings("unchecked")
 public class BookServiceTest extends QaRegistryTest {
 
@@ -216,9 +209,9 @@ public class BookServiceTest extends QaRegistryTest {
         Assert.assertEquals(foundBooks.size(), 1);
 
         //Test lazy get of Images
-        assertEquals(persistedBook1.images.get(0), book1Image1);
-        assertEquals(persistedBook1.images.get(1), book1Image2);
-        assertEquals(persistedBook1.images.get(2), book1Image3);
+        Assert.assertEquals(persistedBook1.images.get(0), book1Image1);
+        Assert.assertEquals(persistedBook1.images.get(1), book1Image2);
+        Assert.assertEquals(persistedBook1.images.get(2), book1Image3);
 
     }
 

@@ -1,7 +1,7 @@
 <html t:type="layout" title="About ncapsuld"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
-<span class="container" style="float:right; width:750px">
+    <span class="container" style="float:right; width:750px">
         <h1>Login</h1>
         <fieldset>
             <legend>Login here</legend>

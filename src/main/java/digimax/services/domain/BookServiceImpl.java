@@ -9,15 +9,11 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jonwilliams
- * Date: 4/6/13
- * Time: 3:54 PM
- * To change this template use File | Settings | File Templates.
- */
 @SuppressWarnings("unchecked")
 public class BookServiceImpl implements BookService {
 
@@ -71,6 +67,8 @@ public class BookServiceImpl implements BookService {
         }
         List<Book> books = null;
         books = session.createCriteria(Book.class).add(Restrictions.ilike("title", "%"+title+"%")).list();
+        Set<Book> bookSet = new HashSet<>(books);
+        books = new ArrayList<>(bookSet);
         return books;
     }
 

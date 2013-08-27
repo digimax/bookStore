@@ -34,14 +34,14 @@ public class LibraryServiceTest extends QaRegistryTest {
 
     private ApplicationStateManager applicationStateManager;
 
-    @BeforeMethod
-    public void setUp() {
-        applicationStateManager =
-                mockApplicationStateManager();
-//        authenticator = new AuthenticatorImpl(
-//                userDao, applicationStateManager);
-        logger.info("LibraryServiceTest@BeforeMethod setUp()");
-    }
+//    @BeforeMethod
+//    public void setUp() {
+//        applicationStateManager =
+//                mockApplicationStateManager();
+////        authenticator = new AuthenticatorImpl(
+////                userDao, applicationStateManager);
+//        logger.info("LibraryServiceTest@BeforeMethod setUp()");
+//    }
 
     @Test
     void testReceive() {

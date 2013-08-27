@@ -237,7 +237,7 @@ public class BookMetaServiceImpl implements BookMetaService {
                             Charset charset = contentType.getCharset();
                             String charsetName = charset.name();
                             if (charset == null || charsetName == null) {
-                                charsetName = HTTP.DEFAULT_CONTENT_CHARSET;
+                                charsetName = HTTP.DEF_CONTENT_CHARSET.name();
                             }
                             return docBuilder.parse(entity.getContent(), charsetName);
                         } catch (ParserConfigurationException ex) {

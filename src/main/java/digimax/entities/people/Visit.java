@@ -1,6 +1,8 @@
 package digimax.entities.people;
 
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.slf4j.Logger;
 
 /**
  * A product of Digimax Technology Inc. (digimax.com)
@@ -10,11 +12,19 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class Visit {
 
+    @Inject
+    private Logger logger;
+
+
     @Property
     public Person user;
 
     public boolean isValid() {
-        return user!=null?true : false;
+        return user!=null;
+    }
+
+    public Visit() {
+        super();
     }
 
 }
