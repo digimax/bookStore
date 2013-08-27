@@ -1,12 +1,14 @@
 package digimax.components.domain;
 
 import digimax.entities.item.BookMeta;
+import digimax.pages.structural.GoogleBookViewer;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.slf4j.Logger;
@@ -30,6 +32,9 @@ public class BookMetaUi {
 
     @Inject
     private JavaScriptSupport javaScriptSupport;
+
+    @Inject
+    private PageRenderLinkSource pageRenderLinkSource;
 
     @InjectComponent
     private Zone asyncinfozone;
@@ -69,6 +74,11 @@ public class BookMetaUi {
     public void afterRender(){
 //        javaScriptSupport.addScript("$(\"#stop\").bind(\"click\", function(){$(\"#asyncinfozone\").trigger(\"stopRefresh\");});");
 //        javaScriptSupport.addScript("$(\"#start\").bind(\"click\", function(){$(\"#clickZone\").trigger(\"startRefresh\");});");
+    }
+
+
+    public String getBookViewerUrl() {
+        return pageRenderLinkSource.createPageRenderLink(GoogleBookViewer.class).toAbsoluteURI();
     }
 
 

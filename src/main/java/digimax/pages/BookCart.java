@@ -64,6 +64,11 @@ public class BookCart {
     }
 
     @Inject
+    @Path("context:imagez/shopping_cart.png")
+    @Property
+    private Asset cartImage;
+
+    @Inject
     @Path("context:imagez/no.png")
     @Property
     private Asset deleteImage;

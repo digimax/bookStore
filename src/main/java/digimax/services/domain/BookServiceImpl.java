@@ -9,10 +9,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class BookServiceImpl implements BookService {
@@ -65,10 +62,11 @@ public class BookServiceImpl implements BookService {
         if (title==null || title.trim().length()==0) {
             return null;
         }
-        List<Book> books = null;
+        List<Book> books;
         books = session.createCriteria(Book.class).add(Restrictions.ilike("title", "%"+title+"%")).list();
         Set<Book> bookSet = new HashSet<>(books);
         books = new ArrayList<>(bookSet);
+        Collections.sort(books, new Book.Compare());
         return books;
     }
 

@@ -33,7 +33,7 @@
                 <img src="${bookMeta.thumbnailUrl}" alt="${bookMeta.book.title}" style="margin: .5em .5em 0px 0px"/>
             </t:if>
             <t:if test="bookMeta.isbn">
-                <a href="/ncapsuld/structural/googlebookviewer?${bookMeta.isbn}" onclick="javascript:void window.open('/ncapsuld/structural/googlebookviewer?${bookMeta.isbn}','BookPreview','width=700,height=600,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">View Book Preview</a>
+                <a href="${bookViewerUrl}?${bookMeta.isbn}" onclick="javascript:void window.open('${bookViewerUrl}?${bookMeta.isbn}','BookPreview','width=700,height=600,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">View Book Preview</a>
             </t:if>
             <!--<p><a id="start">Start Refreshing</a></p>-->
             <!--<p><a id="stop">Stop Refreshing</a></p>-->

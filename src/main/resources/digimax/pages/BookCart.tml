@@ -12,6 +12,7 @@
             </span>
             <fieldset style="margin-left: 1em; width: 96%;">
                 <legend>${message:booksInCart}</legend>
+                <img src="${cartImage}" width="64" height="64" alt="Book Cart"/>
                 <div style="border: 0px dashed red">
                     <ul class="list double" style="width: 100%; border: 0px red dashed;">
                         <span t:type="loop" source="items" value="lineItem">
