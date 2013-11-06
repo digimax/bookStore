@@ -179,31 +179,10 @@ public class AppModule
                                                  FileAssetAliasManager fileAssetAliasManager, ResourceStreamer streamer,
                                                  AssetResourceLocator assetResourceLocator)
     {
-
         LOGGER.debug("contributeAssetDispatcher fileAssetFactory :: {}", fileAssetFactory);
         LOGGER.debug("contributeAssetDispatcher fileAssetAliasManager :: {}", fileAssetAliasManager);
-
-//        Map<String, String> mappings = classpathAssetAliasManager.getMappings();
-//
-//        for (String folder : mappings.keySet())
-//        {
-//            String path = mappings.get(folder);
-//
-//            configuration.add(folder, new ClasspathAssetRequestHandler(streamer, assetResourceLocator, path));
-//        }
-//
         configuration.add("images",
                 new FilePathAssetRequestHandler(streamer, fileAssetFactory.getRootResource()));
-    }
-
-    public static void contributeHibernateEntityPackageManager(Configuration<String> configuration)
-    {
-//        configuration.add("digimax.entities.geo");
-//        configuration.add("digimax.entities.invoice");
-//        configuration.add("digimax.entities.item");
-//        configuration.add("digimax.entities.library");
-//        configuration.add("digimax.entities.people");
-//        configuration.add("digimax.entities.store");
     }
 
     public static void

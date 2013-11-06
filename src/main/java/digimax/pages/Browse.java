@@ -38,21 +38,6 @@ public class Browse {
     @Inject
     Session session;
 
-    @Inject
-    ComponentResources componentResources;
-
-    @Inject
-    private JavaScriptSupport javaScriptSupport;
-
-    @Inject
-    private LinkSource linkSource;
-
-    @Inject
-    private Logger logger;
-
-    @Inject
-    LibraryService libraryService;
-
     @Property
     Book book;
 
@@ -74,7 +59,7 @@ public class Browse {
     }
 
     public List<Book> getSortedBooks() {
-        List<Book> sortedBooks = new ArrayList<Book>();
+        List<Book> sortedBooks = new ArrayList<>();
         for (Shelf shelf: getSortedShelves()) {
             for (Book book: shelf.books) {
                 sortedBooks.add(book);
@@ -102,19 +87,19 @@ public class Browse {
 //        javaScriptSupport.addScript(getImageCacheScript());
 //    }
 
-    public String getImageCacheScript() {
-    return "function preloadImages(array) {\n"+
-    "    if (!preloadImages.list) {\n"+
-    "        preloadImages.list = [];\n"+
-    "    }\n"+
-    "    for (var i = 0; i < array.length; i++) {\n"+
-    "        var img = new Image();\n"+
-    "        img.src = array[i];\n"+
-    "        preloadImages.list.push(img);\n"+
-    "    }\n"+
-    "}\n"+
-    "var imageURLs = ["+getImageUrls()+"];\n"+
-    "preloadImages(imageURLs);";
-    }
+//    public String getImageCacheScript() {
+//        return "function preloadImages(array) {\n"+
+//        "    if (!preloadImages.list) {\n"+
+//        "        preloadImages.list = [];\n"+
+//        "    }\n"+
+//        "    for (var i = 0; i < array.length; i++) {\n"+
+//        "        var img = new Image();\n"+
+//        "        img.src = array[i];\n"+
+//        "        preloadImages.list.push(img);\n"+
+//        "    }\n"+
+//        "}\n"+
+//        "var imageURLs = ["+getImageUrls()+"];\n"+
+//        "preloadImages(imageURLs);";
+//    }
 
 }

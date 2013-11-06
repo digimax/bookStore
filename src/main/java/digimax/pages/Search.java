@@ -29,13 +29,13 @@ import java.util.List;
 public class Search {
 
     @Inject
-    private Logger logger;
-
-    @Inject
     private AlertManager alertManager;
 
     @Inject
     private Messages messages;
+
+    @Inject
+    private Logger logger;
 
     @Inject
     private Request request;

@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import sun.security.provider.MD5;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -98,7 +99,7 @@ public class ImageServiceImpl implements ImageService {
                     "ImageServiceImpl IO failure. Failed to createRotatedImage :: %s", rotatedImageFileName) , e);
         }
 
-        List<Image> createdImages = new ArrayList<Image>();
+        List<Image> createdImages = new ArrayList<>();
         createdImages.add(fullScaleImage);
         createdImages.add(scaledImage);
         createdImages.add(rotatedImage);
@@ -120,6 +121,7 @@ public class ImageServiceImpl implements ImageService {
         g.rotate(angle, w/2, h/2);
         g.drawRenderedImage(image, null);
         g.dispose();
+
         return result;
     }
 }

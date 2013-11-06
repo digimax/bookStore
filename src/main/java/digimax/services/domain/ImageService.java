@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ImageService {
 
-    public Image testInstance();
+    Image testInstance();
 
     @CommitAfter
     void save(Image image);

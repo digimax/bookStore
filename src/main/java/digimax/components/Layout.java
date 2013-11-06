@@ -59,7 +59,7 @@ public class Layout {
 
     public Object[] getPageNames()
     {
-        List<String> pageNames = new ArrayList<String>();
+        List<String> pageNames = new ArrayList<>();
         pageNames.add("Index");
 //        pageNames.add("About");
         pageNames.add("Browse");
